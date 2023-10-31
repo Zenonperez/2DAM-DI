@@ -1,6 +1,5 @@
-
 package data;
-//importacion de todo lo necesario
+
 import dto.Intent;
 import dto.Review;
 import dto.Usuari;
@@ -16,7 +15,7 @@ import java.util.Properties;
 
 /**
  *
- * @author Zenon
+ * @author Miguel
  */
 public class DataAccess {
 
@@ -26,7 +25,7 @@ public class DataAccess {
         try {
             //properties.load(DataAccess.class.getClassLoader().getResourceAsStream("properties/application.properties"));
             //connection = DriverManager.getConnection(properties.getProperty("connectionUrl"));
-            String connectionUrl = "jdbc:sqlserver://localhost;database=simulapdb;user=sa;password=12345678Zpc!;encrypt=false;loginTimeout=10;";
+            String connectionUrl = "jdbc:sqlserver://localhost:1433;database=simulapdb;user=sa;password=12345678Zpc!;encrypt=false;loginTimeout=10;";
             String connectionUrlAzure = "jdbc:sqlserver://simulapsqlserver.database.windows.net:1433;database=simulapdb;user=simulapdbadmin@simulapsqlserver;password=Pwd1234.;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
 
             connection = DriverManager.getConnection(connectionUrl);
@@ -44,8 +43,8 @@ public class DataAccess {
         try (Connection connection = getConnection(); PreparedStatement selectStatement = connection.prepareStatement(sql);) {
             selectStatement.setString(1, email);
             ResultSet resultSet = selectStatement.executeQuery();
+            user = new Usuari();
             while (resultSet.next()) {
-                user = new Usuari();
                 user.setId(resultSet.getInt("Id"));
                 user.setNombre(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));
@@ -56,6 +55,28 @@ public class DataAccess {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public ArrayList<Usuari> getAllUsers() {
+        ArrayList<Usuari> usuaris = new ArrayList<>();
+        String sql = "SELECT * FROM Usuaris WHERE IsInstructor=0";
+        try (Connection connection = getConnection(); PreparedStatement selectStatement = connection.prepareStatement(sql);) {
+
+            ResultSet resultSet = selectStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Usuari user = new Usuari();
+                user.setId(resultSet.getInt("Id"));
+                user.setNombre(resultSet.getString("Nom"));
+                user.setEmail(resultSet.getString("Email"));
+                user.setPasswordHash(resultSet.getString("PasswordHash"));
+                user.setInstructor(resultSet.getBoolean("IsInstructor"));
+                usuaris.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuaris;
     }
 
     public int registerUser(Usuari u) {
@@ -94,9 +115,9 @@ public class DataAccess {
                 Intent attempt = new Intent();
                 attempt.setId(resultSet.getInt("Id"));
                 attempt.setIdUsuari(resultSet.getInt("IdUsuari"));
-                attempt.setNombreUsuario(resultSet.getString("Nombre"));
-                attempt.setIdEjercicio(resultSet.getInt("IdEjercicio"));
-                attempt.setNombreEjercicio(resultSet.getString("NomEjercicio"));
+                attempt.setNombreUsuario(resultSet.getString("Nom"));
+                attempt.setIdEjercicio(resultSet.getInt("IdExercici"));
+                attempt.setNombreEjercicio(resultSet.getString("NomExercici"));
                 attempt.setTimestamp_Inicio(resultSet.getString("Timestamp_Inici"));
                 attempt.setTimestamp_Fin(resultSet.getString("Timestamp_Fi"));
                 attempt.setVideofile(resultSet.getString("VideoFile"));
@@ -118,8 +139,8 @@ public class DataAccess {
             insertStatement.setInt(3, r.getValoracion());
             insertStatement.setString(4, r.getComentario());
 
-            int affectedRows = insertStatement.executeUpdate();
-            if (affectedRows == 0) {
+            result = insertStatement.executeUpdate();
+            if (result == 0) {
                 throw new SQLException("Creating review failed, no rows affected.");
             }
 
@@ -149,4 +170,73 @@ public class DataAccess {
         return 0;
     }
 
+    public ArrayList<Intent> getAttemptsPerUser(Usuari user) {
+        ArrayList<Intent> intents = new ArrayList<>();
+        String sql = "SELECT Intents.Id, Intents.IdUsuari, Usuaris.Nom,"
+                + " Intents.IdExercici, Exercicis.NomExercici, Timestamp_Inici,"
+                + " Timestamp_Fi, VideoFile"
+                + " FROM Intents INNER JOIN Usuaris ON Intents.IdUsuari=Usuaris.Id"
+                + " INNER JOIN Exercicis ON Intents.IdExercici=Exercicis.Id"
+                + " WHERE Intents.IdUsuari=?"
+                + " ORDER BY Intents.IdExercici";
+        try (Connection connection = getConnection(); PreparedStatement selectStatement = connection.prepareStatement(sql);) {
+            selectStatement.setInt(1, user.getId());
+            ResultSet resultSet = selectStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Intent attempt = new Intent();
+                attempt.setId(resultSet.getInt("Id"));
+                attempt.setIdUsuari(resultSet.getInt("IdUsuari"));
+                attempt.setNombreUsuario(resultSet.getString("Nom"));
+                attempt.setIdEjercicio(resultSet.getInt("IdExercici"));
+                attempt.setNombreEjercicio(resultSet.getString("NomExercici"));
+                attempt.setTimestamp_Inicio(resultSet.getString("Timestamp_Inici"));
+                attempt.setTimestamp_Fin(resultSet.getString("Timestamp_Fi"));
+                attempt.setVideofile(resultSet.getString("VideoFile"));
+                intents.add(attempt);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return intents;
+
+    }
+
+    public Review getAttemptReview(int idIntent) {
+        Review review = null;
+        String sql = "SELECT * FROM Review WHERE IdIntent = ?";
+        try (Connection connection = getConnection(); PreparedStatement selectStatement = connection.prepareStatement(sql);) {
+            selectStatement.setInt(1, idIntent);
+            ResultSet resultSet = selectStatement.executeQuery();
+            review = new Review();
+            while (resultSet.next()) {
+                review.setId(resultSet.getInt("Id"));
+                review.setIdIntent(resultSet.getInt("IdIntent"));
+                review.setIdReviewer(resultSet.getInt("IdReviewer"));
+                review.setValoracion(resultSet.getInt("Valoracio"));
+                review.setComentario(resultSet.getString("Comentari"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return review;
+    }
+    
+    public int updateReview(Review r) {
+        int result = 0;
+        String sql = "UPDATE Review SET Valoracio=?, Comentari=? WHERE Id=?";
+        try (Connection conn = getConnection(); PreparedStatement updateStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            updateStatement.setInt(3, r.getId());
+            updateStatement.setInt(1, r.getValoracion());
+            updateStatement.setString(2, r.getComentario());
+
+            result = updateStatement.executeUpdate();
+            if (result == 0) {
+                throw new SQLException("Updating review failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

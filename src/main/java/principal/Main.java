@@ -4,26 +4,26 @@
  */
 package principal;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
-import data.DataAccess;
-import dto.Usuari;
-import java.awt.Color;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Ziku
  */
 public class Main extends javax.swing.JFrame {
 
-    private DataAccess da = new DataAccess();
-
     /**
-     * Creates new form Main
+     * Creates new form SesionIniciada
      */
     public Main() {
+        
+        Login login = new Login(this,true);
+        login.setVisible(true);
+        if (login.EstasConectado()){
         initComponents();
+        }
+        else {
+            System.exit(0);
+        }
     }
 
     /**
@@ -35,47 +35,16 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbl_TextoIniciarSesion = new javax.swing.JLabel();
-        lbl_CorreoElectronico = new javax.swing.JLabel();
-        txt_PonerNombreoMail = new javax.swing.JTextField();
-        lbl_Contraseña = new javax.swing.JLabel();
-        btn_IniciarSesion = new javax.swing.JToggleButton();
-        txt_PonerContraseña = new javax.swing.JPasswordField();
-        lbl_clickParaRegistrar = new javax.swing.JLabel();
+        btn_cerrarSesion = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Fitnow");
+        setPreferredSize(new java.awt.Dimension(652, 316));
 
-        lbl_TextoIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbl_TextoIniciarSesion.setText("Inicio de Sesión");
-
-        lbl_CorreoElectronico.setText("Email o Nombre de Usuario:");
-
-        lbl_Contraseña.setText("Contraseña:");
-
-        btn_IniciarSesion.setText("Iniciar Sesion");
-        btn_IniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+        btn_cerrarSesion.setText("Cerrar Sesion");
+        btn_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_IniciarSesionActionPerformed(evt);
-            }
-        });
-
-        txt_PonerContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_PonerContraseñaActionPerformed(evt);
-            }
-        });
-
-        lbl_clickParaRegistrar.setText("No tienes cuenta? Pulsa aqui para registrarte.");
-        lbl_clickParaRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_clickParaRegistrarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_clickParaRegistrarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbl_clickParaRegistrarMouseExited(evt);
+                btn_cerrarSesionActionPerformed(evt);
             }
         });
 
@@ -83,84 +52,32 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(btn_IniciarSesion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_clickParaRegistrar)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lbl_TextoIniciarSesion)
-                                .addComponent(lbl_Contraseña)
-                                .addComponent(lbl_CorreoElectronico)
-                                .addComponent(txt_PonerNombreoMail)
-                                .addComponent(txt_PonerContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))))
-                .addContainerGap(282, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(423, Short.MAX_VALUE)
+                .addComponent(btn_cerrarSesion)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lbl_TextoIniciarSesion)
-                .addGap(45, 45, 45)
-                .addComponent(lbl_CorreoElectronico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_PonerNombreoMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_Contraseña)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_PonerContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btn_IniciarSesion)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_clickParaRegistrar)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addComponent(btn_cerrarSesion)
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IniciarSesionActionPerformed
-        Usuari user = da.getUser(txt_PonerNombreoMail.getText());
-        if (user != null) {
-
-            char[] contraseñaParaVerificar = txt_PonerContraseña.getPassword();
-            String contraseñaEnBaseDatos = user.getPasswordHash();
-            var resultado = BCrypt.verifyer().verify(contraseñaParaVerificar, contraseñaEnBaseDatos);
-            if (resultado.verified) {
-                JOptionPane.showMessageDialog(this, "Sesion iniciada. Bienvenido " + user.getNombre());
-                SesionIniciada conectarse = new SesionIniciada();
-                conectarse.setVisible(true);
-                setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Acceso denegado: Contraseña incorrecta");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Acceso denegado: No exite el usuario");
+    private void btn_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarSesionActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(this,"Estas seguro que quieres cerrar la sesion?", "Cerrar Sesion", JOptionPane.YES_NO_OPTION);
+        if (respuesta==JOptionPane.YES_OPTION){
+            dispose();
         }
-
-    }//GEN-LAST:event_btn_IniciarSesionActionPerformed
-
-    private void txt_PonerContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PonerContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_PonerContraseñaActionPerformed
-
-    private void lbl_clickParaRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseClicked
-        Register registrarse = new Register(this,true);
-        registrarse.setVisible(true);
-    }//GEN-LAST:event_lbl_clickParaRegistrarMouseClicked
-
-    private void lbl_clickParaRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseEntered
-        lbl_clickParaRegistrar.setForeground(Color.blue);
-    }//GEN-LAST:event_lbl_clickParaRegistrarMouseEntered
-
-    private void lbl_clickParaRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseExited
-        lbl_clickParaRegistrar.setForeground(Color.black);
-    }//GEN-LAST:event_lbl_clickParaRegistrarMouseExited
+        if (respuesta==JOptionPane.NO_OPTION){
+            
+        }
+    }//GEN-LAST:event_btn_cerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,6 +105,7 @@ public class Main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -198,12 +116,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btn_IniciarSesion;
-    private javax.swing.JLabel lbl_Contraseña;
-    private javax.swing.JLabel lbl_CorreoElectronico;
-    private javax.swing.JLabel lbl_TextoIniciarSesion;
-    private javax.swing.JLabel lbl_clickParaRegistrar;
-    private javax.swing.JPasswordField txt_PonerContraseña;
-    private javax.swing.JTextField txt_PonerNombreoMail;
+    private javax.swing.JButton btn_cerrarSesion;
     // End of variables declaration//GEN-END:variables
 }
