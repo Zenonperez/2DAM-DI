@@ -4,28 +4,43 @@
  */
 package principal;
 
+import data.DataAccess;
+import dto.Intent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import principal.tablemodels.IntentosPendientesTableModel;
+import principal.tablemodels.UsuariosTableModel;
 /**
  *
  * @author Ziku
  */
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SesionIniciada
-     */
+        private DataAccess da = new DataAccess();
+        private InformacionIntento info;
     public Main() {
         
         Login login = new Login(this,true);
         login.setVisible(true);
         if (login.EstasConectado()){
         initComponents();
+        tbl_IntentosPendientes.setModel(new IntentosPendientesTableModel(da.getAttemptsPendingReview()));
+        tbl_Usuarios.setModel(new UsuariosTableModel(da.getAllUsers()));
         }
         else {
             System.exit(0);
         }
     }
-
+    
+    public int SeleccionFilaIntentosinfo(){
+    int seleccionado = tbl_IntentosPendientes.convertRowIndexToModel(tbl_IntentosPendientes.getSelectedRow());
+    return seleccionado;
+    }
+    
+    public int SeleccionFilaUsuariosIntentos(){
+    int seleccionado = tbl_Usuarios.convertRowIndexToModel(tbl_Usuarios.getSelectedRow());
+    return seleccionado;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,10 +51,17 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_cerrarSesion = new javax.swing.JButton();
+        pnl_IntentosPendientesRevision = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_IntentosPendientes = new javax.swing.JTable();
+        btn_SeleccionarIntentos = new javax.swing.JButton();
+        pnl_Usuarios = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_Usuarios = new javax.swing.JTable();
+        btn_SeleccionarUsuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Fitnow");
-        setPreferredSize(new java.awt.Dimension(652, 316));
 
         btn_cerrarSesion.setText("Cerrar Sesion");
         btn_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -48,21 +70,147 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        pnl_IntentosPendientesRevision.setBorder(javax.swing.BorderFactory.createTitledBorder("Intentos"));
+
+        tbl_IntentosPendientes.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        tbl_IntentosPendientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "IDUsuario", "NomEjercicio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbl_IntentosPendientes);
+
+        btn_SeleccionarIntentos.setText("Seleccionar");
+        btn_SeleccionarIntentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SeleccionarIntentosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_IntentosPendientesRevisionLayout = new javax.swing.GroupLayout(pnl_IntentosPendientesRevision);
+        pnl_IntentosPendientesRevision.setLayout(pnl_IntentosPendientesRevisionLayout);
+        pnl_IntentosPendientesRevisionLayout.setHorizontalGroup(
+            pnl_IntentosPendientesRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_IntentosPendientesRevisionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnl_IntentosPendientesRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_SeleccionarIntentos)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(351, 351, 351))
+        );
+        pnl_IntentosPendientesRevisionLayout.setVerticalGroup(
+            pnl_IntentosPendientesRevisionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_IntentosPendientesRevisionLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_SeleccionarIntentos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnl_Usuarios.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuarios"));
+
+        tbl_Usuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane2.setViewportView(tbl_Usuarios);
+
+        btn_SeleccionarUsuarios.setText("Seleccionar");
+        btn_SeleccionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SeleccionarUsuariosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_UsuariosLayout = new javax.swing.GroupLayout(pnl_Usuarios);
+        pnl_Usuarios.setLayout(pnl_UsuariosLayout);
+        pnl_UsuariosLayout.setHorizontalGroup(
+            pnl_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_UsuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_UsuariosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_SeleccionarUsuarios)
+                .addContainerGap())
+        );
+        pnl_UsuariosLayout.setVerticalGroup(
+            pnl_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_UsuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_SeleccionarUsuarios)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(423, Short.MAX_VALUE)
-                .addComponent(btn_cerrarSesion)
-                .addGap(22, 22, 22))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_cerrarSesion))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(pnl_IntentosPendientesRevision, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addComponent(pnl_Usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(20, 20, 20)
                 .addComponent(btn_cerrarSesion)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnl_IntentosPendientesRevision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_Usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         pack();
@@ -78,6 +226,17 @@ public class Main extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btn_cerrarSesionActionPerformed
+
+    private void btn_SeleccionarIntentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SeleccionarIntentosActionPerformed
+        InformacionIntento informacionIntento = new InformacionIntento(this, true);
+        informacionIntento.setVisible(true);
+        
+    }//GEN-LAST:event_btn_SeleccionarIntentosActionPerformed
+
+    private void btn_SeleccionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SeleccionarUsuariosActionPerformed
+        InformacionUsuario informacionUsuario = new InformacionUsuario(this, true);
+        informacionUsuario.setVisible(true);
+    }//GEN-LAST:event_btn_SeleccionarUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,6 +275,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_SeleccionarIntentos;
+    private javax.swing.JButton btn_SeleccionarUsuarios;
     private javax.swing.JButton btn_cerrarSesion;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel pnl_IntentosPendientesRevision;
+    private javax.swing.JPanel pnl_Usuarios;
+    private javax.swing.JTable tbl_IntentosPendientes;
+    private javax.swing.JTable tbl_Usuarios;
     // End of variables declaration//GEN-END:variables
 }

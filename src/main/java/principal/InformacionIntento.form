@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lbl_IDIntentoEnunciado" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_IDUsuarioEnunciado" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_NombreUsuarioEnunciado" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_IDEjercicioEnunciado" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_NombreEjercicioEnunciado" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_TimestampInicioEnunciado" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_TimestampFinEnunciado" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_VideofileEnunciado" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lbl_VideofileRespuesta" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_TimestampFinRespuesta" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_TimestampInicioRespuesta" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_NombreEjercicioRespuesta" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_IDEjercicioRespuesta" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_NombreUsuarioRespuesta" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_IDUsuarioRespuesta" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_IDRespuesta" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="197" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_IDIntentoEnunciado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_IDRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_IDUsuarioEnunciado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_IDUsuarioRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_NombreUsuarioEnunciado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_NombreUsuarioRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_IDEjercicioEnunciado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_IDEjercicioRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_NombreEjercicioEnunciado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_NombreEjercicioRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_TimestampInicioEnunciado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_TimestampInicioRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_TimestampFinEnunciado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_TimestampFinRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_VideofileEnunciado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_VideofileRespuesta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lbl_IDIntentoEnunciado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_IDUsuarioEnunciado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID del usuario"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_NombreUsuarioEnunciado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nombre del Usuario:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_IDEjercicioEnunciado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID del Ejercicio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_NombreEjercicioEnunciado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nombre del Ejercicio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_TimestampInicioEnunciado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Timestamp Inicio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_TimestampFinEnunciado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Timestamp Fin:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_VideofileEnunciado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Videofile:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_IDRespuesta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel9"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_IDUsuarioRespuesta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel10"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_NombreUsuarioRespuesta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel11"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_IDEjercicioRespuesta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel12"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_NombreEjercicioRespuesta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel13"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_TimestampInicioRespuesta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel14"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_TimestampFinRespuesta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel15"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_VideofileRespuesta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel16"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
