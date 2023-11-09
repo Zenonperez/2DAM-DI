@@ -5,6 +5,8 @@
 package principal;
 
 import data.DataAccess;
+import dto.Review;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import principal.tablemodels.IntentosUsuario;
 
@@ -16,22 +18,40 @@ public class InformacionUsuario extends javax.swing.JDialog {
 
     private Main main;
     private DataAccess da = new DataAccess();
-    
-    
-    
+    private int seleccion;
+
     public InformacionUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        main = (Main)parent;
-        int seleccion = main.SeleccionFilaUsuariosIntentos();
+        main = (Main) parent;
+        seleccion = main.SeleccionFilaUsuariosIntentos();
         initComponents();
+        btn_EditarReview.setEnabled(false);
+        btn_EliminarReview.setEnabled(false);
+        btn_VerVideo.setEnabled(false);
+        btn_RevisarReview.setEnabled(false);
         String idS = String.valueOf(da.getAllUsers().get(seleccion).getId());
         lbl_IDRespuesta.setText(idS);
         lbl_NombreRespuesta.setText(da.getAllUsers().get(seleccion).getNombre());
         lbl_EmailRespuesta.setText(da.getAllUsers().get(seleccion).getEmail());
         tbl_IntentosUsuario.setModel(new IntentosUsuario(da.getAttemptsPerUser(da.getAllUsers().get(seleccion))));
-        
-        
-        
+
+    }
+
+    public int getIDIntento() {
+        int filaSeleccionada = tbl_IntentosUsuario.convertRowIndexToModel(tbl_IntentosUsuario.getSelectedRow());
+        int idIntento = (Integer) tbl_IntentosUsuario.getValueAt(filaSeleccionada, 0);
+        return idIntento;
+    }
+
+    public int getIDReview() {
+        int filaSeleccionada = tbl_IntentosUsuario.convertRowIndexToModel(tbl_IntentosUsuario.getSelectedRow());
+        int idIntento = (Integer) tbl_IntentosUsuario.getValueAt(filaSeleccionada, 0);
+        int idReview = da.getAttemptReview(idIntento).getId();
+        return idReview;
+    }
+
+    public void ActualizarTablaIntentosUsuario() {
+        tbl_IntentosUsuario.setModel(new IntentosUsuario(da.getAttemptsPerUser(da.getAllUsers().get(seleccion))));
     }
 
     /**
@@ -51,8 +71,15 @@ public class InformacionUsuario extends javax.swing.JDialog {
         lbl_IDRespuesta = new javax.swing.JLabel();
         lbl_NombreRespuesta = new javax.swing.JLabel();
         lbl_EmailRespuesta = new javax.swing.JLabel();
+        btn_VerVideo = new javax.swing.JButton();
+        btn_RevisarReview = new javax.swing.JButton();
+        btn_EditarReview = new javax.swing.JButton();
+        btn_EliminarReview = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Informacion del Usuario");
+        setResizable(false);
+        setSize(new java.awt.Dimension(464, 391));
 
         lbl_idEnunciado.setText("ID:");
 
@@ -71,6 +98,11 @@ public class InformacionUsuario extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_IntentosUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_IntentosUsuarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_IntentosUsuario);
 
         lbl_IDRespuesta.setText("jLabel5");
@@ -79,6 +111,34 @@ public class InformacionUsuario extends javax.swing.JDialog {
 
         lbl_EmailRespuesta.setText("jLabel7");
 
+        btn_VerVideo.setText("Ver video");
+        btn_VerVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VerVideoActionPerformed(evt);
+            }
+        });
+
+        btn_RevisarReview.setText("Revisar Review");
+        btn_RevisarReview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RevisarReviewActionPerformed(evt);
+            }
+        });
+
+        btn_EditarReview.setText("Editar Review");
+        btn_EditarReview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EditarReviewActionPerformed(evt);
+            }
+        });
+
+        btn_EliminarReview.setText("Eliminar Review");
+        btn_EliminarReview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarReviewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,7 +146,7 @@ public class InformacionUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_EliminarReview)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_idEnunciado)
@@ -96,8 +156,16 @@ public class InformacionUsuario extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_EmailRespuesta)
                             .addComponent(lbl_NombreRespuesta)
-                            .addComponent(lbl_IDRespuesta))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                            .addComponent(lbl_IDRespuesta)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(btn_EditarReview)
+                            .addGap(58, 58, 58)
+                            .addComponent(btn_VerVideo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_RevisarReview))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,55 +184,70 @@ public class InformacionUsuario extends javax.swing.JDialog {
                     .addComponent(lbl_EmailRespuesta))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_VerVideo)
+                    .addComponent(btn_RevisarReview)
+                    .addComponent(btn_EditarReview))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_EliminarReview)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InformacionUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InformacionUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InformacionUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InformacionUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btn_VerVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VerVideoActionPerformed
+        int filaSeleccionada = tbl_IntentosUsuario.convertRowIndexToModel(tbl_IntentosUsuario.getSelectedRow());
+        String intentoSeleccionado = (String) tbl_IntentosUsuario.getValueAt(filaSeleccionada, 5);
+        main.video(intentoSeleccionado);
+        dispose();
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                InformacionUsuario dialog = new InformacionUsuario(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_btn_VerVideoActionPerformed
+
+    private void btn_RevisarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RevisarReviewActionPerformed
+        if (getIDReview() != 0) {
+            RevisionReview revisionReview = new RevisionReview(this, true);
+            revisionReview.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No exite la review de este intento");
+        }
+    }//GEN-LAST:event_btn_RevisarReviewActionPerformed
+
+    private void btn_EditarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarReviewActionPerformed
+        if (getIDReview() != 0) {
+            RevalorarIntento revalorarIntento = new RevalorarIntento(this, true);
+            revalorarIntento.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No exite la review de este intento");
+        }
+    }//GEN-LAST:event_btn_EditarReviewActionPerformed
+
+    private void btn_EliminarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarReviewActionPerformed
+        Review eliminarReview = da.getAttemptReview(getIDIntento());
+        da.dropReview(eliminarReview.getId());
+        main.ActualizarCambiosTablaIntentosPendientes();
+        JOptionPane.showMessageDialog(this, "Se ha eliminado la review correctamente");
+
+
+    }//GEN-LAST:event_btn_EliminarReviewActionPerformed
+
+    private void tbl_IntentosUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_IntentosUsuarioMouseClicked
+        if (tbl_IntentosUsuario.convertRowIndexToModel(tbl_IntentosUsuario.getSelectedRow()) != -1) {
+            btn_EditarReview.setEnabled(true);
+            btn_EliminarReview.setEnabled(true);
+            btn_VerVideo.setEnabled(true);
+            btn_RevisarReview.setEnabled(true);
+        }
+    }//GEN-LAST:event_tbl_IntentosUsuarioMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_EditarReview;
+    private javax.swing.JButton btn_EliminarReview;
+    private javax.swing.JButton btn_RevisarReview;
+    private javax.swing.JButton btn_VerVideo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_EmailEnunciado;
     private javax.swing.JLabel lbl_EmailRespuesta;

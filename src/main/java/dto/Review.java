@@ -9,7 +9,7 @@ package dto;
  * @author Ziku
  */
 public class Review {
-    
+
     private int id;
     private int idIntent;
     private int idReviewer;
@@ -55,9 +55,5 @@ public class Review {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
-    
-    
-    
-    
-    
+
 }

@@ -14,12 +14,13 @@ public class InformacionIntento extends javax.swing.JDialog {
 
     private Main main;
     private DataAccess da = new DataAccess();
+
     /**
      * Creates new form InformacionIntento
      */
     public InformacionIntento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        main = (Main)parent;
+        main = (Main) parent;
         int seleccion = main.SeleccionFilaIntentosinfo();
         initComponents();
         String idS = String.valueOf(da.getAttemptsPendingReview().get(seleccion).getId());
@@ -33,12 +34,9 @@ public class InformacionIntento extends javax.swing.JDialog {
         lbl_TimestampInicioRespuesta.setText(da.getAttemptsPendingReview().get(seleccion).getTimestamp_Inicio());
         lbl_TimestampFinRespuesta.setText(da.getAttemptsPendingReview().get(seleccion).getTimestamp_Fin());
         lbl_VideofileRespuesta.setText(da.getAttemptsPendingReview().get(seleccion).getVideofile());
-        
-        
-     
+
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,6 +59,9 @@ public class InformacionIntento extends javax.swing.JDialog {
         lbl_VideofileRespuesta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Informacion del Intento");
+        setResizable(false);
+        setSize(new java.awt.Dimension(445, 300));
 
         lbl_IDIntentoEnunciado.setText("ID:");
 
@@ -119,7 +120,7 @@ public class InformacionIntento extends javax.swing.JDialog {
                     .addComponent(lbl_NombreUsuarioRespuesta)
                     .addComponent(lbl_IDUsuarioRespuesta)
                     .addComponent(lbl_IDRespuesta))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,6 +161,7 @@ public class InformacionIntento extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 

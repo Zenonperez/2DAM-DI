@@ -9,7 +9,7 @@ package dto;
  * @author Zenon
  */
 public class Usuari {
-    
+
     private int id;
     private String nombre;
     private String email;
@@ -64,5 +64,5 @@ public class Usuari {
     public void setInstructor(boolean instructor) {
         this.instructor = instructor;
     }
-    
+
 }

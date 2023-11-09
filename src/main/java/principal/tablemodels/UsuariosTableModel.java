@@ -13,18 +13,18 @@ import javax.swing.table.AbstractTableModel;
  * @author Ziku
  */
 public class UsuariosTableModel extends AbstractTableModel {
+
     private ArrayList<Usuari> usuarios;
     private String[] columnas = {"ID", "Nombre"};
-    
-    public UsuariosTableModel(ArrayList<Usuari> usuarios){
+
+    public UsuariosTableModel(ArrayList<Usuari> usuarios) {
         this.usuarios = usuarios;
     }
-    
-    
+
     @Override
     public int getRowCount() {
         return usuarios.size();
-        
+
     }
 
     @Override
@@ -34,21 +34,20 @@ public class UsuariosTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
-        switch(columnIndex){
+
+        switch (columnIndex) {
             case 0:
                 return usuarios.get(rowIndex).getId();
             case 1:
                 return usuarios.get(rowIndex).getNombre();
         }
-                
+
         return null;
     }
-    
+
     @Override
-    public String getColumnName(int column){
+    public String getColumnName(int column) {
         return columnas[column];
     }
-    
-}
 
+}

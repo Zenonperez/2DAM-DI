@@ -10,24 +10,30 @@ import data.DataAccess;
 import dto.Usuari;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ziku
  */
 public class Login extends javax.swing.JDialog {
-    
-    private boolean conectado = false; 
+
+    private boolean conectado = false;
     private DataAccess da = new DataAccess();
+    private Usuari user;
+    private Main main;
 
     /**
      * Creates new form Login
      */
-    public Login(java.awt.Frame parent, boolean modal) {
+    public Login(java.awt.Frame parent, boolean modal, Usuari user) {
         super(parent, modal);
+        main = (Main) parent;
+        this.user = user;
         initComponents();
+
     }
-    
-    public boolean EstasConectado(){
+
+    public boolean EstasConectado() {
         return conectado;
     }
 
@@ -42,7 +48,7 @@ public class Login extends javax.swing.JDialog {
 
         lbl_TextoIniciarSesion = new javax.swing.JLabel();
         lbl_CorreoElectronico = new javax.swing.JLabel();
-        txt_PonerNombreoMail = new javax.swing.JTextField();
+        txt_PonerMail = new javax.swing.JTextField();
         lbl_Contraseña = new javax.swing.JLabel();
         btn_IniciarSesion = new javax.swing.JToggleButton();
         txt_PonerContraseña = new javax.swing.JPasswordField();
@@ -51,6 +57,8 @@ public class Login extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+        setSize(new java.awt.Dimension(539, 310));
 
         lbl_TextoIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbl_TextoIniciarSesion.setText("Inicio de Sesión");
@@ -102,7 +110,7 @@ public class Login extends javax.swing.JDialog {
                                 .addComponent(lbl_TextoIniciarSesion)
                                 .addComponent(lbl_Contraseña)
                                 .addComponent(lbl_CorreoElectronico)
-                                .addComponent(txt_PonerNombreoMail)
+                                .addComponent(txt_PonerMail)
                                 .addComponent(txt_PonerContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))))
                 .addContainerGap(259, Short.MAX_VALUE))
         );
@@ -114,7 +122,7 @@ public class Login extends javax.swing.JDialog {
                 .addGap(45, 45, 45)
                 .addComponent(lbl_CorreoElectronico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_PonerNombreoMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_PonerMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_Contraseña)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -131,23 +139,24 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IniciarSesionActionPerformed
-        Usuari user = da.getUser(txt_PonerNombreoMail.getText());
-        try{
-        if (user != null) {
+        user = da.getUser(txt_PonerMail.getText());
+        try {
+            if (user != null) {
 
-            char[] contraseñaParaVerificar = txt_PonerContraseña.getPassword();
-            String contraseñaEnBaseDatos = user.getPasswordHash();
-            var resultado = BCrypt.verifyer().verify(contraseñaParaVerificar, contraseñaEnBaseDatos);
-            if (resultado.verified) {
-                JOptionPane.showMessageDialog(this, "Sesion iniciada. Bienvenido " + user.getNombre());
-                setVisible(false);
-                conectado = true;
-            } else {
-                JOptionPane.showMessageDialog(this, "Acceso denegado: Contraseña incorrecta");
+                char[] contraseñaParaVerificar = txt_PonerContraseña.getPassword();
+                String contraseñaEnBaseDatos = user.getPasswordHash();
+                var resultado = BCrypt.verifyer().verify(contraseñaParaVerificar, contraseñaEnBaseDatos);
+                if (resultado.verified) {
+                    JOptionPane.showMessageDialog(this, "Sesion iniciada. Bienvenido " + user.getNombre());
+                    setVisible(false);
+                    main.UsuarioConectado(user);
+                    conectado = true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Acceso denegado: Contraseña incorrecta");
+                }
+
             }
-            
-        }
-        }catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Acceso denegado: El usuario no exite");
         }
     }//GEN-LAST:event_btn_IniciarSesionActionPerformed
@@ -157,7 +166,7 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_PonerContraseñaActionPerformed
 
     private void lbl_clickParaRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseClicked
-        Register registrarse = new Register(this ,true);
+        Register registrarse = new Register(this, true);
         registrarse.setVisible(true);
     }//GEN-LAST:event_lbl_clickParaRegistrarMouseClicked
 
@@ -177,6 +186,6 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_TextoIniciarSesion;
     private javax.swing.JLabel lbl_clickParaRegistrar;
     private javax.swing.JPasswordField txt_PonerContraseña;
-    private javax.swing.JTextField txt_PonerNombreoMail;
+    private javax.swing.JTextField txt_PonerMail;
     // End of variables declaration//GEN-END:variables
 }

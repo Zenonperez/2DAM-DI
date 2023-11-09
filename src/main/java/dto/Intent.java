@@ -1,4 +1,3 @@
-
 package dto;
 
 import java.util.Date;
@@ -8,7 +7,7 @@ import java.util.Date;
  * @author Ziku
  */
 public class Intent {
-    
+
     private int id;
     private int idUsuari;
     private int idEjercicio;
@@ -81,8 +80,5 @@ public class Intent {
     public void setNombreEjercicio(String NombreEjercicio) {
         this.NombreEjercicio = NombreEjercicio;
     }
-    
-    
-    
-    
+
 }

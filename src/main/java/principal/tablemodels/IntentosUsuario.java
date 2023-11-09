@@ -13,18 +13,18 @@ import javax.swing.table.AbstractTableModel;
  * @author Ziku
  */
 public class IntentosUsuario extends AbstractTableModel {
+
     private ArrayList<Intent> intentos;
-    private String[] columnas = {"ID", "IDEjercio","NombreEjercico", "Inicio", "Fin", "Video"};
-    
-    public IntentosUsuario(ArrayList<Intent> intentos){
+    private String[] columnas = {"ID", "IDEjercio", "NombreEjercico", "Inicio", "Fin", "Video"};
+
+    public IntentosUsuario(ArrayList<Intent> intentos) {
         this.intentos = intentos;
     }
-    
-    
+
     @Override
     public int getRowCount() {
         return intentos.size();
-        
+
     }
 
     @Override
@@ -34,8 +34,8 @@ public class IntentosUsuario extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
-        switch(columnIndex){
+
+        switch (columnIndex) {
             case 0:
                 return intentos.get(rowIndex).getId();
             case 1:
@@ -49,13 +49,13 @@ public class IntentosUsuario extends AbstractTableModel {
             case 5:
                 return intentos.get(rowIndex).getVideofile();
         }
-                
+
         return null;
     }
-    
+
     @Override
-    public String getColumnName(int column){
+    public String getColumnName(int column) {
         return columnas[column];
     }
-    
+
 }

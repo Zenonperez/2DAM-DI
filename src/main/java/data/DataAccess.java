@@ -49,7 +49,7 @@ public class DataAccess {
                 user.setNombre(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));
                 user.setPasswordHash(resultSet.getString("PasswordHash"));
-                user.setInstructor(resultSet.getBoolean("IsInstructor"));
+                user.setInstructor(resultSet.getBoolean("Instructor"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class DataAccess {
 
     public ArrayList<Usuari> getAllUsers() {
         ArrayList<Usuari> usuaris = new ArrayList<>();
-        String sql = "SELECT * FROM Usuaris WHERE IsInstructor=0";
+        String sql = "SELECT * FROM Usuaris WHERE Instructor=0";
         try (Connection connection = getConnection(); PreparedStatement selectStatement = connection.prepareStatement(sql);) {
 
             ResultSet resultSet = selectStatement.executeQuery();
@@ -70,7 +70,7 @@ public class DataAccess {
                 user.setNombre(resultSet.getString("Nom"));
                 user.setEmail(resultSet.getString("Email"));
                 user.setPasswordHash(resultSet.getString("PasswordHash"));
-                user.setInstructor(resultSet.getBoolean("IsInstructor"));
+                user.setInstructor(resultSet.getBoolean("Instructor"));
                 usuaris.add(user);
             }
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class DataAccess {
     }
 
     public int registerUser(Usuari u) {
-        String sql = "INSERT INTO dbo.Usuaris (Nom, Email, PasswordHash, IsInstructor)"
+        String sql = "INSERT INTO dbo.Usuaris (Nom, Email, PasswordHash, Instructor)"
                 + " VALUES (?,?,?,?)"
                 + " SELECT CAST(SCOPE_IDENTITY() as int)";
         try (Connection conn = getConnection(); PreparedStatement insertStatement = conn.prepareStatement(sql)) {
@@ -221,7 +221,7 @@ public class DataAccess {
         }
         return review;
     }
-    
+
     public int updateReview(Review r) {
         int result = 0;
         String sql = "UPDATE Review SET Valoracio=?, Comentari=? WHERE Id=?";
@@ -238,5 +238,15 @@ public class DataAccess {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public void dropReview(int id) {
+        String sql = "DELETE FROM Review WHERE Id=?";
+        try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(sql);) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

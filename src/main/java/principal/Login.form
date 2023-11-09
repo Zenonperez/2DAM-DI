@@ -7,6 +7,10 @@
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
       <Color id="Default Cursor"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
+    <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[539, 310]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -41,7 +45,7 @@
                               <Component id="lbl_TextoIniciarSesion" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lbl_Contraseña" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lbl_CorreoElectronico" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_PonerNombreoMail" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_PonerMail" alignment="0" max="32767" attributes="0"/>
                               <Component id="txt_PonerContraseña" alignment="0" pref="191" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -59,7 +63,7 @@
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Component id="lbl_CorreoElectronico" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txt_PonerNombreoMail" min="-2" max="-2" attributes="0"/>
+              <Component id="txt_PonerMail" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lbl_Contraseña" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -87,7 +91,7 @@
         <Property name="text" type="java.lang.String" value="Correo Electr&#xf3;nico"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txt_PonerNombreoMail">
+    <Component class="javax.swing.JTextField" name="txt_PonerMail">
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Contrase&#xf1;a">
       <Properties>

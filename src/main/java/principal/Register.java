@@ -14,30 +14,35 @@ import javax.swing.JOptionPane;
  * @author Ziku
  */
 public class Register extends javax.swing.JDialog {
-    
+
     /**
      * Creates new form Register
+     *
+     * @param parent
+     * @param modal
      */
     public Register(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
-        initComponents();      
+        initComponents();
     }
+
     //Validador para que no haya erores a la hora de introducir los datos
-    private boolean ValidarCampos(){
-     String nombre = txt_ponerNombre.getText();
-     String email = txt_ponerCorreo.getText();
-     char [] contraseña = txt_contraseña.getPassword();
-     if(nombre == null || "".equals(nombre)){
-        JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-     } else if (email == null || "".equals(email) ){
-         JOptionPane.showMessageDialog(this, "El correo no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
-         return false;
-     } else if (contraseña.length <= 0){ //Le faltan unos ajustes
-         JOptionPane.showMessageDialog(this, "La contraseña no puede estar vacia", "Error", JOptionPane.ERROR_MESSAGE);
-         return false;
-     } else
-        return true;
+    private boolean ValidarCampos() {
+        String nombre = txt_ponerNombre.getText();
+        String email = txt_ponerCorreo.getText();
+        char[] contraseña = txt_contraseña.getPassword();
+        if (nombre == null || "".equals(nombre)) {
+            JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (email == null || "".equals(email)) {
+            JOptionPane.showMessageDialog(this, "El correo no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (contraseña.length <= 0) { //Le faltan unos ajustes
+            JOptionPane.showMessageDialog(this, "La contraseña no puede estar vacia", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -61,6 +66,8 @@ public class Register extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar nuevo usuario");
+        setResizable(false);
+        setSize(new java.awt.Dimension(410, 370));
 
         pnl_Register.setBorder(javax.swing.BorderFactory.createTitledBorder("Register"));
 
@@ -175,31 +182,30 @@ public class Register extends javax.swing.JDialog {
     }//GEN-LAST:event_chk_instructorActionPerformed
 
     private void btn_registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarseActionPerformed
-        if (ValidarCampos()){
-        Usuari nuevoUsuario = new Usuari();
-        nuevoUsuario.setNombre(txt_ponerNombre.getText());
-        nuevoUsuario.setEmail(txt_ponerCorreo.getText());
-        String contraseñaZifrada = BCrypt.withDefaults().hashToString(12, txt_contraseña.getPassword());
-        nuevoUsuario.setPasswordHash(contraseñaZifrada);
-        nuevoUsuario.setInstructor(chk_instructor.isSelected());
-        
-        DataAccess da = new DataAccess();
-        int idNuevoUsuario = da.registerUser(nuevoUsuario);
-        nuevoUsuario.setId(idNuevoUsuario);
-        JOptionPane.showMessageDialog(this, "El usuario se ha registrado de manera correcta" );
-        setVisible(false); 
+        if (ValidarCampos()) {
+            Usuari nuevoUsuario = new Usuari();
+            nuevoUsuario.setNombre(txt_ponerNombre.getText());
+            nuevoUsuario.setEmail(txt_ponerCorreo.getText());
+            String contraseñaZifrada = BCrypt.withDefaults().hashToString(12, txt_contraseña.getPassword());
+            nuevoUsuario.setPasswordHash(contraseñaZifrada);
+            nuevoUsuario.setInstructor(chk_instructor.isSelected());
+
+            DataAccess da = new DataAccess();
+            int idNuevoUsuario = da.registerUser(nuevoUsuario);
+            nuevoUsuario.setId(idNuevoUsuario);
+            JOptionPane.showMessageDialog(this, "El usuario se ha registrado de manera correcta");
+            setVisible(false);
         }
     }//GEN-LAST:event_btn_registrarseActionPerformed
 
     private void txt_ponerCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ponerCorreoActionPerformed
-     
+
     }//GEN-LAST:event_txt_ponerCorreoActionPerformed
 
     private void txt_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_contraseñaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_contraseñaActionPerformed
 
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_registrarse;

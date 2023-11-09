@@ -25,6 +25,13 @@
             <artifactId>bcrypt</artifactId>
             <version>0.10.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/uk.co.caprica/vlcj -->
+        <dependency>
+            <groupId>uk.co.caprica</groupId>
+            <artifactId>vlcj</artifactId>
+            <version>4.8.2</version>
+        </dependency>
+
 
     </dependencies>
     <name>Proyecto_Entrenamiento</name>
