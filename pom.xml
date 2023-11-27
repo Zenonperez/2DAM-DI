@@ -31,8 +31,12 @@
             <artifactId>vlcj</artifactId>
             <version>4.8.2</version>
         </dependency>
-
-
+        <!-- https://mvnrepository.com/artifact/com.azure/azure-storage-blob -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-storage-blob</artifactId>
+            <version>12.25.0</version>
+        </dependency>
     </dependencies>
     <name>Proyecto_Entrenamiento</name>
 </project>

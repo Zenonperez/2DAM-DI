@@ -4,10 +4,16 @@
  */
 package principal;
 
+import com.azure.storage.blob.BlobClient;
+import com.azure.storage.blob.BlobClientBuilder;
+import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.BlobServiceClient;
+import com.azure.storage.blob.BlobServiceClientBuilder;
 import data.DataAccess;
 import dto.Intent;
 import dto.Usuari;
 import java.awt.BorderLayout;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import principal.tablemodels.IntentosPendientesTableModel;
@@ -67,8 +73,19 @@ public class Main extends javax.swing.JFrame {
     
     public void video(String video) {
         this.video = video;
-        videoFilePath = "C:\\Users\\Administrator\\AppData\\Local\\Proyecto_Entrenamiento\\videos\\" + video;
-        mediaPlayer.mediaPlayer().media().play(videoFilePath);
+        String connectionAzureStr = "DefaultEndpointsProtocol=https;AccountName=divideo;AccountKey=xr35oLT/BkabDUAQWAXzPX/EDvgFbNm8ecTZfaiU/CVvI47fvx/P9GHtshVzFOsY5O4Q+YZSYG6e+AStSfMFeQ==;EndpointSuffix=core.windows.net";
+        String containerName = "videos";
+        BlobClient blobClient = new BlobClientBuilder().connectionString(connectionAzureStr)
+                .blobName(video)
+                .containerName(containerName)
+                .buildClient();
+        String tempDir = System.getProperty("java.io.tmpdir");
+        String downloadPath = tempDir + File.separator + video;
+        File existe = new File(downloadPath);
+        if (!existe.exists()){
+        blobClient.downloadToFile(downloadPath);
+        }
+        mediaPlayer.mediaPlayer().media().play(downloadPath);
         isPlaying = true;
         btn_ReproducirPausar.setEnabled(true);
         btn_ReproducirPausar.setText("Pausar");
