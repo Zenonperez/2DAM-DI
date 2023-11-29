@@ -13,9 +13,12 @@ import data.DataAccess;
 import dto.Intent;
 import dto.Usuari;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import principal.tablemodels.IntentosPendientesTableModel;
 import principal.tablemodels.UsuariosTableModel;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
@@ -26,6 +29,8 @@ import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
  */
 public class Main extends javax.swing.JFrame {
     
+       private String textoOriginal;
+    private int indiceActual;
     private Usuari user;
     private DataAccess da = new DataAccess();
     private InformacionIntento info;
@@ -44,6 +49,8 @@ public class Main extends javax.swing.JFrame {
         } else {
             System.exit(0);
         }
+        textoOriginal = albl_animado.getText();
+        indiceActual = 0;
         btn_ReproducirPausar.setEnabled(false);
         btn_SeleccionarUsuarios.setEnabled(false);
         btn_VerVideo.setEnabled(false);
@@ -54,6 +61,34 @@ public class Main extends javax.swing.JFrame {
         tbl_Usuarios.setModel(new UsuariosTableModel(da.getAllUsers()));
         mediaPlayer = new EmbeddedMediaPlayerComponent();
         pnl_ReproductorVideos.add(mediaPlayer, BorderLayout.CENTER);
+        
+        Timer animacion = new Timer(albl_animado.getDelay(), new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                animarLabel();
+            }
+            });
+        
+        if (albl_animado.isAnimated()){
+            animacion.start();
+        } else {
+            animacion.stop();
+            albl_animado.setText(textoOriginal);
+        }
+        
+        
+    }
+    
+    private void animarLabel(){
+        String textoAnimado = textoOriginal + albl_animado.getAppendedText().substring(0,indiceActual);
+        albl_animado.setText(textoAnimado);
+        indiceActual++;
+        repaint();
+        
+        
+        if (indiceActual > albl_animado.getAppendedText().length()){
+            indiceActual = 0;
+        }
         
     }
     
@@ -130,6 +165,7 @@ public class Main extends javax.swing.JFrame {
         btn_ReproducirPausar = new javax.swing.JButton();
         lbl_Usuario = new javax.swing.JLabel();
         lbl_UsuarioConectado = new javax.swing.JLabel();
+        albl_animado = new beans.AnimatedLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Fitnow");
@@ -304,6 +340,11 @@ public class Main extends javax.swing.JFrame {
 
         lbl_UsuarioConectado.setText("jLabel1");
 
+        albl_animado.setText("B");
+        albl_animado.setAnimated(true);
+        albl_animado.setAppendedText("ienvenido");
+        albl_animado.setDelay(500);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -315,6 +356,8 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(lbl_Usuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_UsuarioConectado)
+                        .addGap(162, 162, 162)
+                        .addComponent(albl_animado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_cerrarSesion))
                     .addGroup(layout.createSequentialGroup()
@@ -325,11 +368,11 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(275, 275, 275)
-                        .addComponent(btn_ReproducirPausar)))
+                        .addComponent(btn_ReproducirPausar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -339,7 +382,8 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cerrarSesion)
                     .addComponent(lbl_Usuario)
-                    .addComponent(lbl_UsuarioConectado))
+                    .addComponent(lbl_UsuarioConectado)
+                    .addComponent(albl_animado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnl_IntentosPendientesRevision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -455,6 +499,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private beans.AnimatedLabel albl_animado;
     private javax.swing.JButton btn_InformaciónIntentos;
     private javax.swing.JButton btn_ReproducirPausar;
     private javax.swing.JButton btn_SeleccionarUsuarios;

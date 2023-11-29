@@ -35,6 +35,8 @@
                       <Component id="lbl_Usuario" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lbl_UsuarioConectado" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
+                      <Component id="albl_animado" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_cerrarSesion" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -48,13 +50,13 @@
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="275" max="-2" attributes="0"/>
+                      <Component id="btn_ReproducirPausar" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
                       <Component id="pnl_ReproductorVideos" min="-2" pref="273" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="275" max="-2" attributes="0"/>
-                      <Component id="btn_ReproducirPausar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -69,6 +71,7 @@
                   <Component id="btn_cerrarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_Usuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_UsuarioConectado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="albl_animado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -324,6 +327,14 @@
     <Component class="javax.swing.JLabel" name="lbl_UsuarioConectado">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="beans.AnimatedLabel" name="albl_animado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="B"/>
+        <Property name="animated" type="boolean" value="true"/>
+        <Property name="appendedText" type="java.lang.String" value="ienvenido"/>
+        <Property name="delay" type="int" value="500"/>
       </Properties>
     </Component>
   </SubComponents>
