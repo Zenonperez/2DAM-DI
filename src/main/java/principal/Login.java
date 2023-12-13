@@ -9,6 +9,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import data.DataAccess;
 import dto.Usuari;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,15 +23,26 @@ public class Login extends javax.swing.JDialog {
     private DataAccess da = new DataAccess();
     private Usuari user;
     private Main main;
+    private boolean segundaConexion;
 
     /**
      * Creates new form Login
      */
-    public Login(java.awt.Frame parent, boolean modal, Usuari user) {
+    public Login(java.awt.Frame parent, boolean modal, Usuari user, boolean segundaConexion) {
         super(parent, modal);
         main = (Main) parent;
         this.user = user;
         initComponents();
+        conectado = false;
+        this.segundaConexion = segundaConexion;
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        
+        
+        });
 
     }
 
@@ -148,9 +161,12 @@ public class Login extends javax.swing.JDialog {
                 var resultado = BCrypt.verifyer().verify(contraseñaParaVerificar, contraseñaEnBaseDatos);
                 if (resultado.verified) {
                     JOptionPane.showMessageDialog(this, "Sesion iniciada. Bienvenido " + user.getNombre());
-                    setVisible(false);
+                    dispose();
                     main.UsuarioConectado(user);
                     conectado = true;
+                    if(segundaConexion){
+                    main.setVisible(true);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(this, "Acceso denegado: Contraseña incorrecta");
                 }

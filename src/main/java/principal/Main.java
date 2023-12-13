@@ -9,12 +9,15 @@ import com.azure.storage.blob.BlobClientBuilder;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
+import com.mycompany.customcomponentejercicio.SwipeListener;
 import data.DataAccess;
 import dto.Intent;
 import dto.Usuari;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -29,19 +32,20 @@ import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
  */
 public class Main extends javax.swing.JFrame {
     
-       private String textoOriginal;
+    private String textoOriginal;
     private int indiceActual;
     private Usuari user;
     private DataAccess da = new DataAccess();
     private InformacionIntento info;
     private EmbeddedMediaPlayerComponent mediaPlayer;
     private boolean isPlaying;
-    String video = "void";
-    String videoFilePath;
+    private String video = "void";
+    private String videoFilePath;
+    private Login login;
     
     public Main() {
         
-        Login login = new Login(this, true, user);
+        login = new Login(this, true, user,false);
         login.setVisible(true);
         if (login.EstasConectado()) {
             initComponents();
@@ -61,7 +65,21 @@ public class Main extends javax.swing.JFrame {
         tbl_Usuarios.setModel(new UsuariosTableModel(da.getAllUsers()));
         mediaPlayer = new EmbeddedMediaPlayerComponent();
         pnl_ReproductorVideos.add(mediaPlayer, BorderLayout.CENTER);
+        pnl_customComponentEjercicio.setFocusable(true);
+        pnl_customComponentEjercicio.addSwipeListener(new SwipeListener() {
+            @Override
+            public void arrastrar(String dirrecion, String idEjercicio) {
+            System.out.println(dirrecion);
+            System.out.println(idEjercicio);
+            }
+        });
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                lbl_UsuarioConectado.setText(user.getNombre());
+            }
         
+        });
         Timer animacion = new Timer(albl_animado.getDelay(), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,7 +121,7 @@ public class Main extends javax.swing.JFrame {
     }
     
     public void UsuarioConectado(Usuari user) {
-        this.user = user;        
+        this.user = user;      
     }
     
     public void video(String video) {
@@ -140,6 +158,12 @@ public class Main extends javax.swing.JFrame {
     public void ActualizarCambiosTablaIntentosPendientes() {
         tbl_IntentosPendientes.setModel(new IntentosPendientesTableModel(da.getAttemptsPendingReview()));
     }
+    
+    
+    public void desconectarse(){
+        setVisible(false);
+        lbl_UsuarioConectado.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -165,7 +189,8 @@ public class Main extends javax.swing.JFrame {
         btn_ReproducirPausar = new javax.swing.JButton();
         lbl_Usuario = new javax.swing.JLabel();
         lbl_UsuarioConectado = new javax.swing.JLabel();
-        albl_animado = new beans.AnimatedLabel();
+        albl_animado = new AnimatedLabel.AnimatedLabel();
+        pnl_customComponentEjercicio = new com.mycompany.customcomponentejercicio.CustomComponentEjercicio();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Fitnow");
@@ -343,7 +368,6 @@ public class Main extends javax.swing.JFrame {
         albl_animado.setText("B");
         albl_animado.setAnimated(true);
         albl_animado.setAppendedText("ienvenido");
-        albl_animado.setDelay(500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -356,9 +380,9 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(lbl_Usuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_UsuarioConectado)
-                        .addGap(162, 162, 162)
-                        .addComponent(albl_animado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(albl_animado, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(159, 159, 159)
                         .addComponent(btn_cerrarSesion))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnl_IntentosPendientesRevision, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,8 +396,10 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(btn_ReproducirPausar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(176, 176, 176)
-                        .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pnl_customComponentEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,8 +414,13 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnl_IntentosPendientesRevision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnl_Usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(pnl_customComponentEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_ReproducirPausar)
                 .addContainerGap(9, Short.MAX_VALUE))
@@ -402,7 +433,9 @@ public class Main extends javax.swing.JFrame {
     private void btn_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarSesionActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(this, "Estas seguro que quieres cerrar la sesion?", "Cerrar Sesion", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-            dispose();
+            desconectarse();
+            Login loginNuevo = new Login(this, true, null,true);
+            loginNuevo.setVisible(true);
         }
         if (respuesta == JOptionPane.NO_OPTION) {
             
@@ -499,7 +532,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private beans.AnimatedLabel albl_animado;
+    private AnimatedLabel.AnimatedLabel albl_animado;
     private javax.swing.JButton btn_InformaciónIntentos;
     private javax.swing.JButton btn_ReproducirPausar;
     private javax.swing.JButton btn_SeleccionarUsuarios;
@@ -513,6 +546,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_IntentosPendientesRevision;
     private javax.swing.JPanel pnl_ReproductorVideos;
     private javax.swing.JPanel pnl_Usuarios;
+    private com.mycompany.customcomponentejercicio.CustomComponentEjercicio pnl_customComponentEjercicio;
     private javax.swing.JTable tbl_IntentosPendientes;
     private javax.swing.JTable tbl_Usuarios;
     // End of variables declaration//GEN-END:variables
