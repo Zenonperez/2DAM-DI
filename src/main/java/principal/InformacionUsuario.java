@@ -4,11 +4,12 @@
  */
 package principal;
 
+import com.mycompany.customcomponentejercicio.SwipeListener;
 import data.DataAccess;
+import dto.Intent;
 import dto.Review;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.table.AbstractTableModel;
-import principal.tablemodels.IntentosUsuario;
 
 /**
  *
@@ -19,6 +20,9 @@ public class InformacionUsuario extends javax.swing.JDialog {
     private Main main;
     private DataAccess da = new DataAccess();
     private int seleccion;
+    private ArrayList<Intent> intentosUsuario = new ArrayList<>();
+    private String direccion;
+    private int idEjer;
 
     public InformacionUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -27,31 +31,90 @@ public class InformacionUsuario extends javax.swing.JDialog {
         initComponents();
         btn_EditarReview.setEnabled(false);
         btn_EliminarReview.setEnabled(false);
-        btn_VerVideo.setEnabled(false);
         btn_RevisarReview.setEnabled(false);
         String idS = String.valueOf(da.getAllUsers().get(seleccion).getId());
         lbl_IDRespuesta.setText(idS);
         lbl_NombreRespuesta.setText(da.getAllUsers().get(seleccion).getNombre());
         lbl_EmailRespuesta.setText(da.getAllUsers().get(seleccion).getEmail());
-        tbl_IntentosUsuario.setModel(new IntentosUsuario(da.getAttemptsPerUser(da.getAllUsers().get(seleccion))));
-
+        conseguirIntentosUsuario();
     }
 
-    public int getIDIntento() {
-        int filaSeleccionada = tbl_IntentosUsuario.convertRowIndexToModel(tbl_IntentosUsuario.getSelectedRow());
-        int idIntento = (Integer) tbl_IntentosUsuario.getValueAt(filaSeleccionada, 0);
-        return idIntento;
-    }
-
-    public int getIDReview() {
-        int filaSeleccionada = tbl_IntentosUsuario.convertRowIndexToModel(tbl_IntentosUsuario.getSelectedRow());
-        int idIntento = (Integer) tbl_IntentosUsuario.getValueAt(filaSeleccionada, 0);
+    public int getIDReview(int idIntento) {
         int idReview = da.getAttemptReview(idIntento).getId();
         return idReview;
     }
 
-    public void ActualizarTablaIntentosUsuario() {
-        tbl_IntentosUsuario.setModel(new IntentosUsuario(da.getAttemptsPerUser(da.getAllUsers().get(seleccion))));
+    public int getIDIntento() {
+        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        return intentoUsuario.getId();
+    }
+
+    public void conseguirIntentosUsuario() {
+        intentosUsuario = da.getAttemptsPerUser(da.getAllUsers().get(seleccion));
+
+        for (Intent intent : intentosUsuario) {
+            com.mycompany.customcomponentejercicio.CustomComponentEjercicio pnl_customComponentEjercicio = new com.mycompany.customcomponentejercicio.CustomComponentEjercicio();
+            pnl_customComponentEjercicio.setnombreEjercicio(intent.getNombreEjercicio());
+            pnl_customComponentEjercicio.setnombreUsuario(intent.getNombreUsuario());
+            pnl_customComponentEjercicio.setfechaIntento(intent.getTimestamp_Inicio());
+            pnl_customComponentEjercicio.setIdEjercicio(intent.getIdEjercicio());
+            int idreview = getIDReview(intent.getId());
+            if (idreview == 0) {
+                pnl_customComponentEjercicio.setestadoIntento(1);
+            } else {
+                pnl_customComponentEjercicio.setestadoIntento(2);
+            }
+            pnl_ejerciciosUsuario.add(pnl_customComponentEjercicio);
+            pnl_customComponentEjercicio.setFocusable(true);
+            pnl_customComponentEjercicio.addSwipeListener(new SwipeListener() {
+                @Override
+                public void arrastrar(String dirrecion, int idEjercicio) {
+                    direccion = dirrecion;
+                    idEjer = idEjercicio;
+                    String videoFile = "";
+                    if (direccion.equals("right")) {
+                        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+                        if (intentoUsuario != null) {
+                            videoFile = intentoUsuario.getVideofile();
+                        }
+                        main.video(videoFile);
+                        dispose();
+                    }
+                    if (direccion.equals("left")) {
+                        btn_RevisarReview.setEnabled(true);
+                        btn_EliminarReview.setEnabled(true);
+                        btn_EditarReview.setEnabled(true);
+                    }
+                }
+            });
+            
+        }
+
+    }
+
+    private void IniciarRevisionReview() {
+        RevisionReview revisionReview = new RevisionReview(this, true);
+        revisionReview.setVisible(true);
+    }
+
+    private void noReview() {
+        JOptionPane.showMessageDialog(this, "No exite la review de este intento");
+    }
+
+    public void ActualizarIntentosUsuario() {
+        pnl_ejerciciosUsuario.removeAll();
+        conseguirIntentosUsuario();
+        dispose();
+    }
+
+    public Intent buscarIntentoUsuario(int idEjer) {
+        for (Intent intento : intentosUsuario) {
+            int id = intento.getIdEjercicio();
+            if (id == idEjer) {
+                return intento;
+            }
+        }
+        return null;
     }
 
     /**
@@ -66,15 +129,15 @@ public class InformacionUsuario extends javax.swing.JDialog {
         lbl_idEnunciado = new javax.swing.JLabel();
         lbl_NombreEnunciado = new javax.swing.JLabel();
         lbl_EmailEnunciado = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_IntentosUsuario = new javax.swing.JTable();
         lbl_IDRespuesta = new javax.swing.JLabel();
         lbl_NombreRespuesta = new javax.swing.JLabel();
         lbl_EmailRespuesta = new javax.swing.JLabel();
-        btn_VerVideo = new javax.swing.JButton();
         btn_RevisarReview = new javax.swing.JButton();
         btn_EditarReview = new javax.swing.JButton();
         btn_EliminarReview = new javax.swing.JButton();
+        pnl_ejerciciosUsuario = new javax.swing.JPanel();
+        lbl_verVideo = new javax.swing.JLabel();
+        lbl_activarBotones = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informacion del Usuario");
@@ -87,36 +150,11 @@ public class InformacionUsuario extends javax.swing.JDialog {
 
         lbl_EmailEnunciado.setText("Email:");
 
-        tbl_IntentosUsuario.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tbl_IntentosUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_IntentosUsuarioMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tbl_IntentosUsuario);
-
         lbl_IDRespuesta.setText("jLabel5");
 
         lbl_NombreRespuesta.setText("jLabel6");
 
         lbl_EmailRespuesta.setText("jLabel7");
-
-        btn_VerVideo.setText("Ver video");
-        btn_VerVideo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_VerVideoActionPerformed(evt);
-            }
-        });
 
         btn_RevisarReview.setText("Revisar Review");
         btn_RevisarReview.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +177,14 @@ public class InformacionUsuario extends javax.swing.JDialog {
             }
         });
 
+        pnl_ejerciciosUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnl_ejerciciosUsuario.setPreferredSize(new java.awt.Dimension(380, 316));
+        pnl_ejerciciosUsuario.setLayout(new javax.swing.BoxLayout(pnl_ejerciciosUsuario, javax.swing.BoxLayout.PAGE_AXIS));
+
+        lbl_verVideo.setText("Ver Video (Desliza) -->");
+
+        lbl_activarBotones.setText("<--(Desliza) Activar botones");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,31 +192,37 @@ public class InformacionUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_EliminarReview)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_idEnunciado)
-                            .addComponent(lbl_NombreEnunciado)
-                            .addComponent(lbl_EmailEnunciado))
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_EmailRespuesta)
-                            .addComponent(lbl_NombreRespuesta)
-                            .addComponent(lbl_IDRespuesta)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btn_EditarReview)
-                            .addGap(58, 58, 58)
-                            .addComponent(btn_VerVideo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_RevisarReview))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addComponent(lbl_activarBotones)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_verVideo)
+                        .addGap(56, 56, 56))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_EliminarReview)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_EditarReview)
+                                .addGap(47, 47, 47)
+                                .addComponent(btn_RevisarReview))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(pnl_ejerciciosUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lbl_idEnunciado)
+                                        .addComponent(lbl_NombreEnunciado)
+                                        .addComponent(lbl_EmailEnunciado))
+                                    .addGap(55, 55, 55)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lbl_EmailRespuesta)
+                                        .addComponent(lbl_NombreRespuesta)
+                                        .addComponent(lbl_IDRespuesta)))))
+                        .addContainerGap(30, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_idEnunciado)
                     .addComponent(lbl_IDRespuesta))
@@ -182,41 +234,39 @@ public class InformacionUsuario extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_EmailEnunciado)
                     .addComponent(lbl_EmailRespuesta))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_VerVideo)
-                    .addComponent(btn_RevisarReview)
-                    .addComponent(btn_EditarReview))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnl_ejerciciosUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_EliminarReview)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_EditarReview)
+                    .addComponent(btn_RevisarReview)
+                    .addComponent(btn_EliminarReview))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_verVideo)
+                    .addComponent(lbl_activarBotones))
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_VerVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VerVideoActionPerformed
-        int filaSeleccionada = tbl_IntentosUsuario.convertRowIndexToModel(tbl_IntentosUsuario.getSelectedRow());
-        String intentoSeleccionado = (String) tbl_IntentosUsuario.getValueAt(filaSeleccionada, 5);
-        main.video(intentoSeleccionado);
-        dispose();
-
-    }//GEN-LAST:event_btn_VerVideoActionPerformed
 
     private void btn_RevisarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RevisarReviewActionPerformed
-        if (getIDReview() != 0) {
-            RevisionReview revisionReview = new RevisionReview(this, true);
-            revisionReview.setVisible(true);
+        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        int id = intentoUsuario.getId();
+        if (getIDReview(id) != 0) {
+            IniciarRevisionReview();
         } else {
-            JOptionPane.showMessageDialog(this, "No exite la review de este intento");
+            noReview();
         }
     }//GEN-LAST:event_btn_RevisarReviewActionPerformed
 
     private void btn_EditarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarReviewActionPerformed
-        if (getIDReview() != 0) {
+        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        int id = intentoUsuario.getId();
+        if (getIDReview(id) != 0) {
             RevalorarIntento revalorarIntento = new RevalorarIntento(this, true);
             revalorarIntento.setVisible(true);
         } else {
@@ -225,36 +275,30 @@ public class InformacionUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_EditarReviewActionPerformed
 
     private void btn_EliminarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarReviewActionPerformed
-        Review eliminarReview = da.getAttemptReview(getIDIntento());
+        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        int id = intentoUsuario.getId();
+        Review eliminarReview = da.getAttemptReview(id);
         da.dropReview(eliminarReview.getId());
-        main.ActualizarCambiosTablaIntentosPendientes();
+        ActualizarIntentosUsuario();
+        main.ActualizarCambiosIntentosPendientes();
         JOptionPane.showMessageDialog(this, "Se ha eliminado la review correctamente");
 
 
     }//GEN-LAST:event_btn_EliminarReviewActionPerformed
-
-    private void tbl_IntentosUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_IntentosUsuarioMouseClicked
-        if (tbl_IntentosUsuario.convertRowIndexToModel(tbl_IntentosUsuario.getSelectedRow()) != -1) {
-            btn_EditarReview.setEnabled(true);
-            btn_EliminarReview.setEnabled(true);
-            btn_VerVideo.setEnabled(true);
-            btn_RevisarReview.setEnabled(true);
-        }
-    }//GEN-LAST:event_tbl_IntentosUsuarioMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_EditarReview;
     private javax.swing.JButton btn_EliminarReview;
     private javax.swing.JButton btn_RevisarReview;
-    private javax.swing.JButton btn_VerVideo;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_EmailEnunciado;
     private javax.swing.JLabel lbl_EmailRespuesta;
     private javax.swing.JLabel lbl_IDRespuesta;
     private javax.swing.JLabel lbl_NombreEnunciado;
     private javax.swing.JLabel lbl_NombreRespuesta;
+    private javax.swing.JLabel lbl_activarBotones;
     private javax.swing.JLabel lbl_idEnunciado;
-    private javax.swing.JTable tbl_IntentosUsuario;
+    private javax.swing.JLabel lbl_verVideo;
+    private javax.swing.JPanel pnl_ejerciciosUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 package principal;
 
 import data.DataAccess;
+import dto.Intent;
 
 /**
  *
@@ -14,26 +15,27 @@ public class InformacionIntento extends javax.swing.JDialog {
 
     private Main main;
     private DataAccess da = new DataAccess();
+    
 
     /**
      * Creates new form InformacionIntento
      */
-    public InformacionIntento(java.awt.Frame parent, boolean modal) {
+    public InformacionIntento(java.awt.Frame parent, boolean modal, int idEjer) {
         super(parent, modal);
         main = (Main) parent;
-        int seleccion = main.SeleccionFilaIntentosinfo();
+        Intent intento = main.SeleccionIntento(idEjer);
         initComponents();
-        String idS = String.valueOf(da.getAttemptsPendingReview().get(seleccion).getId());
+        String idS = String.valueOf(intento.getId());
         lbl_IDRespuesta.setText(idS);
-        String idUserS = String.valueOf(da.getAttemptsPendingReview().get(seleccion).getIdUsuari());
+        String idUserS = String.valueOf(intento.getIdUsuari());
         lbl_IDUsuarioRespuesta.setText(idUserS);
-        lbl_NombreUsuarioRespuesta.setText(da.getAttemptsPendingReview().get(seleccion).getNombreUsuario());
-        String idEjerS = String.valueOf(da.getAttemptsPendingReview().get(seleccion).getIdEjercicio());
+        lbl_NombreUsuarioRespuesta.setText(intento.getNombreUsuario());
+        String idEjerS = String.valueOf(intento.getIdEjercicio());
         lbl_IDEjercicioRespuesta.setText(idEjerS);
-        lbl_NombreEjercicioRespuesta.setText(da.getAttemptsPendingReview().get(seleccion).getNombreEjercicio());
-        lbl_TimestampInicioRespuesta.setText(da.getAttemptsPendingReview().get(seleccion).getTimestamp_Inicio());
-        lbl_TimestampFinRespuesta.setText(da.getAttemptsPendingReview().get(seleccion).getTimestamp_Fin());
-        lbl_VideofileRespuesta.setText(da.getAttemptsPendingReview().get(seleccion).getVideofile());
+        lbl_NombreEjercicioRespuesta.setText(intento.getNombreEjercicio());
+        lbl_TimestampInicioRespuesta.setText(intento.getTimestamp_Inicio());
+        lbl_TimestampFinRespuesta.setText(intento.getTimestamp_Fin());
+        lbl_VideofileRespuesta.setText(intento.getVideofile());
 
     }
 

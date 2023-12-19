@@ -130,7 +130,7 @@ public class RevalorarIntento extends javax.swing.JDialog {
         } else {
             da.updateReview(review);
         }
-        infoUsuario.ActualizarTablaIntentosUsuario();
+        infoUsuario.ActualizarIntentosUsuario();
         JOptionPane.showMessageDialog(this, "Se ha actualizado la review correctamente");
 
         dispose();

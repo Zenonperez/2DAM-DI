@@ -47,6 +47,11 @@
             <artifactId>CustomComponentEjercicio</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>AnimatedLabel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <name>Proyecto_Entrenamiento</name>
 </project>

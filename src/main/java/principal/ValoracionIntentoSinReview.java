@@ -4,10 +4,9 @@
  */
 package principal;
 
-import com.sun.jna.platform.mac.DiskArbitration;
+
 import data.DataAccess;
 import dto.Review;
-import java.util.InputMismatchException;
 import javax.swing.JOptionPane;
 
 /**
@@ -132,9 +131,11 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
         }
         else{
             da.insertReview(review);  
+            main.ActualizarCambiosIntentosPendientes();
+            JOptionPane.showMessageDialog(this, "Se ha insertado la review correctamente");
         }
-        main.ActualizarCambiosTablaIntentosPendientes();
-        JOptionPane.showMessageDialog(this, "Se ha insertado la review correctamente");
+    
+       
 
         dispose();
        
