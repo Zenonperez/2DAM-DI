@@ -9,3 +9,8 @@ Actividad 2 parte 2: Proyecto Entreno 1.3:
 -Se ha implementado el JavaBean "CustomComponentEjercicio" en la tarea para demostrar que funciona correctamente dentro del programa.
 -Se han arreglado ciertos bugs como que el programa no se terminaba de cerrar y ahora unicamente se cierra si desde Login, se cierra la ventana.
 -El JavaBean implentado "CustomComponentEjercicio" es capaz de notificar por pantalla si se ha arrastrado el panel hacia la izquierda o hacia a la derecha además de regresar el numero de la id del ejercicio al que esta vinculado, que de momento esta "1" por ser default.
+
+Actividad 2 parte 3: Proyecto 2.0:
+-Se han eliminado el uso de tablas de intentos, tanto intentos pendientes como intentos usuarios, se han eliminado por que ahora en vez de tablas se utilizara el bean que hemos desarollado (CustomComponentEjercicio) para realizara las funciones que hacia la tabla que era representar los intentos. 
+-Con este componente si lo deslizamos a la derecha podermos ver el video que tiene ese intento. Si lo deslizamos hacia la izquierda se activaran los botones pudiendo hacer otras gestiones como eliminar la review de un intento o valorar un intento sin review entre otras.
+-Se ha cambiado un poco la interfaz grafica ya que los componenetes sino no se mostraban en el caso que hubieran varios, es por esos que ahora los usuarios y los intentos pendientes estan en un tabbed pane, para tener más espacio.
