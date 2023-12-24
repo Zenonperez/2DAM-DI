@@ -77,7 +77,7 @@ public class InformacionUsuario extends javax.swing.JDialog {
                         if (intentoUsuario != null) {
                             videoFile = intentoUsuario.getVideofile();
                         }
-                        main.video(videoFile);
+                        main.reproducirVideo(videoFile);
                         dispose();
                     }
                     if (direccion.equals("left")) {

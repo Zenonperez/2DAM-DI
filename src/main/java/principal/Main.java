@@ -116,11 +116,7 @@ public class Main extends javax.swing.JFrame {
                         if (intentoPendiente != null) {
                             video = intentoPendiente.getVideofile();
                         }
-                        videoFilePath = "C:\\Users\\Administrator\\AppData\\Local\\Proyecto_Entrenamiento\\videos\\" + video;
-                        mediaPlayer.mediaPlayer().media().play(videoFilePath);
-                        isPlaying = true;
-                        btn_ReproducirPausar.setEnabled(true);
-                        btn_ReproducirPausar.setText("Pausar");
+                        reproducirVideo(video);
                     }
                     if (direccion.equals("left")){
                         btn_InformaciónIntentos.setEnabled(true);
@@ -165,7 +161,7 @@ public class Main extends javax.swing.JFrame {
     
    
 
-    public void video(String video) {
+    public void reproducirVideo(String video) {
         this.video = video;
         String connectionAzureStr = "DefaultEndpointsProtocol=https;AccountName=divideo;AccountKey=xr35oLT/BkabDUAQWAXzPX/EDvgFbNm8ecTZfaiU/CVvI47fvx/P9GHtshVzFOsY5O4Q+YZSYG6e+AStSfMFeQ==;EndpointSuffix=core.windows.net";
         String containerName = "videos";
@@ -383,7 +379,6 @@ public class Main extends javax.swing.JFrame {
 
         lbl_UsuarioConectado.setText("jLabel1");
 
-        albl_animado.setText("B");
         albl_animado.setAnimated(true);
         albl_animado.setAppendedText("ienvenido");
 
@@ -393,14 +388,14 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_Usuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_UsuarioConectado)
-                        .addGap(161, 161, 161)
-                        .addComponent(albl_animado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(albl_animado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(183, 183, 183)
                         .addComponent(btn_cerrarSesion)
                         .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()
