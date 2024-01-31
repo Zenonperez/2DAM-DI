@@ -14,3 +14,9 @@ Actividad 2 parte 3: Proyecto 2.0:
 -Se han eliminado el uso de tablas de intentos, tanto intentos pendientes como intentos usuarios, se han eliminado por que ahora en vez de tablas se utilizara el bean que hemos desarollado (CustomComponentEjercicio) para realizara las funciones que hacia la tabla que era representar los intentos. 
 -Con este componente si lo deslizamos a la derecha podermos ver el video que tiene ese intento. Si lo deslizamos hacia la izquierda se activaran los botones pudiendo hacer otras gestiones como eliminar la review de un intento o valorar un intento sin review entre otras.
 -Se ha cambiado un poco la interfaz grafica ya que los componenetes sino no se mostraban en el caso que hubieran varios, es por esos que ahora los usuarios y los intentos pendientes estan en un tabbed pane, para tener más espacio.
+
+Actividad 3 parte 1: Fitnow 3.0
+
+-El proyecto empieza a tener forma y ahora tiene un estilo grafico de las ventanas dentro del programa de color gris oscuras dandole un toque estetico a la aplicacion
+- Se han arreglado multiples bugs que tenia el programa al seleccionar un intento, ya que miraba la id del ejercico y no la del intento.ç
+- Se han agragado imagenes e iconos para mejorar la estetica del programa.
