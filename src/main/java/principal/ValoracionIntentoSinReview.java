@@ -7,6 +7,7 @@ package principal;
 
 import data.DataAccess;
 import dto.Review;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +18,7 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
 
     private DataAccess da = new DataAccess();    
     Main main;
+    private Color azulPastel = new Color(173, 216, 230);
     
     
     /**
@@ -26,7 +28,12 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
         super(parent, modal);
         main = (Main) parent;
         initComponents();
+        int idIntento = main.getIDIntento();
+        String idIntentoS = String.valueOf(idIntento);
+        lbl_IDIntento.setText(idIntentoS);
+        lbl_idUsuario.setText(main.buscarIDUsuario(idIntento));
         
+     
     }
 
     /**
@@ -38,18 +45,28 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lbl_ValoracionEnunciado = new javax.swing.JLabel();
         txa_ValoracionRespuesta = new javax.swing.JTextField();
         lbl_Comentario = new javax.swing.JLabel();
+        btn_Enviar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txa_ComentarioRespuesta = new javax.swing.JTextArea();
-        btn_Enviar = new javax.swing.JButton();
+        lbl_IDintentoEnunciado = new javax.swing.JLabel();
+        lbl_IDUsuarioEnunciado = new javax.swing.JLabel();
+        lbl_IDIntento = new javax.swing.JLabel();
+        lbl_idUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Review");
+        setPreferredSize(new java.awt.Dimension(442, 306));
         setResizable(false);
-        setSize(new java.awt.Dimension(400, 300));
+        setSize(new java.awt.Dimension(442, 306));
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+
+        lbl_ValoracionEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        lbl_ValoracionEnunciado.setForeground(new java.awt.Color(255, 255, 255));
         lbl_ValoracionEnunciado.setText("Valoración:");
 
         txa_ValoracionRespuesta.addActionListener(new java.awt.event.ActionListener() {
@@ -58,50 +75,110 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
             }
         });
 
+        lbl_Comentario.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        lbl_Comentario.setForeground(new java.awt.Color(255, 255, 255));
         lbl_Comentario.setText("Comentario:");
 
-        txa_ComentarioRespuesta.setColumns(20);
-        txa_ComentarioRespuesta.setRows(5);
-        jScrollPane1.setViewportView(txa_ComentarioRespuesta);
-
         btn_Enviar.setText("Enviar");
+        btn_Enviar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_EnviarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_EnviarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_EnviarMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn_EnviarMouseReleased(evt);
+            }
+        });
         btn_Enviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_EnviarActionPerformed(evt);
             }
         });
 
+        txa_ComentarioRespuesta.setLineWrap(true);
+        jScrollPane1.setViewportView(txa_ComentarioRespuesta);
+
+        lbl_IDintentoEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        lbl_IDintentoEnunciado.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDintentoEnunciado.setText("ID del intento:");
+
+        lbl_IDUsuarioEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        lbl_IDUsuarioEnunciado.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDUsuarioEnunciado.setText("Nombre del Usuario:");
+
+        lbl_IDIntento.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        lbl_IDIntento.setForeground(new java.awt.Color(255, 255, 255));
+
+        lbl_idUsuario.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        lbl_idUsuario.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(lbl_Comentario)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(221, 221, 221)
+                        .addComponent(btn_Enviar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_IDintentoEnunciado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_IDIntento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lbl_ValoracionEnunciado))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(lbl_IDUsuarioEnunciado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_IDIntento, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_IDintentoEnunciado)
+                        .addComponent(lbl_IDUsuarioEnunciado)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_ValoracionEnunciado)
+                    .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(lbl_Comentario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_Enviar)
+                .addGap(32, 32, 32))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_Enviar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbl_Comentario)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lbl_ValoracionEnunciado)
-                            .addGap(18, 18, 18)
-                            .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(57, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_ValoracionEnunciado)
-                    .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(lbl_Comentario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_Enviar)
-                .addGap(19, 19, 19))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -123,7 +200,8 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Solo puedes poner numeros en la valoracion");
             valoracion = -1;
         }
-        review.setComentario(txa_ComentarioRespuesta.getText());         
+        review.setComentario(txa_ComentarioRespuesta.getText());    
+        
         review.setIdIntent(main.getIDIntento());
         review.setIdReviewer(main.getIDUsuario());
         if (valoracion < 0 || valoracion > 10){
@@ -142,11 +220,32 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
       
     }//GEN-LAST:event_btn_EnviarActionPerformed
 
+    private void btn_EnviarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EnviarMouseEntered
+        btn_Enviar.setBackground(azulPastel);
+    }//GEN-LAST:event_btn_EnviarMouseEntered
+
+    private void btn_EnviarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EnviarMouseExited
+        btn_Enviar.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btn_EnviarMouseExited
+
+    private void btn_EnviarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EnviarMousePressed
+        btn_Enviar.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_btn_EnviarMousePressed
+
+    private void btn_EnviarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EnviarMouseReleased
+        btn_Enviar.setBackground(azulPastel);
+    }//GEN-LAST:event_btn_EnviarMouseReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Enviar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_Comentario;
+    private javax.swing.JLabel lbl_IDIntento;
+    private javax.swing.JLabel lbl_IDUsuarioEnunciado;
+    private javax.swing.JLabel lbl_IDintentoEnunciado;
     private javax.swing.JLabel lbl_ValoracionEnunciado;
+    private javax.swing.JLabel lbl_idUsuario;
     private javax.swing.JTextArea txa_ComentarioRespuesta;
     private javax.swing.JTextField txa_ValoracionRespuesta;
     // End of variables declaration//GEN-END:variables

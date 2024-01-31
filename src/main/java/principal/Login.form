@@ -4,8 +4,14 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Login"/>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="33" green="33" red="33" type="rgb"/>
+    </Property>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
       <Color id="Default Cursor"/>
+    </Property>
+    <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.ComponentChooserEditor">
+      <ComponentRef name="null"/>
     </Property>
     <Property name="resizable" type="boolean" value="false"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -31,95 +37,161 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                      <Component id="btn_IniciarSesion" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbl_clickParaRegistrar" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lbl_TextoIniciarSesion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_Contraseña" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_CorreoElectronico" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_PonerMail" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txt_PonerContraseña" alignment="0" pref="191" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace pref="259" max="32767" attributes="0"/>
-          </Group>
+          <Component id="pnl_colorVentana" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="lbl_TextoIniciarSesion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-              <Component id="lbl_CorreoElectronico" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txt_PonerMail" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lbl_Contraseña" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txt_PonerContraseña" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="btn_IniciarSesion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lbl_clickParaRegistrar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
-          </Group>
+          <Component id="pnl_colorVentana" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lbl_TextoIniciarSesion">
+    <Container class="javax.swing.JPanel" name="pnl_colorVentana">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="24" style="1"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Inicio de Sesi&#xf3;n"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl_CorreoElectronico">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Correo Electr&#xf3;nico"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txt_PonerMail">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl_Contrase&#xf1;a">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JToggleButton" name="btn_IniciarSesion">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Iniciar Sesion"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_IniciarSesionActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="txt_PonerContrase&#xf1;a">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_PonerContrase&#xf1;aActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl_clickParaRegistrar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No tienes cuenta? Pulsa aqui para registrarte."/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_clickParaRegistrarMouseClicked"/>
-        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_clickParaRegistrarMouseEntered"/>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_clickParaRegistrarMouseExited"/>
-      </Events>
-    </Component>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lbl_clickParaRegistrar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lbl_TextoIniciarSesion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_Contraseña" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_CorreoElectronico" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_PonerMail" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_PonerContraseña" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                  <Component id="btn_IniciarSesion" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="103" max="32767" attributes="0"/>
+                          <Component id="lbl_logoPrograma" min="-2" pref="178" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="lbl_TextoIniciarSesion" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="lbl_CorreoElectronico" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txt_PonerMail" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="lbl_Contraseña" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txt_PonerContraseña" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="btn_IniciarSesion" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="lbl_logoPrograma" min="-2" pref="193" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="lbl_clickParaRegistrar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lbl_TextoIniciarSesion">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Inicio de Sesi&#xf3;n"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_CorreoElectronico">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Correo Electr&#xf3;nico:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_PonerMail">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_Contrase&#xf1;a">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JToggleButton" name="btn_IniciarSesion">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Iniciar Sesion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_IniciarSesionMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_IniciarSesionMouseExited"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_IniciarSesionMousePressed"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_IniciarSesionMouseReleased"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_IniciarSesionActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btn_IniciarSesionKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txt_PonerContrase&#xf1;a">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_PonerContrase&#xf1;aActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_clickParaRegistrar">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Nuevo Profesor? Pulsa aqui para registrarte."/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_clickParaRegistrarMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_clickParaRegistrarMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_clickParaRegistrarMouseExited"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_logoPrograma">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagenes/Fitnow.jpg"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

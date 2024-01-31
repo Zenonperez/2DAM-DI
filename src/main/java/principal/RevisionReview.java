@@ -11,7 +11,7 @@ import data.DataAccess;
  * @author Ziku
  */
 public class RevisionReview extends javax.swing.JDialog {
-
+    
     private InformacionUsuario infoUsuario;
     private DataAccess da = new DataAccess();
 
@@ -22,10 +22,12 @@ public class RevisionReview extends javax.swing.JDialog {
         super(parent, modal);
         infoUsuario = (InformacionUsuario) parent;
         initComponents();
-
+        
         lbl_suspendido.setVisible(false);
         int idIntento = infoUsuario.getIDIntento();
         String idStringIntento = String.valueOf(idIntento);
+        lbl_nombreUsuario.setText(infoUsuario.getNombreUsuario());
+        lbl_IDEjercicio.setText(String.valueOf(infoUsuario.getIDEjercicio()));
         lbl_IDintentoRespuesta.setText(idStringIntento);
         String idReviewer = String.valueOf(da.getAttemptReview(idIntento).getIdReviewer());
         lbl_IDReviewerRespuesta.setText(idReviewer);
@@ -48,104 +50,137 @@ public class RevisionReview extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbl_IDReviewEnunciado = new javax.swing.JLabel();
-        lbl_IDReviewerEnunciado = new javax.swing.JLabel();
-        lbl_ValoracionEnunciado = new javax.swing.JLabel();
-        lbl_IDIntentoEnunciado = new javax.swing.JLabel();
-        lbl_ComentarioEnunciado = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        jPanel1 = new javax.swing.JPanel();
+        lbl_suspendido = new javax.swing.JLabel();
+        lbl_IDReviewerRespuesta = new javax.swing.JLabel();
         ScrollPane = new javax.swing.JScrollPane();
         txa_ComentarioRespuesta = new javax.swing.JTextArea();
-        lbl_IDReviewRespuesta = new javax.swing.JLabel();
-        lbl_IDReviewerRespuesta = new javax.swing.JLabel();
         lbl_IDintentoRespuesta = new javax.swing.JLabel();
         lbl_ValoracionRespuesta = new javax.swing.JLabel();
-        lbl_suspendido = new javax.swing.JLabel();
+        lbl_ComentarioEnunciado = new javax.swing.JLabel();
+        lbl_IDIntentoEnunciado = new javax.swing.JLabel();
+        lbl_IDReviewEnunciado = new javax.swing.JLabel();
+        lbl_IDReviewerEnunciado = new javax.swing.JLabel();
+        lbl_IDReviewRespuesta = new javax.swing.JLabel();
+        lbl_ValoracionEnunciado = new javax.swing.JLabel();
+        lbl_tituloReview = new javax.swing.JLabel();
+        lbl_nombreUsuario = new javax.swing.JLabel();
+        lbl_IDEjercicioEnunciado = new javax.swing.JLabel();
+        lbl_IDEjercicio = new javax.swing.JLabel();
+
+        jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Revision de la Review");
         setResizable(false);
-        setSize(new java.awt.Dimension(471, 300));
+        setSize(new java.awt.Dimension(516, 302));
 
-        lbl_IDReviewEnunciado.setText("ID de la Review:");
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(516, 302));
+        jPanel1.setLayout(null);
 
-        lbl_IDReviewerEnunciado.setText("ID del Reviewer:");
-
-        lbl_ValoracionEnunciado.setText("Valoracion:");
-
-        lbl_IDIntentoEnunciado.setText("ID del Intento:");
-
-        lbl_ComentarioEnunciado.setText("Comentario:");
-
-        txa_ComentarioRespuesta.setColumns(20);
-        txa_ComentarioRespuesta.setRows(5);
-        ScrollPane.setViewportView(txa_ComentarioRespuesta);
-
-        lbl_IDReviewRespuesta.setText("jLabel1");
-
-        lbl_IDReviewerRespuesta.setText("jLabel2");
-
-        lbl_IDintentoRespuesta.setText("jLabel3");
-
-        lbl_ValoracionRespuesta.setText("jLabel4");
-
+        lbl_suspendido.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_suspendido.setForeground(new java.awt.Color(255, 51, 51));
         lbl_suspendido.setText("Tienes que repetir el intento no has aprobado");
+        jPanel1.add(lbl_suspendido);
+        lbl_suspendido.setBounds(230, 170, 260, 16);
+
+        lbl_IDReviewerRespuesta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IDReviewerRespuesta.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDReviewerRespuesta.setText("jLabel2");
+        jPanel1.add(lbl_IDReviewerRespuesta);
+        lbl_IDReviewerRespuesta.setBounds(130, 120, 60, 16);
+
+        txa_ComentarioRespuesta.setLineWrap(true);
+        ScrollPane.setViewportView(txa_ComentarioRespuesta);
+
+        jPanel1.add(ScrollPane);
+        ScrollPane.setBounds(30, 200, 460, 80);
+
+        lbl_IDintentoRespuesta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IDintentoRespuesta.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDintentoRespuesta.setText("jLabel3");
+        jPanel1.add(lbl_IDintentoRespuesta);
+        lbl_IDintentoRespuesta.setBounds(300, 70, 110, 16);
+
+        lbl_ValoracionRespuesta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_ValoracionRespuesta.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ValoracionRespuesta.setText("jLabel4");
+        jPanel1.add(lbl_ValoracionRespuesta);
+        lbl_ValoracionRespuesta.setBounds(300, 120, 100, 16);
+
+        lbl_ComentarioEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        lbl_ComentarioEnunciado.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ComentarioEnunciado.setText("Comentario:");
+        jPanel1.add(lbl_ComentarioEnunciado);
+        lbl_ComentarioEnunciado.setBounds(30, 170, 120, 26);
+
+        lbl_IDIntentoEnunciado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IDIntentoEnunciado.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDIntentoEnunciado.setText("ID del Intento:");
+        jPanel1.add(lbl_IDIntentoEnunciado);
+        lbl_IDIntentoEnunciado.setBounds(200, 70, 90, 16);
+
+        lbl_IDReviewEnunciado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IDReviewEnunciado.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDReviewEnunciado.setText("ID de la Review:");
+        jPanel1.add(lbl_IDReviewEnunciado);
+        lbl_IDReviewEnunciado.setBounds(30, 70, 100, 16);
+
+        lbl_IDReviewerEnunciado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IDReviewerEnunciado.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDReviewerEnunciado.setText("ID del Reviewer:");
+        jPanel1.add(lbl_IDReviewerEnunciado);
+        lbl_IDReviewerEnunciado.setBounds(30, 120, 100, 16);
+
+        lbl_IDReviewRespuesta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IDReviewRespuesta.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDReviewRespuesta.setText("jLabel1");
+        jPanel1.add(lbl_IDReviewRespuesta);
+        lbl_IDReviewRespuesta.setBounds(130, 70, 50, 16);
+
+        lbl_ValoracionEnunciado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_ValoracionEnunciado.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ValoracionEnunciado.setText("Valoracion:");
+        jPanel1.add(lbl_ValoracionEnunciado);
+        lbl_ValoracionEnunciado.setBounds(200, 120, 80, 16);
+
+        lbl_tituloReview.setFont(new java.awt.Font("Visitor TT1 BRK", 1, 24)); // NOI18N
+        lbl_tituloReview.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_tituloReview.setText("REVIEW DE:");
+        jPanel1.add(lbl_tituloReview);
+        lbl_tituloReview.setBounds(30, 20, 150, 22);
+
+        lbl_nombreUsuario.setFont(new java.awt.Font("Visitor TT1 BRK", 1, 18)); // NOI18N
+        lbl_nombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_nombreUsuario.setText("ANA");
+        jPanel1.add(lbl_nombreUsuario);
+        lbl_nombreUsuario.setBounds(190, 20, 100, 20);
+
+        lbl_IDEjercicioEnunciado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IDEjercicioEnunciado.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDEjercicioEnunciado.setText("ID del Ejercicio:");
+        jPanel1.add(lbl_IDEjercicioEnunciado);
+        lbl_IDEjercicioEnunciado.setBounds(360, 70, 100, 16);
+
+        lbl_IDEjercicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_IDEjercicio.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_IDEjercicio.setText("jLabel4");
+        jPanel1.add(lbl_IDEjercicio);
+        lbl_IDEjercicio.setBounds(460, 70, 50, 16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ScrollPane)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbl_IDReviewerEnunciado)
-                                    .addComponent(lbl_IDReviewEnunciado))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_IDReviewRespuesta)
-                                    .addComponent(lbl_IDReviewerRespuesta)))
-                            .addComponent(lbl_ComentarioEnunciado))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_suspendido)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lbl_ValoracionEnunciado)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl_ValoracionRespuesta))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lbl_IDIntentoEnunciado)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(lbl_IDintentoRespuesta))))))
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_IDReviewEnunciado)
-                    .addComponent(lbl_IDIntentoEnunciado)
-                    .addComponent(lbl_IDReviewRespuesta)
-                    .addComponent(lbl_IDintentoRespuesta))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_IDReviewerEnunciado)
-                    .addComponent(lbl_ValoracionEnunciado)
-                    .addComponent(lbl_IDReviewerRespuesta)
-                    .addComponent(lbl_ValoracionRespuesta))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_ComentarioEnunciado)
-                    .addComponent(lbl_suspendido))
-                .addGap(18, 18, 18)
-                .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                .addGap(36, 36, 36))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -158,7 +193,12 @@ public class RevisionReview extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPane;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_ComentarioEnunciado;
+    private javax.swing.JLabel lbl_IDEjercicio;
+    private javax.swing.JLabel lbl_IDEjercicioEnunciado;
     private javax.swing.JLabel lbl_IDIntentoEnunciado;
     private javax.swing.JLabel lbl_IDReviewEnunciado;
     private javax.swing.JLabel lbl_IDReviewRespuesta;
@@ -167,7 +207,9 @@ public class RevisionReview extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_IDintentoRespuesta;
     private javax.swing.JLabel lbl_ValoracionEnunciado;
     private javax.swing.JLabel lbl_ValoracionRespuesta;
+    private javax.swing.JLabel lbl_nombreUsuario;
     private javax.swing.JLabel lbl_suspendido;
+    private javax.swing.JLabel lbl_tituloReview;
     private javax.swing.JTextArea txa_ComentarioRespuesta;
     // End of variables declaration//GEN-END:variables
 }

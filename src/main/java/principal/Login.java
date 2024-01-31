@@ -5,10 +5,11 @@
 package principal;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import data.DataAccess;
 import dto.Usuari;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
@@ -33,6 +34,9 @@ public class Login extends javax.swing.JDialog {
         main = (Main) parent;
         this.user = user;
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/iconos/logoIcono.jpg"));
+        setIconImage(icono);
+        btn_IniciarSesion.setBackground(Color.white);
         conectado = false;
         this.segundaConexion = segundaConexion;
         this.addWindowListener(new WindowAdapter() {
@@ -59,6 +63,7 @@ public class Login extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnl_colorVentana = new javax.swing.JPanel();
         lbl_TextoIniciarSesion = new javax.swing.JLabel();
         lbl_CorreoElectronico = new javax.swing.JLabel();
         txt_PonerMail = new javax.swing.JTextField();
@@ -66,24 +71,53 @@ public class Login extends javax.swing.JDialog {
         btn_IniciarSesion = new javax.swing.JToggleButton();
         txt_PonerContraseña = new javax.swing.JPasswordField();
         lbl_clickParaRegistrar = new javax.swing.JLabel();
+        lbl_logoPrograma = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
+        setBackground(new java.awt.Color(51, 51, 51));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(null);
         setResizable(false);
         setSize(new java.awt.Dimension(539, 310));
 
+        pnl_colorVentana.setBackground(new java.awt.Color(51, 51, 51));
+
         lbl_TextoIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_TextoIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
         lbl_TextoIniciarSesion.setText("Inicio de Sesión");
 
-        lbl_CorreoElectronico.setText("Correo Electrónico");
+        lbl_CorreoElectronico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_CorreoElectronico.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_CorreoElectronico.setText("Correo Electrónico:");
 
+        lbl_Contraseña.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbl_Contraseña.setForeground(new java.awt.Color(255, 255, 255));
         lbl_Contraseña.setText("Contraseña:");
 
         btn_IniciarSesion.setText("Iniciar Sesion");
+        btn_IniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_IniciarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_IniciarSesionMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_IniciarSesionMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn_IniciarSesionMouseReleased(evt);
+            }
+        });
         btn_IniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_IniciarSesionActionPerformed(evt);
+            }
+        });
+        btn_IniciarSesion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btn_IniciarSesionKeyReleased(evt);
             }
         });
 
@@ -93,7 +127,8 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        lbl_clickParaRegistrar.setText("No tienes cuenta? Pulsa aqui para registrarte.");
+        lbl_clickParaRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_clickParaRegistrar.setText("Nuevo Profesor? Pulsa aqui para registrarte.");
         lbl_clickParaRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_clickParaRegistrarMouseClicked(evt);
@@ -106,50 +141,90 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(btn_IniciarSesion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_clickParaRegistrar)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        lbl_logoPrograma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fitnow.jpg"))); // NOI18N
+        lbl_logoPrograma.setText("jLabel1");
+
+        javax.swing.GroupLayout pnl_colorVentanaLayout = new javax.swing.GroupLayout(pnl_colorVentana);
+        pnl_colorVentana.setLayout(pnl_colorVentanaLayout);
+        pnl_colorVentanaLayout.setHorizontalGroup(
+            pnl_colorVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_colorVentanaLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(pnl_colorVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_colorVentanaLayout.createSequentialGroup()
+                        .addComponent(lbl_clickParaRegistrar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnl_colorVentanaLayout.createSequentialGroup()
+                        .addGroup(pnl_colorVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_colorVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lbl_TextoIniciarSesion)
                                 .addComponent(lbl_Contraseña)
                                 .addComponent(lbl_CorreoElectronico)
                                 .addComponent(txt_PonerMail)
-                                .addComponent(txt_PonerContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))))
-                .addContainerGap(259, Short.MAX_VALUE))
+                                .addComponent(txt_PonerContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnl_colorVentanaLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(btn_IniciarSesion)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                        .addComponent(lbl_logoPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))))
+        );
+        pnl_colorVentanaLayout.setVerticalGroup(
+            pnl_colorVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_colorVentanaLayout.createSequentialGroup()
+                .addGroup(pnl_colorVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_colorVentanaLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(lbl_TextoIniciarSesion)
+                        .addGap(45, 45, 45)
+                        .addComponent(lbl_CorreoElectronico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_PonerMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_Contraseña)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_PonerContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(btn_IniciarSesion))
+                    .addGroup(pnl_colorVentanaLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(lbl_logoPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(lbl_clickParaRegistrar)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_colorVentana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lbl_TextoIniciarSesion)
-                .addGap(45, 45, 45)
-                .addComponent(lbl_CorreoElectronico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_PonerMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_Contraseña)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_PonerContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btn_IniciarSesion)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_clickParaRegistrar)
-                .addContainerGap(15, Short.MAX_VALUE))
+            .addComponent(pnl_colorVentana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lbl_clickParaRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseExited
+        lbl_clickParaRegistrar.setForeground(Color.white);
+    }//GEN-LAST:event_lbl_clickParaRegistrarMouseExited
+
+    private void lbl_clickParaRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseEntered
+        lbl_clickParaRegistrar.setForeground(Color.cyan);
+    }//GEN-LAST:event_lbl_clickParaRegistrarMouseEntered
+
+    private void lbl_clickParaRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseClicked
+        Register registrarse = new Register(this, true);
+        registrarse.setVisible(true);
+    }//GEN-LAST:event_lbl_clickParaRegistrarMouseClicked
+
+    private void txt_PonerContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PonerContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_PonerContraseñaActionPerformed
 
     private void btn_IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IniciarSesionActionPerformed
         user = da.getUser(txt_PonerMail.getText());
@@ -165,7 +240,7 @@ public class Login extends javax.swing.JDialog {
                     main.UsuarioConectado(user);
                     conectado = true;
                     if(segundaConexion){
-                    main.setVisible(true);
+                        main.setVisible(true);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Acceso denegado: Contraseña incorrecta");
@@ -177,22 +252,26 @@ public class Login extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btn_IniciarSesionActionPerformed
 
-    private void txt_PonerContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_PonerContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_PonerContraseñaActionPerformed
+    private void btn_IniciarSesionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_IniciarSesionKeyReleased
 
-    private void lbl_clickParaRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseClicked
-        Register registrarse = new Register(this, true);
-        registrarse.setVisible(true);
-    }//GEN-LAST:event_lbl_clickParaRegistrarMouseClicked
+    }//GEN-LAST:event_btn_IniciarSesionKeyReleased
 
-    private void lbl_clickParaRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseEntered
-        lbl_clickParaRegistrar.setForeground(Color.blue);
-    }//GEN-LAST:event_lbl_clickParaRegistrarMouseEntered
+    private void btn_IniciarSesionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_IniciarSesionMouseReleased
+        btn_IniciarSesion.setBackground(Color.white);
+    }//GEN-LAST:event_btn_IniciarSesionMouseReleased
 
-    private void lbl_clickParaRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_clickParaRegistrarMouseExited
-        lbl_clickParaRegistrar.setForeground(Color.black);
-    }//GEN-LAST:event_lbl_clickParaRegistrarMouseExited
+    private void btn_IniciarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_IniciarSesionMousePressed
+        btn_IniciarSesion.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_btn_IniciarSesionMousePressed
+
+    private void btn_IniciarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_IniciarSesionMouseEntered
+        Color azulPastel = new Color(173,216,230); 
+        btn_IniciarSesion.setBackground(azulPastel);
+    }//GEN-LAST:event_btn_IniciarSesionMouseEntered
+
+    private void btn_IniciarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_IniciarSesionMouseExited
+        btn_IniciarSesion.setBackground(Color.white);
+    }//GEN-LAST:event_btn_IniciarSesionMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -201,6 +280,8 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_CorreoElectronico;
     private javax.swing.JLabel lbl_TextoIniciarSesion;
     private javax.swing.JLabel lbl_clickParaRegistrar;
+    private javax.swing.JLabel lbl_logoPrograma;
+    private javax.swing.JPanel pnl_colorVentana;
     private javax.swing.JPasswordField txt_PonerContraseña;
     private javax.swing.JTextField txt_PonerMail;
     // End of variables declaration//GEN-END:variables
