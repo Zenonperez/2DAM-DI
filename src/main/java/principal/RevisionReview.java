@@ -5,6 +5,8 @@
 package principal;
 
 import data.DataAccess;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -23,6 +25,9 @@ public class RevisionReview extends javax.swing.JDialog {
         infoUsuario = (InformacionUsuario) parent;
         initComponents();
         
+        getRootPane().setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+        
+        
         lbl_suspendido.setVisible(false);
         int idIntento = infoUsuario.getIDIntento();
         String idStringIntento = String.valueOf(idIntento);
@@ -36,6 +41,7 @@ public class RevisionReview extends javax.swing.JDialog {
         String valoracion = String.valueOf(da.getAttemptReview(idIntento).getValoracion());
         lbl_ValoracionRespuesta.setText(valoracion);
         txa_ComentarioRespuesta.setText(da.getAttemptReview(idIntento).getComentario());
+        txa_ComentarioRespuesta.setEditable(false);
         if (da.getAttemptReview(idIntento).getValoracion() < 3) {
             lbl_suspendido.setVisible(true);
         }

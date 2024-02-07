@@ -12,12 +12,16 @@ import dto.Intent;
 import dto.Usuari;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import principal.tablemodels.UsuariosTableModel;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
@@ -68,18 +72,26 @@ public class Main extends javax.swing.JFrame {
         btn_Valorar.setEnabled(false);
         lbl_UsuarioConectado.setText(user.getNombre());
         leerIntentos();
-//        tbl_IntentosPendientes.setModel(new IntentosPendientesTableModel(da.getAttemptsPendingReview()));
         tbl_Usuarios.setModel(new UsuariosTableModel(da.getAllUsers()));
         mediaPlayer = new EmbeddedMediaPlayerComponent();
         pnl_ReproductorVideos.add(mediaPlayer, BorderLayout.CENTER);
-//        pnl_customComponentEjercicio.setFocusable(true);
-//        pnl_customComponentEjercicio.addSwipeListener(new SwipeListener() {
-//            @Override
-//            public void arrastrar(String dirrecion, String idEjercicio) {
-//            System.out.println(dirrecion);
-//            System.out.println(idEjercicio);
-//            }
-//        });
+        setMinimumSize(getPreferredSize());
+        
+        this.addComponentListener(new ComponentAdapter(){
+           
+            @Override
+            public void componentResized(ComponentEvent e){
+            Dimension tamanoActual = getSize();
+            Dimension tamanoPreferido = getPreferredSize();
+            
+            
+            if (tamanoActual.width < tamanoPreferido.width || tamanoActual.height < tamanoPreferido.height){
+                setSize(tamanoPreferido);
+                }
+                }
+        });
+        
+        
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
@@ -266,6 +278,10 @@ public class Main extends javax.swing.JFrame {
         btn_ReproducirPausar = new javax.swing.JButton();
         lbl_Usuario = new javax.swing.JLabel();
         tab_IntentosUsuarios = new javax.swing.JTabbedPane();
+        pnl_Usuarios = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tbl_Usuarios = new javax.swing.JTable();
+        btn_SeleccionarUsuarios = new javax.swing.JButton();
         pnl_GestorIntentosPedientes = new javax.swing.JPanel();
         btn_InformaciónIntentos = new javax.swing.JButton();
         lbl_verVideo = new javax.swing.JLabel();
@@ -274,10 +290,6 @@ public class Main extends javax.swing.JFrame {
         lbl_ActivarBotones = new javax.swing.JLabel();
         lbl_iconosDeslizar = new javax.swing.JLabel();
         lbl_IconoClick = new javax.swing.JLabel();
-        pnl_Usuarios = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tbl_Usuarios = new javax.swing.JTable();
-        btn_SeleccionarUsuarios = new javax.swing.JButton();
         lbl_UsuarioConectado = new javax.swing.JLabel();
         albl_animado = new com.mycompany.animatedlabel.AnimatedLabel();
         lbl_nombrePrograma = new javax.swing.JLabel();
@@ -286,12 +298,14 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Fitnow");
         setBackground(new java.awt.Color(51, 51, 51));
-        setPreferredSize(new java.awt.Dimension(690, 651));
-        setResizable(false);
-        setSize(new java.awt.Dimension(690, 651));
+        setMinimumSize(new java.awt.Dimension(652, 810));
+        setSize(new java.awt.Dimension(810, 651));
+        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setPreferredSize(new java.awt.Dimension(695, 651));
+        jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanel1.setMinimumSize(new java.awt.Dimension(810, 651));
+        jPanel1.setPreferredSize(new java.awt.Dimension(810, 651));
 
         btn_cerrarSesion.setText("Cerrar Sesion");
         btn_cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -317,6 +331,8 @@ public class Main extends javax.swing.JFrame {
         pnl_ReproductorVideos.setBackground(new java.awt.Color(51, 51, 51));
         pnl_ReproductorVideos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Video Reproductor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         pnl_ReproductorVideos.setForeground(new java.awt.Color(255, 255, 255));
+        pnl_ReproductorVideos.setMinimumSize(new java.awt.Dimension(273, 201));
+        pnl_ReproductorVideos.setPreferredSize(new java.awt.Dimension(273, 201));
         pnl_ReproductorVideos.setLayout(new java.awt.BorderLayout());
 
         btn_ReproducirPausar.setText("Reproducir");
@@ -350,6 +366,80 @@ public class Main extends javax.swing.JFrame {
                 tab_IntentosUsuariosMouseEntered(evt);
             }
         });
+
+        pnl_Usuarios.setBackground(new java.awt.Color(51, 51, 51));
+        pnl_Usuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        tbl_Usuarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        tbl_Usuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        tbl_Usuarios.setGridColor(new java.awt.Color(255, 255, 255));
+        tbl_Usuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                tbl_UsuariosMouseMoved(evt);
+            }
+        });
+        tbl_Usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_UsuariossMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbl_UsuariosMouseEntered(evt);
+            }
+        });
+        jScrollPane6.setViewportView(tbl_Usuarios);
+
+        btn_SeleccionarUsuarios.setText("Seleccionar");
+        btn_SeleccionarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_SeleccionarUsuariosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_SeleccionarUsuariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_SeleccionarUsuariosMouseExited(evt);
+            }
+        });
+        btn_SeleccionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SeleccionarUsuariossActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_UsuariosLayout = new javax.swing.GroupLayout(pnl_Usuarios);
+        pnl_Usuarios.setLayout(pnl_UsuariosLayout);
+        pnl_UsuariosLayout.setHorizontalGroup(
+            pnl_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_UsuariosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_SeleccionarUsuarios)
+                .addGap(15, 15, 15))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_UsuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnl_UsuariosLayout.setVerticalGroup(
+            pnl_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_UsuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_SeleccionarUsuarios)
+                .addGap(16, 16, 16))
+        );
+
+        tab_IntentosUsuarios.addTab("Gestion de usuarios", pnl_Usuarios);
 
         pnl_GestorIntentosPedientes.setBackground(new java.awt.Color(51, 51, 51));
         pnl_GestorIntentosPedientes.setForeground(new java.awt.Color(255, 255, 255));
@@ -415,124 +505,53 @@ public class Main extends javax.swing.JFrame {
         pnl_GestorIntentosPedientes.setLayout(pnl_GestorIntentosPedientesLayout);
         pnl_GestorIntentosPedientesLayout.setHorizontalGroup(
             pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_IntentosPendientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_GestorIntentosPedientesLayout.createSequentialGroup()
                 .addGroup(pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnl_IntentosPendientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(btn_Valorar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_InformaciónIntentos))
-                    .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(lbl_ActivarBotones)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_IconoClick)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(lbl_verVideo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_iconosDeslizar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24))
+                        .addContainerGap()
+                        .addGroup(pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
+                                .addComponent(lbl_ActivarBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_IconoClick, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btn_Valorar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
+                        .addGroup(pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
+                                .addComponent(lbl_verVideo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_iconosDeslizar))
+                            .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
+                                .addComponent(btn_InformaciónIntentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(5, 5, 5)))))
+                .addContainerGap())
         );
         pnl_GestorIntentosPedientesLayout.setVerticalGroup(
             pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_GestorIntentosPedientesLayout.createSequentialGroup()
-                .addGroup(pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_IconoClick)
+                .addComponent(pnl_IntentosPendientes, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addGroup(pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_InformaciónIntentos)
+                    .addComponent(btn_Valorar))
+                .addGroup(pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
-                        .addComponent(pnl_IntentosPendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_InformaciónIntentos)
-                            .addComponent(btn_Valorar))
+                        .addGap(41, 41, 41)
                         .addGroup(pnl_GestorIntentosPedientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_iconosDeslizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_iconosDeslizar))
-                            .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(lbl_verVideo))
-                            .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(lbl_ActivarBotones)))))
-                .addGap(55, 55, 55))
+                                .addComponent(lbl_IconoClick, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(5, 5, 5))
+                            .addComponent(lbl_verVideo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnl_GestorIntentosPedientesLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(lbl_ActivarBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(14, 14, 14)))
+                .addGap(36, 36, 36))
         );
 
         tab_IntentosUsuarios.addTab("Intentos Pendientes", pnl_GestorIntentosPedientes);
-
-        pnl_Usuarios.setBackground(new java.awt.Color(51, 51, 51));
-        pnl_Usuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        tbl_Usuarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
-        tbl_Usuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        tbl_Usuarios.setGridColor(new java.awt.Color(255, 255, 255));
-        tbl_Usuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                tbl_UsuariosMouseMoved(evt);
-            }
-        });
-        tbl_Usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_UsuariossMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tbl_UsuariosMouseEntered(evt);
-            }
-        });
-        jScrollPane6.setViewportView(tbl_Usuarios);
-
-        btn_SeleccionarUsuarios.setText("Seleccionar");
-        btn_SeleccionarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_SeleccionarUsuariosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_SeleccionarUsuariosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_SeleccionarUsuariosMouseExited(evt);
-            }
-        });
-        btn_SeleccionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SeleccionarUsuariossActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_UsuariosLayout = new javax.swing.GroupLayout(pnl_Usuarios);
-        pnl_Usuarios.setLayout(pnl_UsuariosLayout);
-        pnl_UsuariosLayout.setHorizontalGroup(
-            pnl_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_UsuariosLayout.createSequentialGroup()
-                .addContainerGap(259, Short.MAX_VALUE)
-                .addComponent(btn_SeleccionarUsuarios)
-                .addGap(15, 15, 15))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_UsuariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnl_UsuariosLayout.setVerticalGroup(
-            pnl_UsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_UsuariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_SeleccionarUsuarios)
-                .addGap(16, 16, 16))
-        );
-
-        tab_IntentosUsuarios.addTab("Gestion de usuarios", pnl_Usuarios);
 
         lbl_UsuarioConectado.setForeground(new java.awt.Color(255, 255, 255));
         lbl_UsuarioConectado.setText("jLabel1");
@@ -547,82 +566,75 @@ public class Main extends javax.swing.JFrame {
         lbl_nombrePrograma.setText("FITNOW");
 
         lbl_logoImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/FitnowSoloImagen.jpg"))); // NOI18N
-        lbl_logoImagen.setText("<<<");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(albl_animado, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(albl_animado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbl_Usuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_UsuarioConectado)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_nombrePrograma)
-                        .addGap(154, 154, 154)
-                        .addComponent(btn_cerrarSesion))
+                                .addComponent(lbl_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                                .addGap(1, 1, 1)
+                                .addComponent(lbl_UsuarioConectado, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                                .addGap(2, 2, 2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                        .addComponent(lbl_nombrePrograma, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                        .addComponent(btn_cerrarSesion)
+                        .addGap(34, 34, 34))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(tab_IntentosUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tab_IntentosUsuarios)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(23, 23, 23))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addComponent(btn_ReproducirPausar))
+                                .addGap(127, 127, 127)
+                                .addComponent(btn_ReproducirPausar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(135, 135, 135))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(lbl_logoImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(30, 30, 30))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                                .addComponent(lbl_logoImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                .addContainerGap(121, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(albl_animado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(albl_animado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_Usuario)
-                                    .addComponent(lbl_UsuarioConectado)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(btn_cerrarSesion)))
-                        .addGap(1, 1, 1))
-                    .addComponent(lbl_nombrePrograma, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(lbl_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_UsuarioConectado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(5, 5, 5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(lbl_nombrePrograma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btn_cerrarSesion)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tab_IntentosUsuarios)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(tab_IntentosUsuarios))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(12, 12, 12)
+                        .addComponent(pnl_ReproductorVideos, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
                         .addComponent(btn_ReproducirPausar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_logoImagen)
-                        .addContainerGap())))
+                        .addComponent(lbl_logoImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12))))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1);
 
         pack();
         setLocationRelativeTo(null);

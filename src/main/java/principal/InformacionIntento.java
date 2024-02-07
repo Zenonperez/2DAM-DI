@@ -6,6 +6,8 @@ package principal;
 
 import data.DataAccess;
 import dto.Intent;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -35,6 +37,7 @@ public class InformacionIntento extends javax.swing.JDialog {
         lbl_TimestampInicioRespuesta.setText(intento.getTimestamp_Inicio());
         lbl_TimestampFinRespuesta.setText(intento.getTimestamp_Fin());
         lbl_VideofileRespuesta.setText(intento.getVideofile());
+        getRootPane().setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 
     }
 

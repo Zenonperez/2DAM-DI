@@ -7,6 +7,7 @@ package principal;
 import data.DataAccess;
 import dto.Review;
 import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ public class RevalorarIntento extends javax.swing.JDialog {
     Review review;
     private int valoracion;
     private Color azulPastel = new Color(173, 216, 230);
+    
 
     /**
      * Creates new form ValoracionIntentoSinReview
@@ -38,6 +40,7 @@ public class RevalorarIntento extends javax.swing.JDialog {
         String valoracion = String.valueOf(review.getValoracion());
         txa_ValoracionRespuesta.setText(valoracion);
         txa_ComentarioRespuesta.setText(review.getComentario());
+        getRootPane().setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
     }
 
     /**

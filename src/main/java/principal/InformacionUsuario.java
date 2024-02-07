@@ -10,6 +10,7 @@ import dto.Intent;
 import dto.Review;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,6 +42,7 @@ public class InformacionUsuario extends javax.swing.JDialog {
         lbl_NombreRespuesta.setText(da.getAllUsers().get(seleccion).getNombre());
         lbl_EmailRespuesta.setText(da.getAllUsers().get(seleccion).getEmail());
         conseguirIntentosUsuario();
+        getRootPane().setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
     }
 
     public int getIDReview(int idIntento) {
@@ -354,11 +356,16 @@ public class InformacionUsuario extends javax.swing.JDialog {
         Intent intentoUsuario = buscarIntentoUsuario(idEjer);
         int id = intentoUsuario.getId();
         Review eliminarReview = da.getAttemptReview(id);
+        if (eliminarReview.getId() != 0){
         da.dropReview(eliminarReview.getId());
         ActualizarIntentosUsuario();
         main.ActualizarCambiosIntentosPendientes();
         JOptionPane.showMessageDialog(this, "Se ha eliminado la review correctamente");
-
+        }else{
+            JOptionPane.showMessageDialog(this, "Este intento no tiene una review para eliminar");
+        }
+        
+        
 
     }//GEN-LAST:event_btn_EliminarReviewActionPerformed
 
