@@ -8,7 +8,9 @@ import data.DataAccess;
 import dto.Review;
 import java.awt.Color;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
+import principal.JDialogos.DialogoErrorNumerosValoracion;
+import principal.JDialogos.DialogoErrorRangoNumerosValoracion;
+import principal.JDialogos.DialogoRevaloracionCompletada;
 
 /**
  *
@@ -52,7 +54,7 @@ public class RevalorarIntento extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnl_Principal = new javax.swing.JPanel();
         btn_Enviar = new javax.swing.JButton();
         lbl_ValoracionEnunciado = new javax.swing.JLabel();
         txa_ValoracionRespuesta = new javax.swing.JTextField();
@@ -69,8 +71,8 @@ public class RevalorarIntento extends javax.swing.JDialog {
         setResizable(false);
         setSize(new java.awt.Dimension(400, 300));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setLayout(null);
+        pnl_Principal.setBackground(new java.awt.Color(51, 51, 51));
+        pnl_Principal.setLayout(null);
 
         btn_Enviar.setText("Enviar");
         btn_Enviar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -92,13 +94,13 @@ public class RevalorarIntento extends javax.swing.JDialog {
                 btn_EnviarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Enviar);
+        pnl_Principal.add(btn_Enviar);
         btn_Enviar.setBounds(260, 280, 72, 23);
 
         lbl_ValoracionEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         lbl_ValoracionEnunciado.setForeground(new java.awt.Color(255, 255, 255));
         lbl_ValoracionEnunciado.setText("Valoración:");
-        jPanel1.add(lbl_ValoracionEnunciado);
+        pnl_Principal.add(lbl_ValoracionEnunciado);
         lbl_ValoracionEnunciado.setBounds(40, 90, 120, 20);
 
         txa_ValoracionRespuesta.addActionListener(new java.awt.event.ActionListener() {
@@ -106,54 +108,54 @@ public class RevalorarIntento extends javax.swing.JDialog {
                 txa_ValoracionRespuestaActionPerformed(evt);
             }
         });
-        jPanel1.add(txa_ValoracionRespuesta);
+        pnl_Principal.add(txa_ValoracionRespuesta);
         txa_ValoracionRespuesta.setBounds(150, 90, 30, 30);
 
         lbl_Comentario.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         lbl_Comentario.setForeground(new java.awt.Color(255, 255, 255));
         lbl_Comentario.setText("Comentario:");
-        jPanel1.add(lbl_Comentario);
+        pnl_Principal.add(lbl_Comentario);
         lbl_Comentario.setBounds(40, 140, 130, 26);
 
         txa_ComentarioRespuesta.setLineWrap(true);
         jScrollPane1.setViewportView(txa_ComentarioRespuesta);
 
-        jPanel1.add(jScrollPane1);
+        pnl_Principal.add(jScrollPane1);
         jScrollPane1.setBounds(40, 170, 290, 90);
 
         lbl_IDintentoEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_IDintentoEnunciado.setForeground(new java.awt.Color(255, 255, 255));
         lbl_IDintentoEnunciado.setText("ID del intento:");
-        jPanel1.add(lbl_IDintentoEnunciado);
+        pnl_Principal.add(lbl_IDintentoEnunciado);
         lbl_IDintentoEnunciado.setBounds(30, 40, 87, 17);
 
         lbl_IDUsuarioEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_IDUsuarioEnunciado.setForeground(new java.awt.Color(255, 255, 255));
         lbl_IDUsuarioEnunciado.setText("Nombre del Usuario:");
-        jPanel1.add(lbl_IDUsuarioEnunciado);
+        pnl_Principal.add(lbl_IDUsuarioEnunciado);
         lbl_IDUsuarioEnunciado.setBounds(170, 40, 125, 17);
 
         lbl_idIntento.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_idIntento.setForeground(new java.awt.Color(255, 255, 255));
         lbl_idIntento.setText("jLabel1");
-        jPanel1.add(lbl_idIntento);
+        pnl_Principal.add(lbl_idIntento);
         lbl_idIntento.setBounds(120, 40, 40, 16);
 
         lbl_nombreUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_nombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lbl_nombreUsuario.setText("jLabel2");
-        jPanel1.add(lbl_nombreUsuario);
+        pnl_Principal.add(lbl_nombreUsuario);
         lbl_nombreUsuario.setBounds(300, 40, 60, 16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(pnl_Principal, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnl_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -170,19 +172,20 @@ public class RevalorarIntento extends javax.swing.JDialog {
             review.setValoracion(valoracion);
             review.setComentario(txa_ComentarioRespuesta.getText());
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Solo puedes poner numeros en la valoracion");
+            DialogoErrorNumerosValoracion dialogoErrorNumerosValoracion = new DialogoErrorNumerosValoracion(this,true);
+            dialogoErrorNumerosValoracion.setVisible(true);
             valoracion = -1;
         }
         if (valoracion < 0 || valoracion > 10) {
-            JOptionPane.showMessageDialog(this, "Solo puedes poner un numero de 0 al 10");
+            DialogoErrorRangoNumerosValoracion dialogoErrorRangoNumerosValoracion = new DialogoErrorRangoNumerosValoracion(this,true);
+            dialogoErrorRangoNumerosValoracion.setVisible(true);
         } else {
             da.updateReview(review);
         }
         infoUsuario.ActualizarIntentosUsuario();
-        JOptionPane.showMessageDialog(this, "Se ha actualizado la review correctamente");
-
+        DialogoRevaloracionCompletada dialogoRevaloracionCompletada = new DialogoRevaloracionCompletada(this,true);
+        dialogoRevaloracionCompletada.setVisible(true);
         dispose();
-
 
     }//GEN-LAST:event_btn_EnviarActionPerformed
 
@@ -204,7 +207,6 @@ public class RevalorarIntento extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Enviar;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_Comentario;
     private javax.swing.JLabel lbl_IDUsuarioEnunciado;
@@ -212,6 +214,7 @@ public class RevalorarIntento extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_ValoracionEnunciado;
     private javax.swing.JLabel lbl_idIntento;
     private javax.swing.JLabel lbl_nombreUsuario;
+    private javax.swing.JPanel pnl_Principal;
     private javax.swing.JTextArea txa_ComentarioRespuesta;
     private javax.swing.JTextField txa_ValoracionRespuesta;
     // End of variables declaration//GEN-END:variables

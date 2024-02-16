@@ -31,7 +31,7 @@
     <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-117,0,0,3,42"/>
   </AuxValues>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="pnl_panelPrincipal">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
@@ -54,38 +54,37 @@
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="albl_animado" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="lbl_Usuario" pref="78" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                  <Component id="lbl_UsuarioConectado" pref="69" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="lbl_Usuario" min="-2" pref="58" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbl_UsuarioConectado" min="-2" pref="56" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="albl_animado" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="164" max="32767" attributes="0"/>
-                          <Component id="lbl_nombrePrograma" pref="196" max="32767" attributes="0"/>
-                          <EmptySpace pref="150" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="lbl_nombrePrograma" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btn_cerrarSesion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Component id="tab_IntentosUsuarios" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="pnl_ReproductorVideos" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
-                                  <Component id="btn_ReproducirPausar" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" attributes="0">
-                                  <EmptySpace pref="111" max="32767" attributes="0"/>
-                                  <Component id="lbl_logoImagen" pref="240" max="32767" attributes="0"/>
-                                  <EmptySpace pref="121" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="pnl_ReproductorVideos" pref="353" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btn_ReproducirPausar" min="-2" pref="96" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="lbl_logoImagen" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -99,34 +98,33 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="albl_animado" max="32767" attributes="0"/>
+                          <Component id="albl_animado" min="-2" pref="26" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_Usuario" max="32767" attributes="0"/>
-                              <Component id="lbl_UsuarioConectado" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_Usuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_UsuarioConectado" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="lbl_nombrePrograma" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="btn_cerrarSesion" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btn_cerrarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_nombrePrograma" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="tab_IntentosUsuarios" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="pnl_ReproductorVideos" min="-2" pref="289" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="pnl_ReproductorVideos" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btn_ReproducirPausar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_logoImagen" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="lbl_logoImagen" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -207,6 +205,159 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
+            <Container class="javax.swing.JPanel" name="pnl_GestorIntentosPedientes">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="33" red="33" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="Intentos Pendientes">
+                    <Property name="tabTitle" type="java.lang.String" value="Intentos Pendientes"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="pnl_IntentosPendientes" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="lbl_ActivarBotones" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="lbl_IconoClick" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="btn_Valorar" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lbl_verVideo" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="lbl_iconosDeslizar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="btn_InformaciónIntentos" alignment="1" min="-2" pref="162" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="pnl_IntentosPendientes" pref="378" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btn_InformaciónIntentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_Valorar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="43" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_verVideo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbl_IconoClick" min="-2" pref="46" max="-2" attributes="0"/>
+                                      <Component id="lbl_iconosDeslizar" min="-2" pref="53" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_ActivarBotones" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="btn_Informaci&#xf3;nIntentos">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Info"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Informaci&#xf3;nIntentosMouseClicked"/>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Informaci&#xf3;nIntentosMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Informaci&#xf3;nIntentosMouseExited"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Informaci&#xf3;nIntentosActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lbl_verVideo">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Deslizar para ver video:"/>
+                  </Properties>
+                </Component>
+                <Container class="javax.swing.JPanel" name="pnl_IntentosPendientes">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="33" red="33" type="rgb"/>
+                    </Property>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                    <Property name="axis" type="int" value="3"/>
+                  </Layout>
+                </Container>
+                <Component class="javax.swing.JButton" name="btn_Valorar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Valorar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ValorarMouseClicked"/>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ValorarMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ValorarMouseExited"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ValorarActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btn_ValorarKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lbl_ActivarBotones">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="ff" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Activar Botones:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lbl_iconosDeslizar">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/iconos/deslizar.png"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lbl_IconoClick">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/iconos/click.png"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
             <Container class="javax.swing.JPanel" name="pnl_Usuarios">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -229,15 +380,24 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btn_SeleccionarUsuarios" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jScrollPane6" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="btn_SeleccionarUsuarios" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane6" pref="0" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="lbl_textoInfoTablaUsuarios" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -248,7 +408,9 @@
                           <Component id="jScrollPane6" min="-2" pref="287" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btn_SeleccionarUsuarios" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="lbl_textoInfoTablaUsuarios" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -316,161 +478,15 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SeleccionarUsuariossActionPerformed"/>
                   </Events>
                 </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="pnl_GestorIntentosPedientes">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="33" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Intentos Pendientes">
-                    <Property name="tabTitle" type="java.lang.String" value="Intentos Pendientes"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="pnl_IntentosPendientes" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="lbl_ActivarBotones" max="32767" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="lbl_IconoClick" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="btn_Valorar" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="lbl_verVideo" max="32767" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="lbl_iconosDeslizar" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="btn_InformaciónIntentos" max="32767" attributes="0"/>
-                                          <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="pnl_IntentosPendientes" pref="382" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btn_InformaciónIntentos" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_Valorar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lbl_iconosDeslizar" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lbl_IconoClick" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="lbl_verVideo" alignment="1" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="lbl_ActivarBotones" max="32767" attributes="0"/>
-                                  <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JButton" name="btn_Informaci&#xf3;nIntentos">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Info"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Informaci&#xf3;nIntentosMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Informaci&#xf3;nIntentosMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Informaci&#xf3;nIntentosMouseExited"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Informaci&#xf3;nIntentosActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lbl_verVideo">
+                <Component class="javax.swing.JLabel" name="lbl_textoInfoTablaUsuarios">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="1"/>
+                      <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="ff" red="ff" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Ver video:"/>
-                  </Properties>
-                </Component>
-                <Container class="javax.swing.JPanel" name="pnl_IntentosPendientes">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="33" red="33" type="rgb"/>
-                    </Property>
-                  </Properties>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
-                    <Property name="axis" type="int" value="3"/>
-                  </Layout>
-                </Container>
-                <Component class="javax.swing.JButton" name="btn_Valorar">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Valorar"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ValorarMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ValorarMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ValorarMouseExited"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ValorarActionPerformed"/>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btn_ValorarKeyPressed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lbl_ActivarBotones">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="ff" red="cc" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Activar Botones:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lbl_iconosDeslizar">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/iconos/deslizar.png"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lbl_IconoClick">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/iconos/click.png"/>
-                    </Property>
+                    <Property name="text" type="java.lang.String" value="Haz click en un usuario de la tabla"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -500,7 +516,7 @@
         <Component class="javax.swing.JLabel" name="lbl_nombrePrograma">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Visitor TT1 BRK" size="36" style="1"/>
+              <Font name="Visitor TT1 BRK" size="50" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -511,7 +527,7 @@
         <Component class="javax.swing.JLabel" name="lbl_logoImagen">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/FitnowSoloImagen.jpg"/>
+              <Image iconType="3" name="/imagenes/FitnowSoloImagenMain.jpg"/>
             </Property>
           </Properties>
         </Component>

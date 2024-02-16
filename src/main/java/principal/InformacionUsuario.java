@@ -11,7 +11,9 @@ import dto.Review;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
+import principal.JDialogos.DialogoEliminacionReviewCompletada;
+import principal.JDialogos.DialogoNoExisteReview;
+import principal.JDialogos.DialogoNoHayReviewQueEliminar;
 
 /**
  *
@@ -128,7 +130,8 @@ public class InformacionUsuario extends javax.swing.JDialog {
     }
 
     private void noReview() {
-        JOptionPane.showMessageDialog(this, "No exite la review de este intento");
+        DialogoNoExisteReview dialogoNoExisteReview = new DialogoNoExisteReview(this,true);
+        dialogoNoExisteReview.setVisible(true);
     }
 
     public void ActualizarIntentosUsuario() {
@@ -156,7 +159,7 @@ public class InformacionUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnl_Principal = new javax.swing.JPanel();
         btn_EditarReview = new javax.swing.JButton();
         btn_EliminarReview = new javax.swing.JButton();
         pnl_ejerciciosUsuario = new javax.swing.JPanel();
@@ -177,9 +180,9 @@ public class InformacionUsuario extends javax.swing.JDialog {
         setResizable(false);
         setSize(new java.awt.Dimension(476, 571));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setPreferredSize(new java.awt.Dimension(476, 571));
-        jPanel1.setLayout(null);
+        pnl_Principal.setBackground(new java.awt.Color(51, 51, 51));
+        pnl_Principal.setPreferredSize(new java.awt.Dimension(476, 571));
+        pnl_Principal.setLayout(null);
 
         btn_EditarReview.setText("Editar Review");
         btn_EditarReview.setToolTipText("");
@@ -202,7 +205,7 @@ public class InformacionUsuario extends javax.swing.JDialog {
                 btn_EditarReviewActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_EditarReview);
+        pnl_Principal.add(btn_EditarReview);
         btn_EditarReview.setBounds(180, 470, 120, 23);
 
         btn_EliminarReview.setText("Eliminar Review");
@@ -225,61 +228,61 @@ public class InformacionUsuario extends javax.swing.JDialog {
                 btn_EliminarReviewActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_EliminarReview);
+        pnl_Principal.add(btn_EliminarReview);
         btn_EliminarReview.setBounds(30, 470, 130, 23);
 
         pnl_ejerciciosUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl_ejerciciosUsuario.setPreferredSize(new java.awt.Dimension(380, 316));
         pnl_ejerciciosUsuario.setLayout(new javax.swing.BoxLayout(pnl_ejerciciosUsuario, javax.swing.BoxLayout.PAGE_AXIS));
-        jPanel1.add(pnl_ejerciciosUsuario);
+        pnl_Principal.add(pnl_ejerciciosUsuario);
         pnl_ejerciciosUsuario.setBounds(30, 140, 416, 316);
 
         lbl_idEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_idEnunciado.setForeground(new java.awt.Color(255, 255, 255));
         lbl_idEnunciado.setText("ID:");
-        jPanel1.add(lbl_idEnunciado);
+        pnl_Principal.add(lbl_idEnunciado);
         lbl_idEnunciado.setBounds(40, 60, 100, 20);
 
         lbl_verVideo.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_verVideo.setForeground(new java.awt.Color(255, 255, 204));
         lbl_verVideo.setText("Ver Video ");
-        jPanel1.add(lbl_verVideo);
+        pnl_Principal.add(lbl_verVideo);
         lbl_verVideo.setBounds(290, 520, 70, 17);
 
         lbl_NombreEnunciado.setFont(new java.awt.Font("Visitor TT1 BRK", 1, 18)); // NOI18N
         lbl_NombreEnunciado.setForeground(new java.awt.Color(255, 255, 255));
         lbl_NombreEnunciado.setText("INFORMACION DEL USUARIO:");
-        jPanel1.add(lbl_NombreEnunciado);
+        pnl_Principal.add(lbl_NombreEnunciado);
         lbl_NombreEnunciado.setBounds(40, 20, 280, 20);
 
         lbl_activarBotones.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_activarBotones.setForeground(new java.awt.Color(204, 255, 204));
         lbl_activarBotones.setText("Activar botones");
-        jPanel1.add(lbl_activarBotones);
+        pnl_Principal.add(lbl_activarBotones);
         lbl_activarBotones.setBounds(30, 520, 100, 17);
 
         lbl_EmailEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_EmailEnunciado.setForeground(new java.awt.Color(255, 255, 255));
         lbl_EmailEnunciado.setText("Email:");
-        jPanel1.add(lbl_EmailEnunciado);
+        pnl_Principal.add(lbl_EmailEnunciado);
         lbl_EmailEnunciado.setBounds(40, 100, 70, 20);
 
         lbl_IDRespuesta.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_IDRespuesta.setForeground(new java.awt.Color(255, 255, 255));
         lbl_IDRespuesta.setText("jLabel5");
-        jPanel1.add(lbl_IDRespuesta);
+        pnl_Principal.add(lbl_IDRespuesta);
         lbl_IDRespuesta.setBounds(110, 60, 140, 20);
 
         lbl_NombreRespuesta.setFont(new java.awt.Font("Visitor TT1 BRK", 0, 18)); // NOI18N
         lbl_NombreRespuesta.setForeground(new java.awt.Color(255, 255, 255));
         lbl_NombreRespuesta.setText("jLabel6");
-        jPanel1.add(lbl_NombreRespuesta);
+        pnl_Principal.add(lbl_NombreRespuesta);
         lbl_NombreRespuesta.setBounds(320, 20, 140, 20);
 
         lbl_EmailRespuesta.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_EmailRespuesta.setForeground(new java.awt.Color(255, 255, 255));
         lbl_EmailRespuesta.setText("jLabel7");
-        jPanel1.add(lbl_EmailRespuesta);
+        pnl_Principal.add(lbl_EmailRespuesta);
         lbl_EmailRespuesta.setBounds(110, 100, 210, 20);
 
         btn_RevisarReview.setText("Revisar Review");
@@ -302,28 +305,28 @@ public class InformacionUsuario extends javax.swing.JDialog {
                 btn_RevisarReviewActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_RevisarReview);
+        pnl_Principal.add(btn_RevisarReview);
         btn_RevisarReview.setBounds(317, 470, 130, 23);
 
         lbl_iconoDeslizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deslizar.png"))); // NOI18N
         lbl_iconoDeslizar.setText("jLabel1");
-        jPanel1.add(lbl_iconoDeslizar);
+        pnl_Principal.add(lbl_iconoDeslizar);
         lbl_iconoDeslizar.setBounds(360, 500, 50, 50);
 
         lbl_iconoClick.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/click.png"))); // NOI18N
         lbl_iconoClick.setText("jLabel2");
-        jPanel1.add(lbl_iconoClick);
+        pnl_Principal.add(lbl_iconoClick);
         lbl_iconoClick.setBounds(130, 500, 40, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -348,7 +351,8 @@ public class InformacionUsuario extends javax.swing.JDialog {
             RevalorarIntento revalorarIntento = new RevalorarIntento(this, true);
             revalorarIntento.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "No exite la review de este intento");
+            DialogoNoExisteReview dialogoNoExisteReview = new DialogoNoExisteReview(this,true);
+            dialogoNoExisteReview.setVisible(true);
         }
     }//GEN-LAST:event_btn_EditarReviewActionPerformed
 
@@ -360,9 +364,11 @@ public class InformacionUsuario extends javax.swing.JDialog {
         da.dropReview(eliminarReview.getId());
         ActualizarIntentosUsuario();
         main.ActualizarCambiosIntentosPendientes();
-        JOptionPane.showMessageDialog(this, "Se ha eliminado la review correctamente");
+            DialogoEliminacionReviewCompletada eliminacionReviewCompletada = new DialogoEliminacionReviewCompletada(this,true);
+            eliminacionReviewCompletada.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(this, "Este intento no tiene una review para eliminar");
+            DialogoNoHayReviewQueEliminar dialogoNoHayReviewQueEliminar = new DialogoNoHayReviewQueEliminar(this, true);
+            dialogoNoHayReviewQueEliminar.setVisible(true);
         }
         
         
@@ -422,7 +428,6 @@ public class InformacionUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btn_EditarReview;
     private javax.swing.JButton btn_EliminarReview;
     private javax.swing.JButton btn_RevisarReview;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_EmailEnunciado;
     private javax.swing.JLabel lbl_EmailRespuesta;
     private javax.swing.JLabel lbl_IDRespuesta;
@@ -433,6 +438,7 @@ public class InformacionUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_iconoDeslizar;
     private javax.swing.JLabel lbl_idEnunciado;
     private javax.swing.JLabel lbl_verVideo;
+    private javax.swing.JPanel pnl_Principal;
     private javax.swing.JPanel pnl_ejerciciosUsuario;
     // End of variables declaration//GEN-END:variables
 }

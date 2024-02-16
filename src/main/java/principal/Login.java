@@ -12,7 +12,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JOptionPane;
+import principal.JDialogos.DialogoAccesoDenegadoContraseña;
+import principal.JDialogos.DialogoAccesoDenegadoUsuario;
+import principal.JDialogos.DialogoBienvenida;
 
 /**
  *
@@ -25,6 +27,7 @@ public class Login extends javax.swing.JDialog {
     private Usuari user;
     private Main main;
     private boolean segundaConexion;
+    private DialogoBienvenida dialogoBienvenida;
 
     /**
      * Creates new form Login
@@ -235,7 +238,8 @@ public class Login extends javax.swing.JDialog {
                 String contraseñaEnBaseDatos = user.getPasswordHash();
                 var resultado = BCrypt.verifyer().verify(contraseñaParaVerificar, contraseñaEnBaseDatos);
                 if (resultado.verified) {
-                    JOptionPane.showMessageDialog(this, "Sesion iniciada. Bienvenido " + user.getNombre());
+                    dialogoBienvenida = new DialogoBienvenida(this, true, user);
+                    dialogoBienvenida.setVisible(true);
                     dispose();
                     main.UsuarioConectado(user);
                     conectado = true;
@@ -243,12 +247,14 @@ public class Login extends javax.swing.JDialog {
                         main.setVisible(true);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Acceso denegado: Contraseña incorrecta");
+                    DialogoAccesoDenegadoContraseña accesoDenegadoContraseña = new DialogoAccesoDenegadoContraseña(this,true);
+                    accesoDenegadoContraseña.setVisible(true);
                 }
 
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "Acceso denegado: El usuario no exite");
+            DialogoAccesoDenegadoUsuario accesoDenegadoUsuario = new DialogoAccesoDenegadoUsuario(this, conectado);
+            accesoDenegadoUsuario.setVisible(true);
         }
     }//GEN-LAST:event_btn_IniciarSesionActionPerformed
 
@@ -257,7 +263,8 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_IniciarSesionKeyReleased
 
     private void btn_IniciarSesionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_IniciarSesionMouseReleased
-        btn_IniciarSesion.setBackground(Color.white);
+        Color azulPastel = new Color(173,216,230); 
+        btn_IniciarSesion.setBackground(azulPastel);
     }//GEN-LAST:event_btn_IniciarSesionMouseReleased
 
     private void btn_IniciarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_IniciarSesionMousePressed

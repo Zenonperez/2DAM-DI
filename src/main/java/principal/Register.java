@@ -8,7 +8,10 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import data.DataAccess;
 import dto.Usuari;
 import java.awt.Color;
-import javax.swing.JOptionPane;
+import principal.JDialogos.DialogoProfesorRegistrado;
+import principal.JDialogos.DialogoRegistrarFaltaContrasena;
+import principal.JDialogos.DialogoRegistrarFaltaMail;
+import principal.JDialogos.DialogoRegistrarFaltaNombre;
 
 /**
  *
@@ -29,13 +32,16 @@ public class Register extends javax.swing.JDialog {
         String email = txt_ponerCorreo.getText();
         char[] contraseña = txt_contraseña.getPassword();
         if (nombre == null || "".equals(nombre)) {
-            JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            DialogoRegistrarFaltaNombre dialogoRegistrarFaltaNombre = new DialogoRegistrarFaltaNombre(this, true);
+            dialogoRegistrarFaltaNombre.setVisible(true);
             return false;
         } else if (email == null || "".equals(email)) {
-            JOptionPane.showMessageDialog(this, "El correo no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            DialogoRegistrarFaltaMail dialogoRegistrarFaltaMail = new DialogoRegistrarFaltaMail(this,true);
+            dialogoRegistrarFaltaMail.setVisible(true);
             return false;
         } else if (contraseña.length <= 0) { //Le faltan unos ajustes
-            JOptionPane.showMessageDialog(this, "La contraseña no puede estar vacia", "Error", JOptionPane.ERROR_MESSAGE);
+            DialogoRegistrarFaltaContrasena dialogoRegistrarFaltaContrasena = new DialogoRegistrarFaltaContrasena(this, true);
+            dialogoRegistrarFaltaContrasena.setVisible(true);
             return false;
         } else {
             return true;
@@ -59,7 +65,7 @@ public class Register extends javax.swing.JDialog {
         lbl_contraseñaRegis = new javax.swing.JLabel();
         txt_contraseña = new javax.swing.JPasswordField();
         btn_registrarse = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_icono = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar nuevo usuario");
@@ -121,7 +127,7 @@ public class Register extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fitnow.jpg"))); // NOI18N
+        lbl_icono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fitnow.jpg"))); // NOI18N
 
         javax.swing.GroupLayout pnl_RegisterLayout = new javax.swing.GroupLayout(pnl_Register);
         pnl_Register.setLayout(pnl_RegisterLayout);
@@ -137,7 +143,7 @@ public class Register extends javax.swing.JDialog {
                     .addComponent(txt_ponerCorreo)
                     .addComponent(txt_ponerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lbl_icono)
                 .addGap(24, 24, 24))
             .addGroup(pnl_RegisterLayout.createSequentialGroup()
                 .addGap(172, 172, 172)
@@ -161,7 +167,7 @@ public class Register extends javax.swing.JDialog {
                         .addComponent(lbl_contraseñaRegis)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
+                    .addComponent(lbl_icono))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(btn_registrarse)
                 .addGap(52, 52, 52))
@@ -198,7 +204,8 @@ public class Register extends javax.swing.JDialog {
             DataAccess da = new DataAccess();
             int idNuevoUsuario = da.registerUser(nuevoUsuario);
             nuevoUsuario.setId(idNuevoUsuario);
-            JOptionPane.showMessageDialog(this, "El usuario se ha registrado de manera correcta");
+            DialogoProfesorRegistrado dialogoProfesorRegistrado = new DialogoProfesorRegistrado(this, true);
+            dialogoProfesorRegistrado.setVisible(true);
             setVisible(false);
         }
     }//GEN-LAST:event_btn_registrarseActionPerformed
@@ -230,9 +237,9 @@ public class Register extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_registrarse;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbl_contraseñaRegis;
     private javax.swing.JLabel lbl_correoElectronicoRegis;
+    private javax.swing.JLabel lbl_icono;
     private javax.swing.JLabel lbl_nombreRegis;
     private javax.swing.JPanel pnl_Register;
     private javax.swing.JPasswordField txt_contraseña;

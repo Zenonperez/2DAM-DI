@@ -10,6 +10,9 @@ import dto.Review;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import principal.JDialogos.DialogoErrorNumerosValoracion;
+import principal.JDialogos.DialogoErrorRangoNumerosValoracion;
+import principal.JDialogos.DialogoValoracionCompletada;
 
 /**
  *
@@ -47,7 +50,7 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnl_Principal = new javax.swing.JPanel();
         lbl_ValoracionEnunciado = new javax.swing.JLabel();
         txa_ValoracionRespuesta = new javax.swing.JTextField();
         lbl_Comentario = new javax.swing.JLabel();
@@ -65,7 +68,7 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
         setResizable(false);
         setSize(new java.awt.Dimension(442, 306));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        pnl_Principal.setBackground(new java.awt.Color(51, 51, 51));
 
         lbl_ValoracionEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         lbl_ValoracionEnunciado.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,19 +122,19 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
         lbl_idUsuario.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_idUsuario.setForeground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnl_PrincipalLayout = new javax.swing.GroupLayout(pnl_Principal);
+        pnl_Principal.setLayout(pnl_PrincipalLayout);
+        pnl_PrincipalLayout.setHorizontalGroup(
+            pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_PrincipalLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_Comentario)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnl_PrincipalLayout.createSequentialGroup()
                         .addComponent(lbl_ValoracionEnunciado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnl_PrincipalLayout.createSequentialGroup()
                         .addComponent(lbl_IDintentoEnunciado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_IDIntento, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,22 +142,22 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
                         .addComponent(lbl_IDUsuarioEnunciado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btn_Enviar)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        pnl_PrincipalLayout.setVerticalGroup(
+            pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_PrincipalLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_IDintentoEnunciado)
                     .addComponent(lbl_IDIntento, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_IDUsuarioEnunciado)
                     .addComponent(lbl_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ValoracionEnunciado)
                     .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
@@ -170,11 +173,11 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -193,7 +196,8 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
         valoracion =Integer.parseInt(txa_ValoracionRespuesta.getText());
         review.setValoracion(valoracion);
         } catch (NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Solo puedes poner numeros en la valoracion");
+            DialogoErrorNumerosValoracion dialogoErrorNumerosValoracion = new DialogoErrorNumerosValoracion(this,true);
+            dialogoErrorNumerosValoracion.setVisible(true);
             valoracion = -1;
         }
         review.setComentario(txa_ComentarioRespuesta.getText());    
@@ -201,15 +205,14 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
         review.setIdIntent(main.getIDIntento());
         review.setIdReviewer(main.getIDUsuario());
         if (valoracion < 0 || valoracion > 10){
-          JOptionPane.showMessageDialog(this, "Solo puedes poner un numero de 0 al 10");
+            DialogoErrorRangoNumerosValoracion dialogoErrorRangoNumerosValoracion = new DialogoErrorRangoNumerosValoracion(this,true);
+            dialogoErrorRangoNumerosValoracion.setVisible(true);
         }
         else{
             da.insertReview(review);  
             main.ActualizarCambiosIntentosPendientes();
-            JOptionPane.showMessageDialog(this, "Se ha insertado la review correctamente");
+            DialogoValoracionCompletada dialogoValoracionCompletada = new DialogoValoracionCompletada(this, true);
         }
-    
-       
 
         dispose();
        
@@ -234,7 +237,6 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Enviar;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_Comentario;
     private javax.swing.JLabel lbl_IDIntento;
@@ -242,6 +244,7 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_IDintentoEnunciado;
     private javax.swing.JLabel lbl_ValoracionEnunciado;
     private javax.swing.JLabel lbl_idUsuario;
+    private javax.swing.JPanel pnl_Principal;
     private javax.swing.JTextArea txa_ComentarioRespuesta;
     private javax.swing.JTextField txa_ValoracionRespuesta;
     // End of variables declaration//GEN-END:variables
