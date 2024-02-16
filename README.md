@@ -20,3 +20,20 @@ Actividad 3 parte 1: Fitnow 3.0
 -El proyecto empieza a tener forma y ahora tiene un estilo grafico de las ventanas dentro del programa de color gris oscuras dandole un toque estetico a la aplicacion
 - Se han arreglado multiples bugs que tenia el programa al seleccionar un intento, ya que miraba la id del ejercico y no la del intento.ç
 - Se han agragado imagenes e iconos para mejorar la estetica del programa.
+- Se han implementado funciones de usabilidad dentro del programa:
+    - El componente que muestra los ejercicios tanto en pendientes como dentro de la información de usuarios hara lo siguiente: al pasar el raton se pone de color azul, al seleccionarlo quedars verde y al ver el video de color amarillo.
+    - Los botones al pasar el raton por encima se pondrán azules al pulsarlos gris y al soltarlos quedarán azules de nuevo.
+    - Al pasar el raton por el texto en el login de registrar un nuevo profesor, el texto se pondra de color cyan.
+
+
+Actividad 3 parte 2: Fitnow 3.1
+
+- Se ha cambiado la ventana principal del programa agregándole un layout de tipo overlay para que cuando se ponga en pantalla completa este use todo el espacio de la pantalla completa, si usaba otro layout al poner pantalla completa no se veia todo el panel principal ocupando toda la pantalla.
+- Se han cambiado algunos espacios y componentes a resizable para que al modificar el tamaño de la pantalla este se adapte al nuevo tamaño.
+- Se ha establecido el tamaño minimo y máximo del programa, el usuario si intenta minimizar al tamaño por debajo del mínimo, el programs se pondra en su tamaño por defecto.
+
+Actividad 3 parte 3: Fitnow 3.2
+
+- Se ha cambiado el feel y el look de los JDialogs que notifican de cambios o excepciones del programa.
+- Se han implementado nuevos icono nos dentro de los JDialogs
+- Estos dialogos ya nos son JoptionPane sino Jdialogs uno para cada una de las excepciones
