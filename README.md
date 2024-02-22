@@ -37,3 +37,9 @@ Actividad 3 parte 3: Fitnow 3.2
 - Se ha cambiado el feel y el look de los JDialogs que notifican de cambios o excepciones del programa.
 - Se han implementado nuevos icono nos dentro de los JDialogs
 - Estos dialogos ya nos son JoptionPane sino Jdialogs uno para cada una de las excepciones
+
+Actividad 3 parte 4: Fitnow 3.3
+
+- Se ha optimizado la operación de valorar un intento sin review, haciendo que se haga inmediatamente en vez, de esperar unos segundos a que se realice.
+- Se ha arreglado el bug que no permitia visualizar el boton de valorar intentos, ya que Jdialog no permitia ese tamaño antes.
+- Al valorar los intentos, se desactivan todos los botnoes y se para el video para evitar excepciones.
