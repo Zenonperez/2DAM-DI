@@ -64,11 +64,12 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Review");
-        setPreferredSize(new java.awt.Dimension(442, 306));
+        setPreferredSize(new java.awt.Dimension(442, 366));
         setResizable(false);
-        setSize(new java.awt.Dimension(442, 306));
+        setSize(new java.awt.Dimension(442, 366));
 
         pnl_Principal.setBackground(new java.awt.Color(51, 51, 51));
+        pnl_Principal.setMinimumSize(new java.awt.Dimension(442, 366));
 
         lbl_ValoracionEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         lbl_ValoracionEnunciado.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,23 +130,24 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
             .addGroup(pnl_PrincipalLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Comentario)
-                    .addGroup(pnl_PrincipalLayout.createSequentialGroup()
-                        .addComponent(lbl_ValoracionEnunciado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_PrincipalLayout.createSequentialGroup()
                         .addComponent(lbl_IDintentoEnunciado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_IDIntento, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
+                        .addComponent(lbl_IDIntento, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
                         .addComponent(lbl_IDUsuarioEnunciado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btn_Enviar)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                    .addGroup(pnl_PrincipalLayout.createSequentialGroup()
+                        .addGap(274, 274, 274)
+                        .addComponent(btn_Enviar))
+                    .addGroup(pnl_PrincipalLayout.createSequentialGroup()
+                        .addComponent(lbl_ValoracionEnunciado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         pnl_PrincipalLayout.setVerticalGroup(
             pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,17 +158,17 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
                     .addComponent(lbl_IDIntento, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_IDUsuarioEnunciado)
                     .addComponent(lbl_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(pnl_PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ValoracionEnunciado)
                     .addComponent(txa_ValoracionRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(lbl_Comentario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(btn_Enviar)
-                .addGap(32, 32, 32))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,8 +212,9 @@ public class ValoracionIntentoSinReview extends javax.swing.JDialog {
         }
         else{
             da.insertReview(review);  
-            main.ActualizarCambiosIntentosPendientes();
             DialogoValoracionCompletada dialogoValoracionCompletada = new DialogoValoracionCompletada(this, true);
+            dialogoValoracionCompletada.setVisible(true);
+            main.revertirAlValorar();
         }
 
         dispose();

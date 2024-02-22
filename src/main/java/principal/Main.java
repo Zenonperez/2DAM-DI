@@ -238,6 +238,15 @@ public class Main extends javax.swing.JFrame {
         return null;
     }
     
+    public void revertirAlValorar(){
+        mediaPlayer.mediaPlayer().controls().stop();
+        isPlaying = false;
+        btn_ReproducirPausar.setText("Reproducir");
+        btn_ReproducirPausar.setEnabled(false);
+        btn_InformaciónIntentos.setEnabled(false);
+        btn_Valorar.setEnabled(false);
+    }
+    
     public String buscarIDUsuario(int idEjer){
         for (Intent intento : intentos){
             if (intento.getId() == idEjer){
@@ -255,6 +264,7 @@ public class Main extends javax.swing.JFrame {
         componenteIntentos.clear();
         pnl_IntentosPendientes.removeAll();
         leerIntentos();
+        repaint();
         
         
     }
@@ -685,6 +695,7 @@ public class Main extends javax.swing.JFrame {
     private void btn_ValorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ValorarActionPerformed
        ValoracionIntentoSinReview valoracionIntentosSinReview = new ValoracionIntentoSinReview(this, true);
        valoracionIntentosSinReview.setVisible(true);
+       ActualizarCambiosIntentosPendientes();
     }//GEN-LAST:event_btn_ValorarActionPerformed
 
     private void btn_ValorarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_ValorarKeyPressed
