@@ -43,3 +43,7 @@ Actividad 3 parte 4: Fitnow 3.3
 - Se ha optimizado la operación de valorar un intento sin review, haciendo que se haga inmediatamente en vez, de esperar unos segundos a que se realice.
 - Se ha arreglado el bug que no permitia visualizar el boton de valorar intentos, ya que Jdialog no permitia ese tamaño antes.
 - Al valorar los intentos, se desactivan todos los botnoes y se para el video para evitar excepciones.
+
+Actividad 3 parte 5: Fitnow 3.4
+
+- Se ha resuelto el problema que habia con la imagen del logo "logoIcono.jpg" que no se encontraba en resources, ahora se ha recuperado esa imagen.
