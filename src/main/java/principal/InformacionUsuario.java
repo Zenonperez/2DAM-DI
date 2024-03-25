@@ -162,7 +162,6 @@ public class InformacionUsuario extends javax.swing.JDialog {
         pnl_Principal = new javax.swing.JPanel();
         btn_EditarReview = new javax.swing.JButton();
         btn_EliminarReview = new javax.swing.JButton();
-        pnl_ejerciciosUsuario = new javax.swing.JPanel();
         lbl_idEnunciado = new javax.swing.JLabel();
         lbl_verVideo = new javax.swing.JLabel();
         lbl_NombreEnunciado = new javax.swing.JLabel();
@@ -174,6 +173,8 @@ public class InformacionUsuario extends javax.swing.JDialog {
         btn_RevisarReview = new javax.swing.JButton();
         lbl_iconoDeslizar = new javax.swing.JLabel();
         lbl_iconoClick = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pnl_ejerciciosUsuario = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informacion del Usuario");
@@ -230,12 +231,6 @@ public class InformacionUsuario extends javax.swing.JDialog {
         });
         pnl_Principal.add(btn_EliminarReview);
         btn_EliminarReview.setBounds(30, 470, 130, 23);
-
-        pnl_ejerciciosUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pnl_ejerciciosUsuario.setPreferredSize(new java.awt.Dimension(380, 316));
-        pnl_ejerciciosUsuario.setLayout(new javax.swing.BoxLayout(pnl_ejerciciosUsuario, javax.swing.BoxLayout.PAGE_AXIS));
-        pnl_Principal.add(pnl_ejerciciosUsuario);
-        pnl_ejerciciosUsuario.setBounds(30, 140, 416, 316);
 
         lbl_idEnunciado.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         lbl_idEnunciado.setForeground(new java.awt.Color(255, 255, 255));
@@ -317,6 +312,17 @@ public class InformacionUsuario extends javax.swing.JDialog {
         lbl_iconoClick.setText("jLabel2");
         pnl_Principal.add(lbl_iconoClick);
         lbl_iconoClick.setBounds(130, 500, 40, 50);
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBar(null);
+
+        pnl_ejerciciosUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnl_ejerciciosUsuario.setPreferredSize(new java.awt.Dimension(380, 316));
+        pnl_ejerciciosUsuario.setLayout(new javax.swing.BoxLayout(pnl_ejerciciosUsuario, javax.swing.BoxLayout.PAGE_AXIS));
+        jScrollPane1.setViewportView(pnl_ejerciciosUsuario);
+
+        pnl_Principal.add(jScrollPane1);
+        jScrollPane1.setBounds(40, 150, 400, 290);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -428,6 +434,7 @@ public class InformacionUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btn_EditarReview;
     private javax.swing.JButton btn_EliminarReview;
     private javax.swing.JButton btn_RevisarReview;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_EmailEnunciado;
     private javax.swing.JLabel lbl_EmailRespuesta;
     private javax.swing.JLabel lbl_IDRespuesta;
