@@ -203,7 +203,7 @@ public class Main extends javax.swing.JFrame {
     public void reproducirVideo(String video) {
         this.video = video;
         //String connectionAzureStr = "secret";
-        String connectionAzureStr = "secret";
+        String connectionAzureStr = ${{ secrets.AZURE_KEY}};
         //String containerName = "videos";
         String containerName = "simulapvideoscontainer";
         BlobClient blobClient = new BlobClientBuilder().connectionString(connectionAzureStr)
