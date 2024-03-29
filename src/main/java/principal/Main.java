@@ -293,8 +293,8 @@ public class Main extends javax.swing.JFrame {
         //Se ponen las dirrecciones.
         //String connectionAzureStr = "secret";
         //El string que esta como secret es donde hay que poner la key de la base de datos que utiliza el programa y que ha pasado el profesor de nuestro curso.
-        String connectionAzureStr = "secret";
-        //String containerName = "videos";        
+        String connectionAzureStr = "${{secrets.AZURE_KEY}}";
+        //String containerName = "videos";
         String containerName = "simulapvideoscontainer";
         BlobClient blobClient = new BlobClientBuilder().connectionString(connectionAzureStr)
                 .blobName("uploaded_user_videos/" + video)
