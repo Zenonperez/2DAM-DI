@@ -53,3 +53,8 @@ Actividad 4 parte 1: Fitnow 4.0
 - Se ha agregado la funcionalidad de conectarse con la base de datos de azure y con la libreria de videos de esta ahora el programa funciona con esta base de datos, linea 206 del main estan las keys que esta añadida como secreto.
 - Se implementa por primera vez los secretos de github para proteger la seguridad de las llaves.
 - Se han añadido scroll panels en donde se lista los componentes, ahora se pueden agregar todos los que se quieran siendo todos visibles.
+
+Actividad 4 parte 2: Fitnow 4.1
+
+- Se han agregado los comentarios y comentarios javadoc además del plugin para generar este.
+- Se ha arreglado el nombre de una variable la cual daba confuion a otra: Se trata de idEjer que en verdad no es la id de un ejercicio sino la de un intento este renombramiento pretende no confundir a una variable con la otra.
