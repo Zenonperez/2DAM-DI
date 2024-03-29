@@ -34,7 +34,6 @@ principal\JDialogos\DialogoAccesoDenegadoUsuario$1.class
 principal\JDialogos\DialogoCerrarSesion.class
 principal\JDialogos\DialogoErrorRangoNumerosValoracion.class
 principal\RevalorarIntento$2.class
-principal\Main$18.class
 principal\JDialogos\DialogoErrorRangoNumerosValoracion$1.class
 principal\JDialogos\DialogoRegistrarFaltaContrasena$2.class
 principal\JDialogos\DialogoValoracionCompletada.class
@@ -46,7 +45,6 @@ principal\JDialogos\DialogoRegistrarFaltaMail.class
 principal\JDialogos\DialogoRegistrarFaltaContrasena$1.class
 principal\JDialogos\DialogoAccesoDenegadoUsuario.class
 principal\JDialogos\DialogoEliminacionReviewCompletada$2.class
-principal\Main$17.class
 principal\JDialogos\DialogoValoracionCompletada$2.class
 principal\Login$2.class
 principal\InformacionUsuario$3.class

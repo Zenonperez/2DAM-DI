@@ -10,7 +10,7 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 
 /**
- * DialogoAccesoDenegadoUsuario es un dialogo que nos dice que el acceso esta denegado debido a que el usuario no existe.
+ * DialogoAccesoDenegadoUsuario es un dialogo que nos dice que el acceso esta denegado debido a que el usuario no existe o no es intructor.
  * @author Zenon Perez
  */
 public class DialogoAccesoDenegadoUsuario extends javax.swing.JDialog {
@@ -70,7 +70,7 @@ public class DialogoAccesoDenegadoUsuario extends javax.swing.JDialog {
 
         lbl_Mensaje.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_Mensaje.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_Mensaje.setText("Acceso denegado: El usuario no exite");
+        lbl_Mensaje.setText("Acceso denegado: El usuario no exite o no es intructor");
 
         lbl_icono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/error.png"))); // NOI18N
 
@@ -86,8 +86,9 @@ public class DialogoAccesoDenegadoUsuario extends javax.swing.JDialog {
                     .addGroup(pnl_OptionPaneConectadoLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(lbl_icono)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addComponent(lbl_Mensaje)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_Mensaje)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(15, 15, 15))
         );
         pnl_OptionPaneConectadoLayout.setVerticalGroup(

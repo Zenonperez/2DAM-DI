@@ -279,7 +279,7 @@ public class Login extends javax.swing.JDialog {
         //Buscamos al usaurio que coincida con el mail
         user = da.getUser(txt_PonerMail.getText());
         try {
-            if (user != null) {
+            if (user != null && user.isInstructor()) {
                 //Verificamos la contraseña
                 char[] contraseñaParaVerificar = txt_PonerContraseña.getPassword();
                 String contraseñaEnBaseDatos = user.getPasswordHash();
@@ -300,6 +300,9 @@ public class Login extends javax.swing.JDialog {
                     accesoDenegadoContraseña.setVisible(true);
                 }
 
+            } else{
+                DialogoAccesoDenegadoUsuario accesoDenegadoUsuario = new DialogoAccesoDenegadoUsuario(this, conectado);
+                accesoDenegadoUsuario.setVisible(true);
             }
             //Si el usuario no exite nos saltara un dialogo de error.
         } catch (NullPointerException ex) {
