@@ -13,11 +13,16 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 /**
- *
+ * DataAccess es una clase que se encarga de manejar las setencias SQL de la base de datos para poder tanto conseguir datos de esta como para modificar o eliminar datos.
+ * Con esta base de datos conseguimos que nuestra aplicación funcione.
  * @author Miguel
  */
 public class DataAccess {
 
+    /**
+     * Este metodo hace que podamos conectarnos a la base datos y poder realizar diferentes operaciones en esta.
+     * @return devolvera la conexion del url proporcionado.
+     */
     private Connection getConnection() {
         Connection connection = null;
         Properties properties = new Properties();
@@ -36,6 +41,11 @@ public class DataAccess {
         return connection;
     }
 
+    /**
+     * Metodo que devuelve al usuario cuyo email coincida con el que se ha puesto en el parametro.
+     * @param email este parametro sirve para usarlo para encontrar al usuario que tenga el mismo mail.
+     * @return devolvera al usuario que coincida con ese mail.
+     */
     public Usuari getUser(String email) {
         Usuari user = null;
         String sql = "SELECT * FROM Usuaris WHERE Email = ?";
@@ -55,7 +65,10 @@ public class DataAccess {
         }
         return user;
     }
-
+    /**
+     * Metodo que devolvera a todos los usuarios de la base de datos que no sean intructores.
+     * @return devuelve a todos los usuarios menos a los instructores como una lista.
+     */
     public ArrayList<Usuari> getAllUsers() {
         ArrayList<Usuari> usuaris = new ArrayList<>();
         String sql = "SELECT * FROM Usuaris WHERE Instructor=0";
@@ -77,7 +90,11 @@ public class DataAccess {
         }
         return usuaris;
     }
-
+    /**
+     * Metodo que registra a un nuevo usuario en la base de datos.
+     * @param u es el usuario que se metera por parametros el cual se quiere agregar a la base de datos.
+     * @return devolvera un int con el valor de la id del usuario, si no consigue crearlo sera 0.
+     */
     public int registerUser(Usuari u) {
         String sql = "INSERT INTO dbo.Usuaris (Nom, Email, PasswordHash, Instructor)"
                 + " VALUES (?,?,?,?)"
@@ -95,7 +112,10 @@ public class DataAccess {
         }
         return 0;
     }
-
+    /**
+     * Metodo que consigue coger todos los intentos pendientes de review.
+     * @return devuelve una lista de intentos de los cuales ninguno tiene review.
+     */
     public ArrayList<Intent> getAttemptsPendingReview() {
         ArrayList<Intent> intents = new ArrayList<>();
         String sql = "SELECT Intents.Id, Intents.IdUsuari, Usuaris.Nom,"
@@ -128,6 +148,11 @@ public class DataAccess {
         return intents;
     }
 
+    /**
+     * Metodo que inserta una nueva review en la base datos que va asociada a un intento.
+     * @param r es la review que se quiere agregar en la base de datos.
+     * @return devuelve un int con valor el valor de resultado de la actualizacion, si no hay ningun cambio sera 0.
+     */
     public int insertReview(Review r) {
         int result = 0;
         String sql = "INSERT INTO dbo.Review (IdIntent, IdReviewer, Valoracio, Comentari)"
@@ -168,7 +193,11 @@ public class DataAccess {
     public int getPreviousFailedAttempt(Intent intent) {
         return 0;
     }
-
+    /**
+     * Metodo que consigue todos los intentos que tiene un usuario.
+     * @param user es el usuario del cual queremos conseguir todos sus intentos.
+     * @return devuelve una lista de los intentos que tiene un usuario.
+     */
     public ArrayList<Intent> getAttemptsPerUser(Usuari user) {
         ArrayList<Intent> intents = new ArrayList<>();
         String sql = "SELECT Intents.Id, Intents.IdUsuari, Usuaris.Nom,"
@@ -200,7 +229,11 @@ public class DataAccess {
         return intents;
 
     }
-
+    /**
+     * Metodo que consigue la review de un intento.
+     * @param idIntent es el id del intento del cual queremos conseguir la review
+     * @return nos devolvera la review del intento cuya id coincida con esta.
+     */
     public Review getAttemptReview(int idIntent) {
         Review review = null;
         String sql = "SELECT * FROM Review WHERE IdIntent = ?";
@@ -221,6 +254,11 @@ public class DataAccess {
         return review;
     }
 
+    /**
+     * Metodo que actualiza la review de un intento.
+     * @param r el parametro que hemos metido es nueva review que modificara a la que ya estaba.
+     * @return nos devolvera un int con el valor de la actualizacion, si no se actualizara nada el resultado sera 0.
+     */
     public int updateReview(Review r) {
         int result = 0;
         String sql = "UPDATE Review SET Valoracio=?, Comentari=? WHERE Id=?";
@@ -238,7 +276,10 @@ public class DataAccess {
         }
         return result;
     }
-
+    /**
+     * Metodo el cual elimina una review existente.
+     * @param id la id de la review que se pretende eliminar.
+     */
     public void dropReview(int id) {
         String sql = "DELETE FROM Review WHERE Id=?";
         try (Connection conn = getConnection(); PreparedStatement preparedStatement = conn.prepareStatement(sql);) {

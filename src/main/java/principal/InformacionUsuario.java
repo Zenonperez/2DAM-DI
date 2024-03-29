@@ -16,60 +16,129 @@ import principal.JDialogos.DialogoNoExisteReview;
 import principal.JDialogos.DialogoNoHayReviewQueEliminar;
 
 /**
- *
- * @author Ziku
+ *InformacionUsuario sera la ventana que mostrara información de un usuario elegido en la tabla de usuarios.
+ *Podremos ver los intentos que tiene usuario y podremos visualizarlos, revalorarlos y eliminar la review de estos.
+ *Ademas de poder ver los videos de los intentos.
+ * 
+ * @author Zenon Perez
  */
 public class InformacionUsuario extends javax.swing.JDialog {
 
+    //Varaibles privadas de Main y DataAcess para poder acceder a sus metodos
+    /**
+     * Es la ventana parent de InformacionUusario y que usaremos para llamar algun metodo de esta.
+     */
     private Main main;
+    /**
+     * Esta variable se usa para coger datos de la base de datos.
+     */
     private DataAccess da = new DataAccess();
-    private int seleccion;
+    
+    //Declaramos listas para guardar los intentos de los usuarios y los componentes de esos intentos.
+    /**
+     * Es la lista que guardara los intentos del usuario selecionado en main.
+     */
     private ArrayList<Intent> intentosUsuario = new ArrayList<>();
+    /**
+     * Es la lista que guardara los componentes personalizados de los intentos del usuario.
+     */
     private ArrayList<com.mycompany.customcomponentejercicio.CustomComponentEjercicio> componenteIntentos = new ArrayList<>();
+    
+    //Declaramos otras variables globales del codigo
+    /**
+     * Es la variable que guarda el valor del indice de la tabla que pertenece el usuario seleccionado.
+     */
+    private int seleccion;
+    /**
+     *  Es la variable que guarda la dirrecion a la cual se ha arrastrado el componente.
+     */
     private String direccion;
-    private int idEjer;
+    /**
+     * Es la varaible que guarda la idIntento del componente con el que se ha interactuado.
+     */
+    private int idIntento;
+    /**
+     * Es el color que usaremos para seleccionar un componente al hacer click.
+     */
     private Color verdePastel = new Color(205, 255, 205);
+    /**
+     * Es el color con el que se pondran los botones u el componente al pasar el cursor encima.
+     */
     private Color azulPastel = new Color(173, 216, 230);
 
+    /**
+     * Aqui se crea el nuevo form de InformacionUsuario
+     * @param parent nos muestra de que esta ventana sale de un JFrame que en este caso es de Main.
+     * @param modal nos dice si la ventana sera modal o no, en este caso lo es.
+     */
     public InformacionUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         main = (Main) parent;
+        //Se seleciona el usuario elegido en la tabla
         seleccion = main.SeleccionFilaUsuariosIntentos();
+        //Iniciamos los componentes del Jdialog
         initComponents();
+        //Desactivamos botones
         btn_EditarReview.setEnabled(false);
         btn_EliminarReview.setEnabled(false);
         btn_RevisarReview.setEnabled(false);
+        //Ponemos los datos del usuario elegido en lbl
         String idS = String.valueOf(da.getAllUsers().get(seleccion).getId());
         lbl_IDRespuesta.setText(idS);
         lbl_NombreRespuesta.setText(da.getAllUsers().get(seleccion).getNombre());
         lbl_EmailRespuesta.setText(da.getAllUsers().get(seleccion).getEmail());
+        //Conseguimos los intentos del usuario.
         conseguirIntentosUsuario();
+        //Ponemos el borde de color blanco para destacar la ventana
         getRootPane().setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
     }
 
+    /**
+     * Metodo que consigue la id de una review de un intento.
+     * @param idIntento id del intento que que se intenta obtener la review
+     * @return la id de la review de un intento
+     */
     public int getIDReview(int idIntento) {
         int idReview = da.getAttemptReview(idIntento).getId();
         return idReview;
     }
 
+    /**
+     * Metodo que consigue la id de un intento buscandolo con el metodo buscarIntentoUsuario usando la id del Ejercicio
+     * @return devuelve la id de un intento.
+     */
     public int getIDIntento() {
-        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        Intent intentoUsuario = buscarIntentoUsuario(idIntento);
         return intentoUsuario.getId();
     }
 
+    /**
+     * Metodo qu devulve el nombre de un usuario utilizando el metodo buscarIntentoUsuario usando la id del Ejercicio
+     * @return devuelve el nombre de un usuario vinculado a un ejericicio
+     */
     public String getNombreUsuario() {
-        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        Intent intentoUsuario = buscarIntentoUsuario(idIntento);
         return intentoUsuario.getNombreUsuario();
     }
-
+    
+    /**
+     * Metodo que devuelve la id de un ejercicio usando el metodo buscarIntentoUsuario usando la id del Ejercicio.
+     * @return devuelve la id del Ejercicio dado por parametros en el otro metodo mencionado.
+     */
     public int getIDEjercicio() {
-        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        Intent intentoUsuario = buscarIntentoUsuario(idIntento);
         return intentoUsuario.getIdEjercicio();
     }
 
+    /**
+     *Metodo que carga los intentos del usuario en el panel usando los componentes personalizados de customCoponentEjercicio que representan los intentos del usuario.
+     *A estos componentes se les dara la funcionalidad de seleccionarlos para realizar gestiones de los intentos o ver los videos de estos. 
+     */
     public void conseguirIntentosUsuario() {
+        //Primero se busca los intentos del usuario en la base de datos
         intentosUsuario = da.getAttemptsPerUser(da.getAllUsers().get(seleccion));
 
+        //Luego por cada intento se crea un componente a medida de ese intento.
         for (Intent intent : intentosUsuario) {
             com.mycompany.customcomponentejercicio.CustomComponentEjercicio pnl_customComponentEjercicio = new com.mycompany.customcomponentejercicio.CustomComponentEjercicio();
             pnl_customComponentEjercicio.setnombreEjercicio(intent.getNombreEjercicio());
@@ -82,68 +151,98 @@ public class InformacionUsuario extends javax.swing.JDialog {
             } else {
                 pnl_customComponentEjercicio.setestadoIntento(2);
             }
+            //Se agrega cada customEjercicio al panel
             pnl_ejerciciosUsuario.add(pnl_customComponentEjercicio);
             pnl_customComponentEjercicio.setFocusable(true);
             componenteIntentos.add(pnl_customComponentEjercicio);
+            //Se le agrega al customComponent los listeners de cuando se arrastra o se hace click
             pnl_customComponentEjercicio.addSwipeListener(new SwipeListener() {
+                /**
+                 * Metodo que listener que si se arrastra a la derecha un componente reproducira el video del componente y si se hace click se podra interactuar con las reviews del componente usando los botones.
+                 * @param dirrecion determina si el componente personalizado a sido arrastrado o pulsado lo cual hara una cosa u otra. 
+                 * @param idIntento es la id del ejercicio a la cual pertenece el componente con el que interactuemos.
+                 */
                 @Override
-                public void arrastrar(String dirrecion, int idEjercicio) {
+                public void arrastrar(String dirrecion, int idIntento) {
                     direccion = dirrecion;
-                    idEjer = idEjercicio;
+                    InformacionUsuario.this.idIntento = idIntento;
                     String videoFile = "";
+                    //Si se mueve a la derecha reproducira un video,
                     if (direccion.equals("right")) {
-                        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+                        //Esta variable guardara el intento del usuario al cual pertenece este ejercicio
+                        Intent intentoUsuario = buscarIntentoUsuario(InformacionUsuario.this.idIntento);
+                        //Mientras no sea nulo reproducira el video
                         if (intentoUsuario != null) {
                             videoFile = intentoUsuario.getVideofile();
                         }
+                        
                         main.reproducirVideo(videoFile);
                         dispose();
                     }
-                    if (direccion.equals("left")) {
+                    //Si se mueve a la izquierda o es tan solo un click se activaran los botones para gestionar las reviews del intento
+                    if (direccion.equals("left")) {                       
                         btn_RevisarReview.setEnabled(true);
                         btn_EliminarReview.setEnabled(true);
                         btn_EditarReview.setEnabled(true);
                     }
-                    SeleccionarComponente(idEjer);
+                    //Independientemente de lo que se haga al interactuar se cambiara de color el componente con este metodo
+                    SeleccionarComponente(InformacionUsuario.this.idIntento);
                 }
             });
 
         }
 
     }
-
-    public void SeleccionarComponente(int idEjer) {
-
+    /**
+     * Metodo que implementa la usabilidad del componente personalizado cambiandolo de color a amarillo para decir que es el componente que reproduce el video y a verde si se ha seleccionado.
+     *  Si se deja de usar cambiara a su color por defecto que es el gris clarito.
+     * @param idIntento para buscar al componente que coincida con la id del ejercicio 
+     */
+    public void SeleccionarComponente(int idIntento) {
+        //Se usa la lista donde hemos guardado los componentes para buscar el que coincida y cambiarlo de color.
         for (com.mycompany.customcomponentejercicio.CustomComponentEjercicio componente : componenteIntentos) {
 
-            if (componente.getIdEjercicio() == idEjer && direccion.equals("left")) {
+            if (componente.getIdEjercicio() == idIntento && direccion.equals("left")) {
                 componente.cambiarColor(verdePastel);
             } else {
                 componente.cambiarColor(Color.lightGray);
             }
         }
     }
-
+    /**
+     * Metodo que incializa la nueva ventana que mostrara los datos de una review de un ejercicio.
+     */
     private void IniciarRevisionReview() {
         RevisionReview revisionReview = new RevisionReview(this, true);
         revisionReview.setVisible(true);
     }
-
+    /**
+     * Metodo que mostrara un dialogo diciendo que la review no exite.
+     */
     private void noReview() {
         DialogoNoExisteReview dialogoNoExisteReview = new DialogoNoExisteReview(this,true);
         dialogoNoExisteReview.setVisible(true);
     }
 
+    /**
+     * Metodo que actualiza el estado de los intentos del usuario.
+     * Se activa cuando suele haber una modificacion.
+     */
     public void ActualizarIntentosUsuario() {
         pnl_ejerciciosUsuario.removeAll();
         conseguirIntentosUsuario();
         dispose();
     }
-
-    public Intent buscarIntentoUsuario(int idEjer) {
+    
+    /**
+     * Metodo que busca un intento especifico de un usuario.
+     * @param idIntento se utiliza este parametro para buscar el intento que coincida con esta id.
+     * @return devuelve el intento encontrado en la lista de intentos si lo encuentra, en caso contrario devulve null.
+     */
+    public Intent buscarIntentoUsuario(int idIntento) {
         for (Intent intento : intentosUsuario) {
             int id = intento.getId();
-            if (id == idEjer) {
+            if (id == idIntento) {
                 return intento;
             }
         }
@@ -151,9 +250,7 @@ public class InformacionUsuario extends javax.swing.JDialog {
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Metodo que incializa los componentes del JDialog para que se puedan ver.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -339,9 +436,14 @@ public class InformacionUsuario extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-
+    /**
+     * Metodo que se activa al pulsar el boton " btn_RevisarReview" que lo que hara sera abrir una ventana para revisar la review de un intento.
+     * Si no existe ninguna review saldra un dialogo que dira que no exite.
+     * @param evt Action event del boton que se activa al pulsar el boton.
+     */
     private void btn_RevisarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RevisarReviewActionPerformed
-        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        //Buscara primero la id de la review buscando primero el id del intento.
+        Intent intentoUsuario = buscarIntentoUsuario(idIntento);
         int id = intentoUsuario.getId();
         if (getIDReview(id) != 0) {
             IniciarRevisionReview();
@@ -349,9 +451,14 @@ public class InformacionUsuario extends javax.swing.JDialog {
             noReview();
         }
     }//GEN-LAST:event_btn_RevisarReviewActionPerformed
-
+    /**
+     * Metodo que se activa al pulsar el boton "btn_EditarReview" que abrira una ventana para modificar la review del intento seleccionado.
+     * Si no existe ninguna review saldra un dialogo que dira que no exite.
+     * @param evt Action event del boton que se activa al pulsar el boton.
+     */
     private void btn_EditarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarReviewActionPerformed
-        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        //Buscara primero la id de la review buscando primero el id del intento.
+        Intent intentoUsuario = buscarIntentoUsuario(idIntento);
         int id = intentoUsuario.getId();
         if (getIDReview(id) != 0) {
             RevalorarIntento revalorarIntento = new RevalorarIntento(this, true);
@@ -361,9 +468,14 @@ public class InformacionUsuario extends javax.swing.JDialog {
             dialogoNoExisteReview.setVisible(true);
         }
     }//GEN-LAST:event_btn_EditarReviewActionPerformed
-
+    /**
+     *  Metodo que se activa al pulsar el boton "btn_EliminarRevie" este eliminara la review de un intento.
+     *  Si no existe ninguna review saldra un dialogo que dira que no exite.
+     * @param evt Action event del boton que se activa al pulsar el boton.
+     */
     private void btn_EliminarReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarReviewActionPerformed
-        Intent intentoUsuario = buscarIntentoUsuario(idEjer);
+        //Buscara primero la id de la review buscando primero el id del intento.
+        Intent intentoUsuario = buscarIntentoUsuario(idIntento);
         int id = intentoUsuario.getId();
         Review eliminarReview = da.getAttemptReview(id);
         if (eliminarReview.getId() != 0){
@@ -380,51 +492,75 @@ public class InformacionUsuario extends javax.swing.JDialog {
         
 
     }//GEN-LAST:event_btn_EliminarReviewActionPerformed
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_EliminarReview" que hara que se ponga de color azul.
+     */
     private void btn_EliminarReviewMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EliminarReviewMouseEntered
         btn_EliminarReview.setBackground(azulPastel);
     }//GEN-LAST:event_btn_EliminarReviewMouseEntered
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_EliminarReview" que hara que se ponga de color gris claro.
+     */
     private void btn_EliminarReviewMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EliminarReviewMousePressed
         btn_EliminarReview.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_btn_EliminarReviewMousePressed
-
+    /**
+     * Metodo que se activara al soltar el "btn_EliminarReview" que hara que se ponga de color azul.
+     */
     private void btn_EliminarReviewMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EliminarReviewMouseReleased
         btn_EliminarReview.setBackground(azulPastel);
     }//GEN-LAST:event_btn_EliminarReviewMouseReleased
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_EliminarReview" que hara que se ponga de color blanco.
+     */
     private void btn_EliminarReviewMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EliminarReviewMouseExited
         btn_EliminarReview.setBackground(Color.WHITE);
     }//GEN-LAST:event_btn_EliminarReviewMouseExited
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_EditarReview" que hara que se ponga de color azul.
+     */
     private void btn_EditarReviewMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EditarReviewMouseEntered
         btn_EditarReview.setBackground(azulPastel);
     }//GEN-LAST:event_btn_EditarReviewMouseEntered
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_EditarReview" que hara que se ponga de color blanco.
+     */
     private void btn_EditarReviewMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EditarReviewMouseExited
         btn_EditarReview.setBackground(Color.WHITE);
     }//GEN-LAST:event_btn_EditarReviewMouseExited
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_EditarReview" que hara que se ponga de color gris claro.
+     */
     private void btn_EditarReviewMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EditarReviewMousePressed
         btn_EditarReview.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_btn_EditarReviewMousePressed
-
+    /**
+     * Metodo que se activara al soltar el "btn_EditarReview" que hara que se ponga de color azul.
+     */
     private void btn_EditarReviewMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EditarReviewMouseReleased
         btn_EditarReview.setBackground(azulPastel);
     }//GEN-LAST:event_btn_EditarReviewMouseReleased
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_RevisarReview" que hara que se ponga de color azul.
+     */
     private void btn_RevisarReviewMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RevisarReviewMouseEntered
         btn_RevisarReview.setBackground(azulPastel);
     }//GEN-LAST:event_btn_RevisarReviewMouseEntered
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_RevisarReview" que hara que se ponga de color blanco.
+     */
     private void btn_RevisarReviewMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RevisarReviewMouseExited
         btn_RevisarReview.setBackground(Color.WHITE);
     }//GEN-LAST:event_btn_RevisarReviewMouseExited
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_RevisarReview" que hara que se ponga de color gris claro.
+     */
     private void btn_RevisarReviewMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RevisarReviewMousePressed
         btn_RevisarReview.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_btn_RevisarReviewMousePressed
-
+    /**
+     * Metodo que se activara al soltar el "btn_RevisarReview" que hara que se ponga de color azul.
+     */
     private void btn_RevisarReviewMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RevisarReviewMouseReleased
         btn_RevisarReview.setBackground(azulPastel);
     }//GEN-LAST:event_btn_RevisarReviewMouseReleased

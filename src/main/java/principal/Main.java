@@ -17,68 +17,118 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import principal.JDialogos.DialogoCerrarSesion;
 import principal.tablemodels.UsuariosTableModel;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
 /**
- *
- * @author Ziku
+ *Main sera la ventana y el menu principal de la aplicacion.
+ * Es a su vez el JFrame que ejecuta la aplicacion donde primero cargara el login y si este es verificado correctamente cargara esta ventana.
+ * @author Zenon Perez
  */
 public class Main extends javax.swing.JFrame {
-
-    private String textoOriginal;
+    //Declaramos las variabbles globales de la ventana
+    
+    /**
+     * Usuario con el cual nos hemos conectado.
+     */
     private Usuari user;
+    /**
+     * Variable para poder enviar o recibir datos de la base de datos.
+     */
     private DataAccess da = new DataAccess();
+    /**
+     * Variable la cual nos permite reproducir videos en el programa. Y sus acciones como pausar entre otras.
+     */
     private EmbeddedMediaPlayerComponent mediaPlayer;
+    /**
+     * Booleano el cual indica si un video se esta repoduciendo o no.
+     */
     private boolean isPlaying;
+    /**
+     * String del video que se esta reproducira. Ahora tiene el valor void pero luego tendra otro 
+     */
     private String video = "void";
-    private String videoFilePath;
+    /**
+     * Varaible que representa la ventana de login la cual usaremos algunos de sus metodos aqui. 
+     */
     private Login login;
+    /**
+     * Lista que usaremos para guardar todos los intentos pendientes de review.
+     */
     private ArrayList<Intent> intentos = new ArrayList<>();
+    /**
+     * Lista la cual usaremos para guardar todos los componentes personalizados de lso intentos pendientes.
+     */
     private ArrayList<com.mycompany.customcomponentejercicio.CustomComponentEjercicio> componenteIntentos = new ArrayList<>();
-    private int idEjer;
+    /**
+     * Variable para guardar la id de un intento pendiente al interactuar con su componente.
+     */
+    private int idIntento;
+    /**
+     * Variable que guardara la accion que hemos realizado sobre un componente personalizado y determinara si reproducir el video o si realizar las acciones de los botones.
+     */
     private String direccion;
+    /**
+     * Color que usaremos para seleccionar un componente.
+     */
     private Color verdePastel = new Color(205,255,205);
+    /**
+     * Color que usaremos cuando el cursor pase por encima de un boton o componente.
+     */
     private Color azulPastel = new Color(173,216,230);
+    /**
+     * Color que usaremos para decir que un componente esta reproduciendo el video del intento al cual representa.
+     */
     private Color amarilloPastel = new Color(255,255,205);
    
-    
+    /**
+     * Aqui se crear el form de Main por primera y unica vez.
+     */
     public Main() {
-
+        //Antes del main primero creamos el Login donde al ser modal primero se ha de resolver para crear el main.
         login = new Login(this, true, user, false);
         login.setVisible(true);
+        //Si login es resuelto y se verifica todo correctamente se creara e iniciara el main.
         if (login.EstasConectado()) {
             initComponents();
-
+        //De lo contrario se cerrara la aplicacion.
         } else {
             System.exit(0);
         }
+        //Se les pone color a los botones
         btn_Valorar.setBackground(Color.WHITE);
         btn_InformaciónIntentos.setBackground(Color.WHITE);
         btn_cerrarSesion.setBackground(Color.WHITE);
+        //Se le pone color a la tabla de usuarios
         tbl_Usuarios.setSelectionForeground(Color.BLACK);
         tbl_Usuarios.setSelectionBackground(verdePastel);
+        //Se seleciona el "logoIcono" como icono de aplicacion.
         Image icono = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/iconos/logoIcono.jpg"));
         setIconImage(icono);
+        //Se desactivan los botones
         btn_ReproducirPausar.setEnabled(false);
         btn_SeleccionarUsuarios.setEnabled(false);
         btn_InformaciónIntentos.setEnabled(false);
         btn_Valorar.setEnabled(false);
+        //Se le pone el nombre del usario conectado
         lbl_UsuarioConectado.setText(user.getNombre());
+        //Se cargan los intentos pendientes
         leerIntentos();
+        //Se cargan los usuarios en la tabla.
         tbl_Usuarios.setModel(new UsuariosTableModel(da.getAllUsers()));
+        //Se prepara la funcionalidad del video
         mediaPlayer = new EmbeddedMediaPlayerComponent();
         pnl_ReproductorVideos.add(mediaPlayer, BorderLayout.CENTER);
+        //Se establece el tamanyo minimo de la aplicacion
         setMinimumSize(getPreferredSize());
-        
         this.addComponentListener(new ComponentAdapter(){
-           
+            /**
+             * Metodo para que si si el tamanyo es menor al tamanyo minimo se ponga de nuevo el tamanyo minimo.
+             * Esto es para que no se puede hacer más pequenya la aplicacion de lo que se puede.
+             */
             @Override
             public void componentResized(ComponentEvent e){
             Dimension tamanoActual = getSize();
@@ -93,20 +143,24 @@ public class Main extends javax.swing.JFrame {
         
         
         this.addComponentListener(new ComponentAdapter() {
+            /**
+             * Metodo para que en caso de cerrar la aplicacion e iniciar con otro usuario cambie el texto de "lbl_UusarioConectado".
+             */
             @Override
             public void componentShown(ComponentEvent e) {
                 lbl_UsuarioConectado.setText(user.getNombre());
             }
-
         });
-        
-
-        
-
     }
-
+    
+    /**
+     * Metodo que carga los intentos pendientes de review como componentes `personalizados.
+     * Al interacturar con uno de estos componentes podremos o ver el video de este intento, sus datos o poner una review de este.
+     */
     private void leerIntentos() {
+        //Primero se busca los intentos pendientes de review en la base de datos y los guarda dentro de una lista.
         intentos = da.getAttemptsPendingReview();
+        //Por cada intento se crea un componente personalizado de este y se guardara en una lista de componentes personalizados con los datos de dicho intento. 
         for (Intent intent : intentos) {
             com.mycompany.customcomponentejercicio.CustomComponentEjercicio pnl_customComponentEjercicio = new com.mycompany.customcomponentejercicio.CustomComponentEjercicio();
             pnl_customComponentEjercicio.setnombreEjercicio(intent.getNombreEjercicio());
@@ -116,57 +170,76 @@ public class Main extends javax.swing.JFrame {
             pnl_customComponentEjercicio.setestadoIntento(1);
             pnl_IntentosPendientes.add(pnl_customComponentEjercicio);
             pnl_customComponentEjercicio.setFocusable(true);
+            //Ahora se establecera el listener de cada componente personalizado
             pnl_customComponentEjercicio.addSwipeListener(new SwipeListener() {
+                /**
+                 * Metodo que al arrastrar el componente a la derecha nos permitira ver el video y al hacerlo a la izquierda o hacer click podremos hacer otras gestiones como ver la informacion del intento o ponerle una review a este intento.
+                 * @param dirrecion parametro que determinara las acciones del componente si se arrastra a la derecha se podra ver el video del intento, si hace click o se mueve a la izquierda se activaran los botones y se podran realizar diferentes gestiones
+                 * @param IdIntento determina el intento que esta relacionado con el componente para poder ver su video o su info al interactuar con este. 
+                 */
                 @Override
-                public void arrastrar(String dirrecion, int idEjercicio) {
+                public void arrastrar(String dirrecion, int IdIntento) {
                     direccion = dirrecion;
-                    idEjer = idEjercicio;
+                    idIntento = IdIntento;
+                    //Si se arrastra a la derecha se reproducira el video del intento que represente el componente arrastrado
                     if (direccion.equals("right")) {
-                        Intent intentoPendiente = buscarIntento(idEjer);
-                        
+                        Intent intentoPendiente = buscarIntento(idIntento);
+                        //Si el intento no es nulo se reproducira el video
                         if (intentoPendiente != null) {
                             video = intentoPendiente.getVideofile();
                         }
                         reproducirVideo(video);
                     }
+                    //Si se hace click o arrastra a la derecha se activaran los botones, seleccionara al componente y se podra mirar la informacion del intento o valorar este.
                     if (direccion.equals("left")){
                         btn_InformaciónIntentos.setEnabled(true);
                         btn_Valorar.setEnabled(true);
                     }
-                    SeleccionarComponente(idEjer);
+                    SeleccionarComponente(idIntento);
                 }
             });
+            //Finalmente se agregara el componente a la lista de componentes personalizados
             componenteIntentos.add(pnl_customComponentEjercicio);
         }
 
     }
     
     
-    
-    public void SeleccionarComponente(int idEjer){
-
+    /**
+     * Metodo que utiliza la lista de componentes con intentos pendientes de review para selecionar el componente que contiene el intento relacionado con la id del intento para cambiar el color del componente dependiendo lo que se haga con este.
+     * Sirve para aplicar usabilidad al componente. Si se arrastra a la erecha se pondra amarillo, si se arrastra al reves o se hace click se pondra de color verde.
+     * Al arrastrar otro componente para ver el video o para selecionarlo el anterior se pondra gris y lo substituira el que se seleccione.
+     * çPuede haber un componente amarillo y uno verde, esto da a entender que un se esta reproduciendo el video y otro es seleccionado para realziar gestiones.
+     * No puede haber dos componentes seleccionados simultaneamente tanto para realizar gestiones o ver video.
+     * @param idIntento determina cual es el componente que cambia de color al se arrastrado o al hacer click.
+     */
+    public void SeleccionarComponente(int idIntento){
+        //Primero busca al componente que coincida con idIntento en la lista de componetes.
         for (com.mycompany.customcomponentejercicio.CustomComponentEjercicio componente : componenteIntentos){
-            
+            //Los componentes tiene una propiedad llamada Intentoselecionado si esta en false se pondra gris si no se matendra el color
             if(direccion.equals("right")){
                 componente.setIntentoSeleccionado(false);
                 componente.cambiarColor(Color.LIGHT_GRAY);
             }
                       
-            
-            if (componente.getIdEjercicio() == idEjer && direccion.equals("right")){
+            //Si el componente coicide con la id del intento y es arrastrado a la derecha cambiara el color a amarillo.
+            if (componente.getIdEjercicio() == idIntento && direccion.equals("right")){
                 componente.cambiarColor(amarilloPastel);
                 componente.setIntentoSeleccionado(true);
                 
             }
           
-            if (componente.getIdEjercicio() == idEjer && direccion.equals("left")){ 
+            //Si el componente coicide con la id del intento y se le hace click o se arrastra a la izquierda se cambiara de color verde.
+            if (componente.getIdEjercicio() == idIntento && direccion.equals("left")){ 
                 componente.cambiarColor(verdePastel);
+                //Si el componente del cual estamos viendo el video se hace click o se arrastra a la izquierda mantendra su color amarillo pese a estar seleccionado y se activaran los botones.
                 if (componente.getIntentoSeleccionado()){
                    componente.mantenerColor(amarilloPastel);
                 }
                
                 
             }
+            //Si el componente no es selecionado cambiara a su color por defecto
             else{
                 if (!componente.getIntentoSeleccionado()){
                 componente.cambiarColor(Color.lightGray);
@@ -179,32 +252,49 @@ public class Main extends javax.swing.JFrame {
         
     }
 
-  
-    public Intent SeleccionIntento(int idEjercicio) {
+    /**
+     * Metodo que buscara en la lista de intentos el intento que coincida con la idIntento.
+     * @param idIntento es el parametro que determina que intento hay que encontrar
+     * @return devuelve el intento que coincida con la id del Intento, de lo contrario devolvera null.
+     */
+    public Intent SeleccionIntento(int idIntento) {
         for (Intent intent : intentos){
-            if(intent.getId() == idEjercicio){
+            if(intent.getId() == idIntento){
                 return intent;
             }
            
         }
         return null;
     }
+    /**
+     * Metodo que sirve para poder conseguir el numero del indice de filas que ha sido seleccionado de la tabla usuarios
+     * @return devuelve el numero de la fila selecionado en la tabla usuarios
+     */
     public int SeleccionFilaUsuariosIntentos() {
         int seleccionado = tbl_Usuarios.convertRowIndexToModel(tbl_Usuarios.getSelectedRow());
         return seleccionado;
     }
 
+    /**
+     * Metodo que se llama desde login es un setter de usuario que servira para poner el usuario que se ha conectado.
+     * @param user el usuario que se mostrara en el main es el que se pasa por parametro
+     */
     public void UsuarioConectado(Usuari user) {
         this.user = user;
     }
     
    
-
+    /**
+     * Metodo que se utiliza para reproducir el video de un intento.
+     * @param video es el nombre del videoFile que se utilizara para pillar el video y reproducirlo
+     */
     public void reproducirVideo(String video) {
         this.video = video;
+        //Se ponen las dirrecciones.
         //String connectionAzureStr = "secret";
+        //El string que esta como secret es donde hay que poner la key de la base de datos que utiliza el programa y que ha pasado el profesor de nuestro curso.
         String connectionAzureStr = "secret";
-        //String containerName = "videos";
+        //String containerName = "videos";        
         String containerName = "simulapvideoscontainer";
         BlobClient blobClient = new BlobClientBuilder().connectionString(connectionAzureStr)
                 .blobName("uploaded_user_videos/" + video)
@@ -212,10 +302,12 @@ public class Main extends javax.swing.JFrame {
                 .buildClient();
         String tempDir = System.getProperty("java.io.tmpdir");
         String downloadPath = tempDir + File.separator + video;
+        //Descarga el video en el directorio temporal siempre que exista
         File existe = new File(downloadPath);
         if (!existe.exists()) {
             blobClient.downloadToFile(downloadPath);
         }
+        //Se reproduce el video
         mediaPlayer.mediaPlayer().media().play(downloadPath);
         isPlaying = true;
         btn_ReproducirPausar.setEnabled(true);
@@ -223,23 +315,37 @@ public class Main extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Metodo getter buscar el intento usando la id Intento dentro de la lista de los intentos pendientes.
+     * @return devuelve el intento que coincida con la idIntento, de lo contrario sino coincide ninguna devolvera 0.
+     */
     public int getIDIntento() {
         for (Intent intento: intentos){
-            if (intento.getId()== idEjer){
+            if (intento.getId()== idIntento){
                 return intento.getId();
             }
         }
         return 0;
     }
-    public Intent buscarIntento(int idEjer) {
+    
+    /**
+     * Metodo que similar a getIDintento() pero a este se le pasa un parametro para buscar el intento que coincida con id dada por parametro.
+     * @param idIntento es la id del intento que se pretende buscar
+     * @return devulve el intento si es encontrado dentro de la lista y si no devolvera null.
+     */
+    public Intent buscarIntento(int idIntento) {
         for (Intent intento : intentos) {
-            if (intento.getId() == idEjer) {
+            if (intento.getId() == idIntento) {
                 return intento;
             }
         }
         return null;
     }
     
+    /**
+     * Metodo que al valorar un intento pediente al desaparecer ese intento de la lista de intentos pendientes, revertira todo lo asociado a ese intento.
+     * Se desactivaran los botones de tramites de los intentos y se parara el video.
+     */
     public void revertirAlValorar(){
         mediaPlayer.mediaPlayer().controls().stop();
         isPlaying = false;
@@ -249,19 +355,32 @@ public class Main extends javax.swing.JFrame {
         btn_Valorar.setEnabled(false);
     }
     
-    public String buscarIDUsuario(int idEjer){
+    /**
+     * Metodo que busca utilizando la id de los intentos el nombre del usuario el cual pertenece dicho intento.
+     * @param idIntento es con lo que se buscar al usuario, ya que cada intento va asociado a un usuario.
+     * @return devuelve el nombre del usuario si coincide con el intento, de lo contrario devolvera null.
+     */
+    public String buscarIDUsuario(int idIntento){
         for (Intent intento : intentos){
-            if (intento.getId() == idEjer){
+            if (intento.getId() == idIntento){
                 return intento.getNombreUsuario();
             }
         }
         return null;
     }
 
+    /**
+     * Metodo que realiza un getter de la ID del usuario.
+     * @return devuelve el valor que tenga la id del usuario en el momento de utilizar este getter.
+     */
     public int getIDUsuario() {
         return user.getId();
     }
 
+    /**
+     * Metodo que se realiza para actualizar los cambios y se utiliza normalmente tras a ver realizado una gestion con un intento, ya se haberlo valorado o eliminado su review.
+     * Esto resetea y cambia todos los componentes personalizados que representan los intentos.
+     */
     public void ActualizarCambiosIntentosPendientes() {
         componenteIntentos.clear();
         pnl_IntentosPendientes.removeAll();
@@ -270,15 +389,17 @@ public class Main extends javax.swing.JFrame {
         
         
     }
+    
+    /**
+     * Metodo que cambia hace que el main deje de ser visible y elimine el nombre del usuario conectado al desconectarse.
+     */
     public void desconectarse() {
         setVisible(false);
         lbl_UsuarioConectado.setText("");
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Este metodo inicializa el form de Main y sus componentes.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -375,11 +496,6 @@ public class Main extends javax.swing.JFrame {
         lbl_Usuario.setText("Usuario:");
 
         tab_IntentosUsuarios.setBackground(new java.awt.Color(153, 153, 153));
-        tab_IntentosUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tab_IntentosUsuariosMouseEntered(evt);
-            }
-        });
 
         pnl_GestorIntentosPedientes.setBackground(new java.awt.Color(51, 51, 51));
         pnl_GestorIntentosPedientes.setForeground(new java.awt.Color(255, 255, 255));
@@ -508,17 +624,9 @@ public class Main extends javax.swing.JFrame {
             }
         ));
         tbl_Usuarios.setGridColor(new java.awt.Color(255, 255, 255));
-        tbl_Usuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                tbl_UsuariosMouseMoved(evt);
-            }
-        });
         tbl_Usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_UsuariossMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tbl_UsuariosMouseEntered(evt);
             }
         });
         jScrollPane6.setViewportView(tbl_Usuarios);
@@ -660,12 +768,16 @@ public class Main extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metodo que al pulsar el boton "btn_cerrarSesion" saltara un dialogo con el que nos dira si queremos cerrar la sesion.
+     */
     private void btn_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarSesionActionPerformed
         DialogoCerrarSesion cerrarSesion = new DialogoCerrarSesion(this, true);
         cerrarSesion.setVisible(true);
     }//GEN-LAST:event_btn_cerrarSesionActionPerformed
-
+    /**
+     *Metodo que al pulsar el boton "btn_ReproducirPausar" parara la reproduccion del video de un intento si esta reproduciendose o reproducira el video si esta pausado. 
+     */
     private void btn_ReproducirPausarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReproducirPausarActionPerformed
         if (isPlaying) {
             mediaPlayer.mediaPlayer().controls().pause();
@@ -679,71 +791,99 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_ReproducirPausarActionPerformed
 
+    /**
+     *Metodo que al pulsar el boton "SeleccionarUsuarios" abrira un nueva ventana con los datos del usuario seleccionado en la tabla. 
+     */
     private void btn_SeleccionarUsuariossActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SeleccionarUsuariossActionPerformed
         InformacionUsuario informacionUsuario = new InformacionUsuario(this, true);
         informacionUsuario.setVisible(true);
     }//GEN-LAST:event_btn_SeleccionarUsuariossActionPerformed
-
+    /**
+    *Metodo que al pulsar en una celda de la tabla de "tbl_Usuarios" seleccionara la fila de dicha tabla y activara el boton de seleccionar usuarios.
+    */
     private void tbl_UsuariossMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_UsuariossMouseClicked
         if (tbl_Usuarios.convertRowIndexToModel(tbl_Usuarios.getSelectedRow()) != -1) {
             btn_SeleccionarUsuarios.setEnabled(true);
         }
     }//GEN-LAST:event_tbl_UsuariossMouseClicked
-
+    /**
+     * Metodo que mostrara la toda informacion del intento pendiente de valorar que se haya seleccionado en una nueva ventana. 
+     */
     private void btn_InformaciónIntentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InformaciónIntentosActionPerformed
-        InformacionIntento informacionIntento = new InformacionIntento(this, true,idEjer);
+        InformacionIntento informacionIntento = new InformacionIntento(this, true,idIntento);
         informacionIntento.setVisible(true);
     }//GEN-LAST:event_btn_InformaciónIntentosActionPerformed
-
+    /**
+     * Metodo que valorara el intento pendiente que se haya seleccionado dandole click a un componente abriendo una nueva ventana para comenzar alli con la valoracion.
+     */
     private void btn_ValorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ValorarActionPerformed
        ValoracionIntentoSinReview valoracionIntentosSinReview = new ValoracionIntentoSinReview(this, true);
        valoracionIntentosSinReview.setVisible(true);
+       //Al terminar de valorar el intento se actualizaran los cambios en los componetes personalizados.
        ActualizarCambiosIntentosPendientes();
     }//GEN-LAST:event_btn_ValorarActionPerformed
 
     private void btn_ValorarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_ValorarKeyPressed
     }//GEN-LAST:event_btn_ValorarKeyPressed
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_Valorar" que hara que se ponga de color azul.
+     */
     private void btn_ValorarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ValorarMouseEntered
         if (btn_Valorar.isEnabled()){
             btn_Valorar.setBackground(azulPastel);
         }
     }//GEN-LAST:event_btn_ValorarMouseEntered
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_Valorar" que hara que se ponga de color gris claro.
+     */
     private void btn_ValorarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ValorarMouseClicked
            btn_Valorar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_btn_ValorarMouseClicked
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_Valorar" que hara que se ponga de color blanco.
+     */
     private void btn_ValorarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ValorarMouseExited
         if(btn_Valorar.isEnabled()){
             btn_Valorar.setBackground(Color.WHITE);
         }
     }//GEN-LAST:event_btn_ValorarMouseExited
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_InformaciónIntentos" que hara que se ponga de color azul.
+     */
     private void btn_InformaciónIntentosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_InformaciónIntentosMouseEntered
         if (btn_InformaciónIntentos.isEnabled()){
             btn_InformaciónIntentos.setBackground(azulPastel);
         }
     }//GEN-LAST:event_btn_InformaciónIntentosMouseEntered
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_InformaciónIntentos" que hara que se ponga de color blanco.
+     */
     private void btn_InformaciónIntentosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_InformaciónIntentosMouseExited
         if(btn_InformaciónIntentos.isEnabled()){
             btn_InformaciónIntentos.setBackground(Color.WHITE);
         }
     }//GEN-LAST:event_btn_InformaciónIntentosMouseExited
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_InformaciónIntentos" que hara que se ponga de color gris claro.
+     */
     private void btn_InformaciónIntentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_InformaciónIntentosMouseClicked
             btn_InformaciónIntentos.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_btn_InformaciónIntentosMouseClicked
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_cerrarSesion" que hara que se ponga de color azul.
+     */
     private void btn_cerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarSesionMouseEntered
         btn_cerrarSesion.setBackground(azulPastel);
     }//GEN-LAST:event_btn_cerrarSesionMouseEntered
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_cerrarSesion" que hara que se ponga de color blanco.
+     */
     private void btn_cerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarSesionMouseExited
         btn_cerrarSesion.setBackground(Color.WHITE);
     }//GEN-LAST:event_btn_cerrarSesionMouseExited
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_cerrarSesion" que hara que se ponga de color gris claro y que devolvera a todos los componentes a su color por defecto.
+     */
     private void btn_cerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarSesionMousePressed
         btn_cerrarSesion.setBackground(Color.LIGHT_GRAY);
         for (com.mycompany.customcomponentejercicio.CustomComponentEjercicio componente : componenteIntentos){
@@ -751,52 +891,57 @@ public class Main extends javax.swing.JFrame {
             componente.setIntentoSeleccionado(false);
         }
     }//GEN-LAST:event_btn_cerrarSesionMousePressed
-
+    /**
+     * Metodo que se activara al soltar el "btn_cerrarSesion" que hara que se ponga de color azul.
+     */
     private void btn_cerrarSesionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarSesionMouseReleased
         btn_cerrarSesion.setBackground(azulPastel);
     }//GEN-LAST:event_btn_cerrarSesionMouseReleased
-
-    private void tab_IntentosUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_IntentosUsuariosMouseEntered
-       
-    }//GEN-LAST:event_tab_IntentosUsuariosMouseEntered
-
-    private void tbl_UsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_UsuariosMouseEntered
-        
-    }//GEN-LAST:event_tbl_UsuariosMouseEntered
-
-    private void tbl_UsuariosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_UsuariosMouseMoved
-
-    }//GEN-LAST:event_tbl_UsuariosMouseMoved
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_ReproducirPausar" que hara que se ponga de color azul.
+     */
     private void btn_ReproducirPausarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ReproducirPausarMouseEntered
         btn_ReproducirPausar.setBackground(azulPastel);
     }//GEN-LAST:event_btn_ReproducirPausarMouseEntered
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_ReproducirPausar" que hara que se ponga de color blanco.
+     */
     private void btn_ReproducirPausarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ReproducirPausarMouseExited
         btn_ReproducirPausar.setBackground(Color.WHITE);
     }//GEN-LAST:event_btn_ReproducirPausarMouseExited
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_ReproducirPausar" que hara que se ponga de color gris claro.
+     */
     private void btn_ReproducirPausarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ReproducirPausarMouseClicked
         btn_ReproducirPausar.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_btn_ReproducirPausarMouseClicked
-
+    /**
+     * Metodo que se activara al soltar el "btn_ReproducirPausar" que hara que se ponga de color azul.
+     */
     private void btn_ReproducirPausarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ReproducirPausarMouseReleased
         btn_ReproducirPausar.setBackground(azulPastel);
     }//GEN-LAST:event_btn_ReproducirPausarMouseReleased
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_SeleccionarUsuarios" que hara que se ponga de color gris claro.
+     */
     private void btn_SeleccionarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SeleccionarUsuariosMouseClicked
         btn_SeleccionarUsuarios.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_btn_SeleccionarUsuariosMouseClicked
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_SeleccionarUsuarios" que hara que se ponga de color azul.
+     */
     private void btn_SeleccionarUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SeleccionarUsuariosMouseEntered
         btn_SeleccionarUsuarios.setBackground(azulPastel);
     }//GEN-LAST:event_btn_SeleccionarUsuariosMouseEntered
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_SeleccionarUsuarios" que hara que se ponga de color blanco.
+     */
     private void btn_SeleccionarUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SeleccionarUsuariosMouseExited
         btn_SeleccionarUsuarios.setBackground(Color.white);
     }//GEN-LAST:event_btn_SeleccionarUsuariosMouseExited
 
     /**
+     * Aqui se encuentra la parte ejecutable del programa donde iniciara la aplicacion.
      * @param args the command line arguments
      */
     public static void main(String args[]) {

@@ -197,9 +197,6 @@
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tab_IntentosUsuariosMouseEntered"/>
-          </Events>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
@@ -467,9 +464,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="tbl_UsuariosMouseMoved"/>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_UsuariossMouseClicked"/>
-                        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_UsuariosMouseEntered"/>
                       </Events>
                     </Component>
                   </SubComponents>

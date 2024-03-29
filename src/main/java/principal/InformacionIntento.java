@@ -10,21 +10,33 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 
 /**
- *
- * @author Ziku
+ * InformacionIntento sera la ventana que mostrara toda la informacion de un intento sin review
+ * 
+ * @author Zenon Perez
  */
 public class InformacionIntento extends javax.swing.JDialog {
-
+    /**
+     * Es la ventana parent de InformacionIntento y que usaremos para llamar algun metodo de esta.
+     */
     private Main main;
+    /**
+     * Esta variable se usa para coger datos de la base de datos.
+     */
     private DataAccess da = new DataAccess();
 
     /**
-     * Creates new form InformacionIntento
+     * Aqui se crea el nuevo form de InformacionIntento
+     * @param parent nos muestra de que hereda de un JFrame que en este caso es de Main.
+     * @param modal nos dice si es modal o no, en este caso lo es.
+     * @param idEjer cada form de InformacionIntento tendra asociado la id del Ejercicio seleccionado mostrando su informacion.
      */
     public InformacionIntento(java.awt.Frame parent, boolean modal, int idEjer) {
         super(parent, modal);
         main = (Main) parent;
+        //Se selecciona el intento con el parametro dado.
         Intent intento = main.SeleccionIntento(idEjer);
+        
+        //Iniciamos el JDialog donde a cada lbl le pondremos la informacion del ejercicio seleccionado
         initComponents();
         String idS = String.valueOf(intento.getId());
         lbl_IDRespuesta.setText(idS);
@@ -37,10 +49,13 @@ public class InformacionIntento extends javax.swing.JDialog {
         lbl_TimestampInicioRespuesta.setText(intento.getTimestamp_Inicio());
         lbl_TimestampFinRespuesta.setText(intento.getTimestamp_Fin());
         lbl_VideofileRespuesta.setText(intento.getVideofile());
+        //Ponemos el borde de la ventana blanca para que se destaque mas.
         getRootPane().setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 
     }
-
+    /**
+     *Metodo que inicializa los componentes del JDialgog.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,7 +166,7 @@ public class InformacionIntento extends javax.swing.JDialog {
         lbl_VideofileRespuesta.setForeground(new java.awt.Color(255, 255, 255));
         lbl_VideofileRespuesta.setText("jLabel16");
         pnl_Principal.add(lbl_VideofileRespuesta);
-        lbl_VideofileRespuesta.setBounds(210, 330, 130, 16);
+        lbl_VideofileRespuesta.setBounds(210, 330, 380, 16);
 
         lbl_TimestampInicioEnunciado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_TimestampInicioEnunciado.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,7 +212,6 @@ public class InformacionIntento extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbl_IDEjercicioEnunciado;

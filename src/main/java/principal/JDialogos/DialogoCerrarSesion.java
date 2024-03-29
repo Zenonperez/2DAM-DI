@@ -4,25 +4,24 @@
  */
 package principal.JDialogos;
 
-import dto.Usuari;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import principal.Login;
 import principal.Main;
 
 /**
- *
- * @author Ziku
+ * DialogoCerrarSesion es una ventana de dialogo la cual nos pregunta si de verdad queremos cerrar la sesion.
+ * En caso afirmativo la cerrara y en negativo volvera atras.
+ * @author Zenon Pèrez
  */
 public class DialogoCerrarSesion extends javax.swing.JDialog {
-
     
     
     private Main main;
     /**
-     * Creates new form NewJDialog
-     * @param parent
-     * @param modal
+     * Aqui es donde se crea el nuevo form de DialogoCerrarSesion
+     * @param parent nos muestra que esta ventana sale de un JFrame que en este caso sale de "Main".
+     * @param modal nos dice si la ventana es modal o no, en este caso es modal.
      */
     public DialogoCerrarSesion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -148,58 +147,74 @@ public class DialogoCerrarSesion extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metodo se activa si se pulsa el boton "btn_botonSi" haciendo que se cierre la aplicacion usando el metodo desconectaese y volviendo al "Login".
+     */
     private void btn_botonSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_botonSiActionPerformed
             dispose();
             main.desconectarse();
             Login loginNuevo = new Login(main, true, null, true);
             loginNuevo.setVisible(true);
     }//GEN-LAST:event_btn_botonSiActionPerformed
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_botonSi" que hara que se ponga de color gris claro.
+     */
     private void btn_botonSiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_botonSiMousePressed
         btn_botonSi.setBackground(Color.GRAY);
     }//GEN-LAST:event_btn_botonSiMousePressed
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_botonSi" que hara que se ponga de color blanco.
+     */
     private void btn_botonSiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_botonSiMouseExited
         btn_botonSi.setBackground(Color.WHITE);
     }//GEN-LAST:event_btn_botonSiMouseExited
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_botonSi" que hara que se ponga de color azul.
+     */
     private void btn_botonSiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_botonSiMouseEntered
         Color azulPastel = new Color(173,216,230); 
         btn_botonSi.setBackground(azulPastel);
     }//GEN-LAST:event_btn_botonSiMouseEntered
-
+    /**
+     * Metodo que se activara al soltar el boton "btn_botonSi" que hara que se ponga de color azul.
+     */
     private void btn_botonSiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_botonSiMouseReleased
         Color azulPastel = new Color(173,216,230); 
         btn_botonSi.setBackground(azulPastel);
     }//GEN-LAST:event_btn_botonSiMouseReleased
-
+    /**
+     * Metodo que se activara al pasar el raton por encima del boton "btn_botonNo" que hara que se ponga de color azul.
+     */
     private void btn_botonNoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_botonNoMouseEntered
         Color azulPastel = new Color(173,216,230); 
         btn_botonNo.setBackground(azulPastel);
     }//GEN-LAST:event_btn_botonNoMouseEntered
-
+    /**
+     * Metodo que se activara al salir el raton del "btn_botonSi" que hara que se ponga de color blanco.
+     */
     private void btn_botonNoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_botonNoMouseExited
         btn_botonSi.setBackground(Color.WHITE);
     }//GEN-LAST:event_btn_botonNoMouseExited
-
+    /**
+     * Metodo que se activara al pulsar boton "btn_botonNo" que hara que se ponga de color gris claro.
+     */
     private void btn_botonNoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_botonNoMousePressed
         btn_botonNo.setBackground(Color.GRAY);
     }//GEN-LAST:event_btn_botonNoMousePressed
-
+    /**
+     * Metodo que se activara al soltar el boton "btn_botonNo" que hara que se ponga de color azul.
+     */
     private void btn_botonNoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_botonNoMouseReleased
         Color azulPastel = new Color(173,216,230); 
         btn_botonNo.setBackground(azulPastel);
     }//GEN-LAST:event_btn_botonNoMouseReleased
-
+    /**
+     * Metodo que se activa al pulsar el boton "btn_botonNo" que cerrara la ventana de dialogo.
+     */
     private void btn_botonNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_botonNoActionPerformed
         dispose();
     }//GEN-LAST:event_btn_botonNoActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-   
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_botonNo;
     private javax.swing.JButton btn_botonSi;
